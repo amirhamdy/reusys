@@ -17,7 +17,6 @@ class Project extends Model
         'end_date',
         'po_number',
         'productline_id',
-        'currency_id',
     ];
 
     protected $searchableFields = ['*'];
@@ -30,11 +29,6 @@ class Project extends Model
     public function productline()
     {
         return $this->belongsTo(Productline::class);
-    }
-
-    public function currency()
-    {
-        return $this->belongsTo(Currency::class);
     }
 
     public function jobs()

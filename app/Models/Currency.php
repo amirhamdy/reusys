@@ -19,9 +19,4 @@ class Currency extends Model
     {
         return $this->hasMany(Pricebook::class);
     }
-
-    public function projects()
-    {
-        return $this->hasMany(Project::class);
-    }
 }

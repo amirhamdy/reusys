@@ -29,4 +29,9 @@ class Productline extends Model
     {
         return $this->hasMany(Project::class);
     }
+
+    public function opportuninties()
+    {
+        return $this->hasMany(Opportuninty::class);
+    }
 }

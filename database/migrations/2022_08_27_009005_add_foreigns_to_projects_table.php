@@ -19,13 +19,6 @@ return new class extends Migration {
                 ->on('productlines')
                 ->onUpdate('CASCADE')
                 ->onDelete('CASCADE');
-
-            $table
-                ->foreign('currency_id')
-                ->references('id')
-                ->on('currencies')
-                ->onUpdate('CASCADE')
-                ->onDelete('CASCADE');
         });
     }
 
@@ -38,7 +31,6 @@ return new class extends Migration {
     {
         Schema::table('projects', function (Blueprint $table) {
             $table->dropForeign(['productline_id']);
-            $table->dropForeign(['currency_id']);
         });
     }
 };

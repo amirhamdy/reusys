@@ -33,6 +33,17 @@ class ProjectsRelationManager extends HasManyRelationManager
                         'lg' => 12,
                     ]),
 
+                BelongsToSelect::make('productline_id')
+                    ->rules(['required', 'exists:productlines,id'])
+                    ->relationship('productline', 'name')
+                    ->searchable()
+                    ->placeholder('Productline')
+                    ->columnSpan([
+                        'default' => 12,
+                        'md' => 12,
+                        'lg' => 6,
+                    ]),
+
                 DatePicker::make('start_date')
                     ->rules(['required', 'date'])
                     ->placeholder('Start Date')
@@ -59,17 +70,6 @@ class ProjectsRelationManager extends HasManyRelationManager
                         'md' => 12,
                         'lg' => 4,
                     ]),
-
-                BelongsToSelect::make('productline_id')
-                    ->rules(['required', 'exists:productlines,id'])
-                    ->relationship('productline', 'name')
-                    ->searchable()
-                    ->placeholder('Productline')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 6,
-                    ]),
             ]),
         ]);
     }
@@ -79,11 +79,11 @@ class ProjectsRelationManager extends HasManyRelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')->limit(50),
+                Tables\Columns\TextColumn::make('productline.name')->limit(50),
+                Tables\Columns\TextColumn::make('currency.name')->limit(50),
                 Tables\Columns\TextColumn::make('start_date')->date(),
                 Tables\Columns\TextColumn::make('end_date')->date(),
                 Tables\Columns\TextColumn::make('po_number')->limit(50),
-                Tables\Columns\TextColumn::make('productline.name')->limit(50),
-                Tables\Columns\TextColumn::make('currency.name')->limit(50),
             ])
             ->filters([
                 Tables\Filters\Filter::make('created_at')

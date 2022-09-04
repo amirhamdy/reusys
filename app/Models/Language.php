@@ -34,4 +34,14 @@ class Language extends Model
     {
         return $this->hasMany(Job::class, 'target_language_id');
     }
+
+    public function opportuninties()
+    {
+        return $this->hasMany(Opportuninty::class, 'source_language_id');
+    }
+
+    public function opportuninties2()
+    {
+        return $this->hasMany(Opportuninty::class, 'target_language_id');
+    }
 }

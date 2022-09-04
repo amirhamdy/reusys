@@ -5,11 +5,13 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PortalController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PricebookController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductlineController;
+use App\Http\Controllers\OpportunintyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +25,7 @@ use App\Http\Controllers\ProductlineController;
 */
 
 Route::get('/', function () {
-//    return view('welcome');
-    return redirect('/dashboard');
+    return view('welcome');
 });
 
 Auth::routes();
@@ -43,4 +44,6 @@ Route::prefix('/')
         Route::resource('projects', ProjectController::class);
         Route::resource('jobs', JobController::class);
         Route::resource('tasks', TaskController::class);
+        Route::resource('opportuninties', OpportunintyController::class);
+        Route::resource('portals', PortalController::class);
     });

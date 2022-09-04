@@ -56,7 +56,7 @@ class CustomerResource extends Resource
                         ]),
 
                     TextInput::make('fax')
-                        ->rules(['required', 'max:255', 'string'])
+                        ->rules(['nullable', 'max:255', 'string'])
                         ->placeholder('Fax')
                         ->columnSpan([
                             'default' => 12,
@@ -65,7 +65,7 @@ class CustomerResource extends Resource
                         ]),
 
                     TextInput::make('address')
-                        ->rules(['required', 'max:255', 'string'])
+                        ->rules(['nullable', 'max:255', 'string'])
                         ->placeholder('Address')
                         ->columnSpan([
                             'default' => 12,
@@ -74,7 +74,7 @@ class CustomerResource extends Resource
                         ]),
 
                     TextInput::make('billing_address')
-                        ->rules(['required', 'max:255', 'string'])
+                        ->rules(['nullable', 'max:255', 'string'])
                         ->placeholder('Billing Address')
                         ->columnSpan([
                             'default' => 12,
@@ -83,7 +83,7 @@ class CustomerResource extends Resource
                         ]),
 
                     TextInput::make('postal_code')
-                        ->rules(['required', 'max:255', 'string'])
+                        ->rules(['nullable', 'max:255', 'string'])
                         ->placeholder('Postal Code')
                         ->columnSpan([
                             'default' => 12,
@@ -92,7 +92,7 @@ class CustomerResource extends Resource
                         ]),
 
                     TextInput::make('website')
-                        ->rules(['required', 'max:255', 'string'])
+                        ->rules(['nullable', 'max:255', 'string'])
                         ->placeholder('Website')
                         ->columnSpan([
                             'default' => 12,
@@ -101,7 +101,7 @@ class CustomerResource extends Resource
                         ]),
 
                     TextInput::make('city')
-                        ->rules(['required', 'max:255', 'string'])
+                        ->rules(['nullable', 'max:255', 'string'])
                         ->placeholder('City')
                         ->columnSpan([
                             'default' => 12,

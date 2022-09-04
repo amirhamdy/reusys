@@ -39,7 +39,7 @@ class ProjectsRelationManager extends HasManyRelationManager
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
-                        'lg' => 4,
+                        'lg' => 6,
                     ]),
 
                 DatePicker::make('end_date')
@@ -48,23 +48,12 @@ class ProjectsRelationManager extends HasManyRelationManager
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
-                        'lg' => 4,
+                        'lg' => 6,
                     ]),
 
                 TextInput::make('po_number')
                     ->rules(['required', 'max:255', 'string'])
                     ->placeholder('Po Number')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 4,
-                    ]),
-
-                BelongsToSelect::make('currency_id')
-                    ->rules(['required', 'exists:currencies,id'])
-                    ->relationship('currency', 'name')
-                    ->searchable()
-                    ->placeholder('Currency')
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
@@ -81,9 +70,8 @@ class ProjectsRelationManager extends HasManyRelationManager
                 Tables\Columns\TextColumn::make('name')->limit(50),
                 Tables\Columns\TextColumn::make('start_date')->date(),
                 Tables\Columns\TextColumn::make('end_date')->date(),
-                Tables\Columns\TextColumn::make('po_number')->limit(50),
                 Tables\Columns\TextColumn::make('productline.name')->limit(50),
-                Tables\Columns\TextColumn::make('currency.name')->limit(50),
+                Tables\Columns\TextColumn::make('po_number')->limit(50),
             ])
             ->filters([
                 Tables\Filters\Filter::make('created_at')
@@ -119,11 +107,6 @@ class ProjectsRelationManager extends HasManyRelationManager
 
                 MultiSelectFilter::make('productline_id')->relationship(
                     'productline',
-                    'name'
-                ),
-
-                MultiSelectFilter::make('currency_id')->relationship(
-                    'currency',
                     'name'
                 ),
             ]);

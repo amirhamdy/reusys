@@ -5,7 +5,7 @@
         <x-inputs.text
             name="name"
             label="Name"
-            value="{{ old('name', ($editing ? $role->name : '')) }}"
+            :value="old('name', ($editing ? $role->name : ''))"
         ></x-inputs.text>
     </x-inputs.group>
 

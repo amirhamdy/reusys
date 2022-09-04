@@ -17,12 +17,12 @@ return new class extends Migration {
             $table->string('name');
             $table->string('phone');
             $table->string('email');
-            $table->string('fax');
-            $table->string('website');
-            $table->string('address');
-            $table->string('postal_code');
-            $table->string('city');
-            $table->string('billing_address');
+            $table->string('fax')->nullable();
+            $table->string('website')->nullable();
+            $table->string('address')->nullable();
+            $table->string('postal_code')->nullable();
+            $table->string('city')->nullable();
+            $table->string('billing_address')->nullable();
             $table->unsignedBigInteger('country_id');
             $table->unsignedBigInteger('region_id');
             $table->unsignedBigInteger('industry_id');

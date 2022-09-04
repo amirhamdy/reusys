@@ -19,7 +19,6 @@ return new class extends Migration {
             $table->date('end_date');
             $table->string('po_number');
             $table->unsignedBigInteger('productline_id');
-            $table->unsignedBigInteger('currency_id');
 
             $table->timestamps();
         });

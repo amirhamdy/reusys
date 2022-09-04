@@ -50,6 +50,16 @@
                             Tasks
                             </x-dropdown-link>
                             @endcan
+                            @can('view-any', App\Models\Opportuninty::class)
+                            <x-dropdown-link href="{{ route('opportuninties.index') }}">
+                            Opportuninties
+                            </x-dropdown-link>
+                            @endcan
+                            @can('view-any', App\Models\Portal::class)
+                            <x-dropdown-link href="{{ route('portals.index') }}">
+                            Portals
+                            </x-dropdown-link>
+                            @endcan
                     </x-nav-dropdown>
 
                     @if (Auth::user()->can('view-any', Spatie\Permission\Models\Role::class) || 
@@ -150,6 +160,16 @@
                 @can('view-any', App\Models\Task::class)
                 <x-responsive-nav-link href="{{ route('tasks.index') }}">
                 Tasks
+                </x-responsive-nav-link>
+                @endcan
+                @can('view-any', App\Models\Opportuninty::class)
+                <x-responsive-nav-link href="{{ route('opportuninties.index') }}">
+                Opportuninties
+                </x-responsive-nav-link>
+                @endcan
+                @can('view-any', App\Models\Portal::class)
+                <x-responsive-nav-link href="{{ route('portals.index') }}">
+                Portals
                 </x-responsive-nav-link>
                 @endcan
 

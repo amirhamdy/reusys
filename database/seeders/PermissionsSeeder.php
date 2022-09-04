@@ -75,6 +75,30 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'update languages']);
         Permission::create(['name' => 'delete languages']);
 
+        Permission::create(['name' => 'list opportuninties']);
+        Permission::create(['name' => 'view opportuninties']);
+        Permission::create(['name' => 'create opportuninties']);
+        Permission::create(['name' => 'update opportuninties']);
+        Permission::create(['name' => 'delete opportuninties']);
+
+        Permission::create(['name' => 'list opportunitytypes']);
+        Permission::create(['name' => 'view opportunitytypes']);
+        Permission::create(['name' => 'create opportunitytypes']);
+        Permission::create(['name' => 'update opportunitytypes']);
+        Permission::create(['name' => 'delete opportunitytypes']);
+
+        Permission::create(['name' => 'list opportunityunits']);
+        Permission::create(['name' => 'view opportunityunits']);
+        Permission::create(['name' => 'create opportunityunits']);
+        Permission::create(['name' => 'update opportunityunits']);
+        Permission::create(['name' => 'delete opportunityunits']);
+
+        Permission::create(['name' => 'list portals']);
+        Permission::create(['name' => 'view portals']);
+        Permission::create(['name' => 'create portals']);
+        Permission::create(['name' => 'update portals']);
+        Permission::create(['name' => 'delete portals']);
+
         Permission::create(['name' => 'list pricebooks']);
         Permission::create(['name' => 'view pricebooks']);
         Permission::create(['name' => 'create pricebooks']);

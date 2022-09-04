@@ -126,7 +126,8 @@ class TaskResource extends Resource
                     TextInput::make('amount')
                         ->rules(['required', 'numeric'])
                         ->numeric()
-                        ->placeholder('Task Amount')
+                        ->placeholder('Amount')
+                        ->default('1')
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
@@ -135,6 +136,7 @@ class TaskResource extends Resource
 
                     Toggle::make('is_paid')
                         ->rules(['required', 'boolean'])
+                        ->default('false')
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
@@ -143,6 +145,7 @@ class TaskResource extends Resource
 
                     Toggle::make('is_minimum_charge_used')
                         ->rules(['required', 'boolean'])
+                        ->default('false')
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
@@ -151,6 +154,7 @@ class TaskResource extends Resource
 
                     Toggle::make('send_details_to_resource')
                         ->rules(['required', 'boolean'])
+                        ->default('false')
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
@@ -158,7 +162,7 @@ class TaskResource extends Resource
                         ]),
 
                     RichEditor::make('notes')
-                        ->rules(['required', 'max:255', 'string'])
+                        ->rules(['nullable', 'max:255', 'string'])
                         ->placeholder('Notes')
                         ->columnSpan([
                             'default' => 12,

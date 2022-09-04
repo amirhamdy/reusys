@@ -28,7 +28,6 @@ class ProjectFactory extends Factory
             'end_date' => $this->faker->date,
             'po_number' => $this->faker->text(255),
             'productline_id' => \App\Models\Productline::factory(),
-            'currency_id' => \App\Models\Currency::factory(),
         ];
     }
 }

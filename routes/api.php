@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\JobController;
 use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\Api\PortalController;
 use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\JobTasksController;
@@ -13,10 +14,12 @@ use App\Http\Controllers\Api\PricebookController;
 use App\Http\Controllers\Api\PermissionController;
 use App\Http\Controllers\Api\ProductlineController;
 use App\Http\Controllers\Api\ProjectJobsController;
+use App\Http\Controllers\Api\OpportunintyController;
 use App\Http\Controllers\Api\ProductlineProjectsController;
 use App\Http\Controllers\Api\PricebookPricelistsController;
 use App\Http\Controllers\Api\CustomerProductlinesController;
 use App\Http\Controllers\Api\PricebookProductlinesController;
+use App\Http\Controllers\Api\ProductlineOpportunintiesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,6 +70,16 @@ Route::name('api.')
             'store',
         ])->name('productlines.projects.store');
 
+        // Productline Opportuninties
+        Route::get('/productlines/{productline}/opportuninties', [
+            ProductlineOpportunintiesController::class,
+            'index',
+        ])->name('productlines.opportuninties.index');
+        Route::post('/productlines/{productline}/opportuninties', [
+            ProductlineOpportunintiesController::class,
+            'store',
+        ])->name('productlines.opportuninties.store');
+
         Route::apiResource('pricebooks', PricebookController::class);
 
         // Pricebook Productlines
@@ -114,4 +127,8 @@ Route::name('api.')
         ])->name('jobs.tasks.store');
 
         Route::apiResource('tasks', TaskController::class);
+
+        Route::apiResource('opportuninties', OpportunintyController::class);
+
+        Route::apiResource('portals', PortalController::class);
     });

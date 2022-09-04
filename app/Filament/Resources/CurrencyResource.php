@@ -93,7 +93,6 @@ class CurrencyResource extends Resource
     {
         return [
             CurrencyResource\RelationManagers\PricebooksRelationManager::class,
-            CurrencyResource\RelationManagers\ProjectsRelationManager::class,
         ];
     }
 

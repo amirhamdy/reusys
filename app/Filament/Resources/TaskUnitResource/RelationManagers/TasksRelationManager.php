@@ -111,7 +111,8 @@ class TasksRelationManager extends HasManyRelationManager
                 TextInput::make('amount')
                     ->rules(['required', 'numeric'])
                     ->numeric()
-                    ->placeholder('Task Amount')
+                    ->placeholder('Amount')
+                    ->default('1')
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
@@ -120,6 +121,7 @@ class TasksRelationManager extends HasManyRelationManager
 
                 Toggle::make('is_paid')
                     ->rules(['required', 'boolean'])
+                    ->default('false')
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
@@ -128,6 +130,7 @@ class TasksRelationManager extends HasManyRelationManager
 
                 Toggle::make('is_minimum_charge_used')
                     ->rules(['required', 'boolean'])
+                    ->default('false')
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
@@ -136,6 +139,7 @@ class TasksRelationManager extends HasManyRelationManager
 
                 Toggle::make('send_details_to_resource')
                     ->rules(['required', 'boolean'])
+                    ->default('false')
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
@@ -143,7 +147,7 @@ class TasksRelationManager extends HasManyRelationManager
                     ]),
 
                 RichEditor::make('notes')
-                    ->rules(['required', 'max:255', 'string'])
+                    ->rules(['nullable', 'max:255', 'string'])
                     ->placeholder('Notes')
                     ->columnSpan([
                         'default' => 12,
