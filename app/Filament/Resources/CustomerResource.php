@@ -18,7 +18,9 @@ class CustomerResource extends Resource
 {
     protected static ?string $model = Customer::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?int $navigationSort = 1;
+
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -175,11 +177,11 @@ class CustomerResource extends Resource
                 Tables\Columns\TextColumn::make('name')->limit(50),
                 Tables\Columns\TextColumn::make('phone')->limit(50),
                 Tables\Columns\TextColumn::make('email')->limit(50),
-                Tables\Columns\TextColumn::make('fax')->limit(50),
-                Tables\Columns\TextColumn::make('address')->limit(50),
-                Tables\Columns\TextColumn::make('billing_address')->limit(50),
-                Tables\Columns\TextColumn::make('postal_code')->limit(50),
-                Tables\Columns\TextColumn::make('website')->limit(50),
+//                Tables\Columns\TextColumn::make('fax')->limit(50),
+//                Tables\Columns\TextColumn::make('address')->limit(50),
+//                Tables\Columns\TextColumn::make('billing_address')->limit(50),
+//                Tables\Columns\TextColumn::make('postal_code')->limit(50),
+//                Tables\Columns\TextColumn::make('website')->limit(50),
                 Tables\Columns\TextColumn::make('city')->limit(50),
                 Tables\Columns\TextColumn::make('customerStatus.name')->limit(
                     50
@@ -262,6 +264,7 @@ class CustomerResource extends Resource
         return [
             'index' => Pages\ListCustomers::route('/'),
             'create' => Pages\CreateCustomer::route('/create'),
+            'view' => Pages\ViewCustomer::route('/{record}'),
             'edit' => Pages\EditCustomer::route('/{record}/edit'),
         ];
     }
