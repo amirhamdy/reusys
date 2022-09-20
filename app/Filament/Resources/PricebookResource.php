@@ -24,6 +24,8 @@ class PricebookResource extends Resource
 
     protected static ?string $navigationLabel = 'Price Books';
 
+    protected static ?string $navigationGroup = '   ';
+
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Form $form): Form

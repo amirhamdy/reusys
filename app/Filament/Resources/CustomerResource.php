@@ -22,6 +22,8 @@ class CustomerResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
+    protected static ?string $navigationGroup = ' ';
+
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Form $form): Form
@@ -268,4 +270,10 @@ class CustomerResource extends Resource
             'edit' => Pages\EditCustomer::route('/{record}/edit'),
         ];
     }
+
+    protected static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
 }

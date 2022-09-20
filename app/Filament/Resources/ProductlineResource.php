@@ -24,6 +24,8 @@ class ProductlineResource extends Resource
 
     protected static ?string $navigationLabel = 'Product Lines';
 
+    protected static ?string $navigationGroup = ' ';
+
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Form $form): Form
