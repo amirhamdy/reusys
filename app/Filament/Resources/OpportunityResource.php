@@ -20,6 +20,8 @@ class OpportunityResource extends Resource
 {
     protected static ?string $model = Opportunity::class;
 
+    protected static ?int $navigationSort = 8;
+
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $recordTitleAttribute = 'name';
@@ -249,6 +251,7 @@ class OpportunityResource extends Resource
         return [
             'index' => Pages\ListOpportunities::route('/'),
             'create' => Pages\CreateOpportunity::route('/create'),
+            'view' => Pages\ViewOpportunity::route('/{record}'),
             'edit' => Pages\EditOpportunity::route('/{record}/edit'),
         ];
     }
