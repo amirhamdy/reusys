@@ -18,6 +18,8 @@ class PricebookResource extends Resource
 {
     protected static ?string $model = Pricebook::class;
 
+    protected static ?int $navigationSort = 6;
+
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $recordTitleAttribute = 'name';
@@ -110,6 +112,7 @@ class PricebookResource extends Resource
         return [
             'index' => Pages\ListPricebooks::route('/'),
             'create' => Pages\CreatePricebook::route('/create'),
+            'view' => Pages\ViewPricebook::route('/{record}'),
             'edit' => Pages\EditPricebook::route('/{record}/edit'),
         ];
     }

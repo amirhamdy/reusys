@@ -18,6 +18,8 @@ class ProductlineResource extends Resource
 {
     protected static ?string $model = Productline::class;
 
+    protected static ?int $navigationSort = 2;
+
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $recordTitleAttribute = 'name';
@@ -127,6 +129,7 @@ class ProductlineResource extends Resource
         return [
             'index' => Pages\ListProductlines::route('/'),
             'create' => Pages\CreateProductline::route('/create'),
+            'view' => Pages\ViewProductline::route('/{record}'),
             'edit' => Pages\EditProductline::route('/{record}/edit'),
         ];
     }

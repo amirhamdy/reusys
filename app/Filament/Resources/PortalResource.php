@@ -16,6 +16,8 @@ class PortalResource extends Resource
 {
     protected static ?string $model = Portal::class;
 
+    protected static ?int $navigationSort = 7;
+
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $recordTitleAttribute = 'name';
@@ -124,6 +126,7 @@ class PortalResource extends Resource
         return [
             'index' => Pages\ListPortals::route('/'),
             'create' => Pages\CreatePortal::route('/create'),
+            'view' => Pages\ViewPortal::route('/{record}'),
             'edit' => Pages\EditPortal::route('/{record}/edit'),
         ];
     }

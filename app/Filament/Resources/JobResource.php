@@ -19,6 +19,8 @@ class JobResource extends Resource
 {
     protected static ?string $model = Job::class;
 
+    protected static ?int $navigationSort = 4;
+
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $recordTitleAttribute = 'name';
@@ -210,6 +212,7 @@ class JobResource extends Resource
         return [
             'index' => Pages\ListJobs::route('/'),
             'create' => Pages\CreateJob::route('/create'),
+            'view' => Pages\ViewJob::route('/{record}'),
             'edit' => Pages\EditJob::route('/{record}/edit'),
         ];
     }
