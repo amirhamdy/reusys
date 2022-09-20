@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         $this->call(JobTypeSeeder::class);
         $this->call(JobUnitSeeder::class);
         $this->call(LanguageSeeder::class);
-        $this->call(OpportunintySeeder::class);
+        $this->call(OpportunitySeeder::class);
         $this->call(OpportunityTypeSeeder::class);
         $this->call(OpportunityUnitSeeder::class);
         $this->call(PortalSeeder::class);

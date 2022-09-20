@@ -17,8 +17,8 @@ class OpportunityType extends Model
 
     protected $table = 'opportunity_types';
 
-    public function opportuninties()
+    public function opportunities()
     {
-        return $this->hasMany(Opportuninty::class);
+        return $this->hasMany(Opportunity::class);
     }
 }

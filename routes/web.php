@@ -11,7 +11,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PricebookController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductlineController;
-use App\Http\Controllers\OpportunintyController;
+use App\Http\Controllers\OpportunityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +44,6 @@ Route::prefix('/')
         Route::resource('projects', ProjectController::class);
         Route::resource('jobs', JobController::class);
         Route::resource('tasks', TaskController::class);
-        Route::resource('opportuninties', OpportunintyController::class);
         Route::resource('portals', PortalController::class);
+        Route::resource('opportunities', OpportunityController::class);
     });

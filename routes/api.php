@@ -14,12 +14,12 @@ use App\Http\Controllers\Api\PricebookController;
 use App\Http\Controllers\Api\PermissionController;
 use App\Http\Controllers\Api\ProductlineController;
 use App\Http\Controllers\Api\ProjectJobsController;
-use App\Http\Controllers\Api\OpportunintyController;
+use App\Http\Controllers\Api\OpportunityController;
 use App\Http\Controllers\Api\ProductlineProjectsController;
 use App\Http\Controllers\Api\PricebookPricelistsController;
 use App\Http\Controllers\Api\CustomerProductlinesController;
 use App\Http\Controllers\Api\PricebookProductlinesController;
-use App\Http\Controllers\Api\ProductlineOpportunintiesController;
+use App\Http\Controllers\Api\ProductlineOpportunitiesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,15 +70,15 @@ Route::name('api.')
             'store',
         ])->name('productlines.projects.store');
 
-        // Productline Opportuninties
-        Route::get('/productlines/{productline}/opportuninties', [
-            ProductlineOpportunintiesController::class,
+        // Productline Opportunities
+        Route::get('/productlines/{productline}/opportunities', [
+            ProductlineOpportunitiesController::class,
             'index',
-        ])->name('productlines.opportuninties.index');
-        Route::post('/productlines/{productline}/opportuninties', [
-            ProductlineOpportunintiesController::class,
+        ])->name('productlines.opportunities.index');
+        Route::post('/productlines/{productline}/opportunities', [
+            ProductlineOpportunitiesController::class,
             'store',
-        ])->name('productlines.opportuninties.store');
+        ])->name('productlines.opportunities.store');
 
         Route::apiResource('pricebooks', PricebookController::class);
 
@@ -128,7 +128,7 @@ Route::name('api.')
 
         Route::apiResource('tasks', TaskController::class);
 
-        Route::apiResource('opportuninties', OpportunintyController::class);
-
         Route::apiResource('portals', PortalController::class);
+
+        Route::apiResource('opportunities', OpportunityController::class);
     });
