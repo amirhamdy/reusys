@@ -12,6 +12,8 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use App\Filament\Resources\CustomerResource\Widgets\CustomersChart;
+use App\Filament\Resources\JobResource\Widgets\LatestJobs;
 
 return [
 
@@ -140,6 +142,8 @@ return [
         'path' => app_path('Filament/Widgets'),
         'register' => [
             Widgets\AccountWidget::class,
+            CustomersChart::class,
+            LatestJobs::class,
 //            Widgets\FilamentInfoWidget::class,
         ],
     ],
