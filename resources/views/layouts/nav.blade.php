@@ -50,14 +50,14 @@
                             Tasks
                             </x-dropdown-link>
                             @endcan
-                            @can('view-any', App\Models\Opportuninty::class)
-                            <x-dropdown-link href="{{ route('opportuninties.index') }}">
-                            Opportuninties
-                            </x-dropdown-link>
-                            @endcan
                             @can('view-any', App\Models\Portal::class)
                             <x-dropdown-link href="{{ route('portals.index') }}">
                             Portals
+                            </x-dropdown-link>
+                            @endcan
+                            @can('view-any', App\Models\Opportunity::class)
+                            <x-dropdown-link href="{{ route('opportunities.index') }}">
+                            Opportunities
                             </x-dropdown-link>
                             @endcan
                     </x-nav-dropdown>
@@ -162,14 +162,14 @@
                 Tasks
                 </x-responsive-nav-link>
                 @endcan
-                @can('view-any', App\Models\Opportuninty::class)
-                <x-responsive-nav-link href="{{ route('opportuninties.index') }}">
-                Opportuninties
-                </x-responsive-nav-link>
-                @endcan
                 @can('view-any', App\Models\Portal::class)
                 <x-responsive-nav-link href="{{ route('portals.index') }}">
                 Portals
+                </x-responsive-nav-link>
+                @endcan
+                @can('view-any', App\Models\Opportunity::class)
+                <x-responsive-nav-link href="{{ route('opportunities.index') }}">
+                Opportunities
                 </x-responsive-nav-link>
                 @endcan
 

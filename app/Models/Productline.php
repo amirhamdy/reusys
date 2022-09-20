@@ -30,8 +30,8 @@ class Productline extends Model
         return $this->hasMany(Project::class);
     }
 
-    public function opportuninties()
+    public function opportunities()
     {
-        return $this->hasMany(Opportuninty::class);
+        return $this->hasMany(Opportunity::class);
     }
 }

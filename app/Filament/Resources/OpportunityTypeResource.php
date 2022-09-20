@@ -80,7 +80,7 @@ class OpportunityTypeResource extends Resource
     public static function getRelations(): array
     {
         return [
-            OpportunityTypeResource\RelationManagers\OpportunintiesRelationManager::class,
+            OpportunityTypeResource\RelationManagers\OpportunitiesRelationManager::class,
         ];
     }
 

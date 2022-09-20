@@ -120,7 +120,7 @@ class ProductlineResource extends Resource
     {
         return [
             ProductlineResource\RelationManagers\ProjectsRelationManager::class,
-            ProductlineResource\RelationManagers\OpportunintiesRelationManager::class,
+            ProductlineResource\RelationManagers\OpportunitiesRelationManager::class,
         ];
     }
 

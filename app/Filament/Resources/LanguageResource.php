@@ -96,8 +96,8 @@ class LanguageResource extends Resource
             LanguageResource\RelationManagers\PricelistsRelationManager::class,
             LanguageResource\RelationManagers\JobsRelationManager::class,
             LanguageResource\RelationManagers\JobsRelationManager::class,
-            LanguageResource\RelationManagers\OpportunintiesRelationManager::class,
-            LanguageResource\RelationManagers\OpportunintiesRelationManager::class,
+            LanguageResource\RelationManagers\OpportunitiesRelationManager::class,
+            LanguageResource\RelationManagers\OpportunitiesRelationManager::class,
         ];
     }
 

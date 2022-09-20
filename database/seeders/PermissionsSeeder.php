@@ -75,11 +75,11 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'update languages']);
         Permission::create(['name' => 'delete languages']);
 
-        Permission::create(['name' => 'list opportuninties']);
-        Permission::create(['name' => 'view opportuninties']);
-        Permission::create(['name' => 'create opportuninties']);
-        Permission::create(['name' => 'update opportuninties']);
-        Permission::create(['name' => 'delete opportuninties']);
+        Permission::create(['name' => 'list opportunities']);
+        Permission::create(['name' => 'view opportunities']);
+        Permission::create(['name' => 'create opportunities']);
+        Permission::create(['name' => 'update opportunities']);
+        Permission::create(['name' => 'delete opportunities']);
 
         Permission::create(['name' => 'list opportunitytypes']);
         Permission::create(['name' => 'view opportunitytypes']);

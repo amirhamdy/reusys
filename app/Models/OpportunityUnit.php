@@ -17,8 +17,8 @@ class OpportunityUnit extends Model
 
     protected $table = 'opportunity_units';
 
-    public function opportuninties()
+    public function opportunities()
     {
-        return $this->hasMany(Opportuninty::class);
+        return $this->hasMany(Opportunity::class);
     }
 }

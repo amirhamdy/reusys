@@ -12,7 +12,7 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('opportuninties', function (Blueprint $table) {
+        Schema::create('opportunities', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->date('date');
@@ -38,6 +38,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('opportuninties');
+        Schema::dropIfExists('opportunities');
     }
 };
