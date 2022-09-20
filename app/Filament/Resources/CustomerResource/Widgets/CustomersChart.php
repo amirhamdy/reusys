@@ -9,6 +9,8 @@ use Flowframe\Trend\TrendValue;
 
 class CustomersChart extends LineChartWidget
 {
+    protected static ?int $sort = 1;
+
     public ?string $filter = 'today';
 
     protected static ?string $heading = 'Chart';
