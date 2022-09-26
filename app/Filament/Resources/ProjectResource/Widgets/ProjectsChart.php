@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Filament\Resources\CustomerResource\Widgets;
+namespace App\Filament\Resources\ProjectResource\Widgets;
 
-use App\Models\Customer;
+use App\Models\Project;
 use Filament\Widgets\LineChartWidget;
 use Flowframe\Trend\Trend;
 use Flowframe\Trend\TrendValue;
 
-class CustomersChart extends LineChartWidget
+class ProjectsChart extends LineChartWidget
 {
     protected static ?int $sort = 1;
 
@@ -17,14 +17,14 @@ class CustomersChart extends LineChartWidget
 
     protected function getHeading(): string
     {
-        return 'Customers per month';
+        return 'Projects per month';
     }
 
     protected function getData(): array
     {
         $activeFilter = $this->filter;
 
-        $data = Trend::model(Customer::class)
+        $data = Trend::model(Project::class)
             ->between(
                 start: now()->startOfDecade(),
                 end: now()->endOfYear(),
@@ -35,7 +35,7 @@ class CustomersChart extends LineChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'Customers',
+                    'label' => 'Projects',
                     'data' => $data->map(fn(TrendValue $value) => $value->aggregate),
                 ],
             ],

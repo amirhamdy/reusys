@@ -137,4 +137,9 @@ class ProductlineResource extends Resource
             'edit' => Pages\EditProductline::route('/{record}/edit'),
         ];
     }
+
+    protected static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 }

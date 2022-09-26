@@ -218,4 +218,9 @@ class JobResource extends Resource
             'edit' => Pages\EditJob::route('/{record}/edit'),
         ];
     }
+
+    protected static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 }

@@ -120,4 +120,9 @@ class PricebookResource extends Resource
             'edit' => Pages\EditPricebook::route('/{record}/edit'),
         ];
     }
+
+    protected static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 }
