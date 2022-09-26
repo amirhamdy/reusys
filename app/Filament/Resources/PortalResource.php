@@ -132,4 +132,9 @@ class PortalResource extends Resource
             'edit' => Pages\EditPortal::route('/{record}/edit'),
         ];
     }
+
+    protected static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 }

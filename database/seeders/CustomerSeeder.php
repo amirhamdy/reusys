@@ -67,9 +67,6 @@ class CustomerSeeder extends Seeder
                 }
 
                 DB::table('customers')->insert($c);
-            } else {
-                print_r($customer);
-                print_r('DONE!');
             }
         }
     }
