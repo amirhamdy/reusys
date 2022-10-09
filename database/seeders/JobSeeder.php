@@ -27,6 +27,7 @@ class JobSeeder extends Seeder
 
                 $values = array_values($job);
                 $j = array_combine($keys, $values);
+                $j['is_minimum_charge_used'] = (int)($j['is_minimum_charge_used']);
                 $j['name'] = trim($j['name']);
                 $j['updated_at'] = $j['created_at'];
                 $j['is_free_job'] = $j['cost'] == 0;
