@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,13 +15,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // Adding an admin user
-        $user = \App\Models\User::factory()
-            ->count(1)
-            ->create([
-                'email' => 'admin@admin.com',
-                'password' => \Hash::make('admin'),
-            ]);
-        $this->call(PermissionsSeeder::class);
+//        $user = \App\Models\User::factory()
+//            ->count(1)
+//            ->create([
+//                'email' => 'admin@admin.com',
+//                'password' => Hash::make('password'),
+//            ]);
 
         $this->call(CountrySeeder::class);
         $this->call(CurrencySeeder::class);
@@ -48,6 +48,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TaskUnitSeeder::class);
         $this->call(TranslatorSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(PermissionsSeeder::class);
 //        $this->call(\SqlFileSeeder::class);
     }
 }
