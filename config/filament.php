@@ -15,6 +15,8 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Filament\Resources\CustomerResource\Widgets\CustomersChart;
 use App\Filament\Resources\JobResource\Widgets\LatestJobs;
 use App\Filament\Resources\ProjectResource\Widgets\ProjectsChart;
+use App\Filament\Resources\JobResource\Widgets\JobsChart;
+use App\Filament\Resources\TaskResource\Widgets\TasksChart;
 
 return [
 
@@ -144,6 +146,8 @@ return [
         'register' => [
             CustomersChart::class,
             ProjectsChart::class,
+            JobsChart::class,
+            TasksChart::class,
             LatestJobs::class,
 //            Widgets\AccountWidget::class,
 //            Widgets\FilamentInfoWidget::class,
