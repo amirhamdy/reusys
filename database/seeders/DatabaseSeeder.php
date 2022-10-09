@@ -29,7 +29,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CustomerRatingSeeder::class);
         $this->call(CustomerStatusSeeder::class);
         $this->call(CustomerSeeder::class);
-        $this->call(JobSeeder::class);
         $this->call(JobTypeSeeder::class);
         $this->call(JobUnitSeeder::class);
         $this->call(LanguageSeeder::class);
@@ -41,6 +40,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PricelistSeeder::class);
         $this->call(ProductlineSeeder::class);
         $this->call(ProjectSeeder::class);
+        $this->call(JobSeeder::class);
         $this->call(SubjectMatterSeeder::class);
         $this->call(TaskSeeder::class);
         $this->call(TaskStatusSeeder::class);
