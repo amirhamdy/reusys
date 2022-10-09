@@ -15,6 +15,12 @@ class PermissionsSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         // Create default permissions
+        Permission::create(['name' => 'list contacts']);
+        Permission::create(['name' => 'view contacts']);
+        Permission::create(['name' => 'create contacts']);
+        Permission::create(['name' => 'update contacts']);
+        Permission::create(['name' => 'delete contacts']);
+
         Permission::create(['name' => 'list countries']);
         Permission::create(['name' => 'view countries']);
         Permission::create(['name' => 'create countries']);
@@ -164,6 +170,18 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'create translators']);
         Permission::create(['name' => 'update translators']);
         Permission::create(['name' => 'delete translators']);
+
+        Permission::create(['name' => 'list translatorpricelists']);
+        Permission::create(['name' => 'view translatorpricelists']);
+        Permission::create(['name' => 'create translatorpricelists']);
+        Permission::create(['name' => 'update translatorpricelists']);
+        Permission::create(['name' => 'delete translatorpricelists']);
+
+        Permission::create(['name' => 'list translatortypes']);
+        Permission::create(['name' => 'view translatortypes']);
+        Permission::create(['name' => 'create translatortypes']);
+        Permission::create(['name' => 'update translatortypes']);
+        Permission::create(['name' => 'delete translatortypes']);
 
         // Create user role and assign existing permissions
         $currentPermissions = Permission::all();

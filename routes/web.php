@@ -9,6 +9,7 @@ use App\Http\Controllers\PortalController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PricebookController;
+use App\Http\Controllers\TranslatorController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductlineController;
 use App\Http\Controllers\OpportunityController;
@@ -46,4 +47,5 @@ Route::prefix('/')
         Route::resource('tasks', TaskController::class);
         Route::resource('portals', PortalController::class);
         Route::resource('opportunities', OpportunityController::class);
+        Route::resource('translators', TranslatorController::class);
     });

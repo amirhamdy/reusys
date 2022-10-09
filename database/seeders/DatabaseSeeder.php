@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             ]);
         $this->call(PermissionsSeeder::class);
 
+        $this->call(ContactSeeder::class);
         $this->call(CountrySeeder::class);
         $this->call(CurrencySeeder::class);
         $this->call(CustomerSeeder::class);
@@ -47,6 +48,8 @@ class DatabaseSeeder extends Seeder
         $this->call(TaskTypeSeeder::class);
         $this->call(TaskUnitSeeder::class);
         $this->call(TranslatorSeeder::class);
+        $this->call(TranslatorPriceListSeeder::class);
+        $this->call(TranslatorTypeSeeder::class);
         $this->call(UserSeeder::class);
     }
 }

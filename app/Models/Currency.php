@@ -19,4 +19,14 @@ class Currency extends Model
     {
         return $this->hasMany(Pricebook::class);
     }
+
+    public function translators()
+    {
+        return $this->hasMany(Translator::class);
+    }
+
+    public function translatorPriceLists()
+    {
+        return $this->hasMany(TranslatorPriceList::class);
+    }
 }
