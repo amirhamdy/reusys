@@ -20,7 +20,11 @@ class TranslatorResource extends Resource
 {
     protected static ?string $model = Translator::class;
 
+    protected static ?int $navigationSort = 9;
+
     protected static ?string $navigationIcon = 'heroicon-o-collection';
+
+    protected static ?string $navigationGroup = '   ';
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -368,7 +372,13 @@ class TranslatorResource extends Resource
         return [
             'index' => Pages\ListTranslators::route('/'),
             'create' => Pages\CreateTranslator::route('/create'),
+            'view' => Pages\ViewTranslator::route('/{record}'),
             'edit' => Pages\EditTranslator::route('/{record}/edit'),
         ];
+    }
+
+    protected static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
     }
 }
