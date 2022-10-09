@@ -105,8 +105,8 @@ return [
             'job_type_id' => 'Job Type',
             'job_unit_id' => 'Job Unit',
             'amount' => 'Amount',
-            'is_free_job' => 'Mark as a free job?',
-            'is_minimum_charge_used' => 'Use Minimum Charge for Job price?',
+            'is_free_job' => 'Is Free Job',
+            'is_minimum_charge_used' => 'Is Minimum Charge Used',
         ],
     ],
 

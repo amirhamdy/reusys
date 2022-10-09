@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->integer('amount')->default(1);
             $table->boolean('is_free_job');
             $table->boolean('is_minimum_charge_used');
+            $table->float('cost');
             $table->unsignedBigInteger('project_id');
             $table->unsignedBigInteger('source_language_id');
             $table->unsignedBigInteger('target_language_id');
@@ -25,6 +26,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('job_unit_id');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
