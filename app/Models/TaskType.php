@@ -21,4 +21,9 @@ class TaskType extends Model
     {
         return $this->hasMany(Task::class);
     }
+
+    public function translatorPriceLists()
+    {
+        return $this->hasMany(TranslatorPriceList::class);
+    }
 }

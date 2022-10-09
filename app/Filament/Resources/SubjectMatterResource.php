@@ -82,6 +82,7 @@ class SubjectMatterResource extends Resource
         return [
             SubjectMatterResource\RelationManagers\PricelistsRelationManager::class,
             SubjectMatterResource\RelationManagers\TasksRelationManager::class,
+            SubjectMatterResource\RelationManagers\TranslatorPriceListsRelationManager::class,
         ];
     }
 

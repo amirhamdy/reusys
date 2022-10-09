@@ -79,7 +79,10 @@ class TaskUnitResource extends Resource
 
     public static function getRelations(): array
     {
-        return [TaskUnitResource\RelationManagers\TasksRelationManager::class];
+        return [
+            TaskUnitResource\RelationManagers\TasksRelationManager::class,
+            TaskUnitResource\RelationManagers\TranslatorPriceListsRelationManager::class,
+        ];
     }
 
     public static function getPages(): array

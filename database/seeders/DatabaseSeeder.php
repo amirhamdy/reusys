@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
 //                'password' => Hash::make('password'),
 //            ]);
 
+        $this->call(ContactSeeder::class);
         $this->call(CountrySeeder::class);
         $this->call(CurrencySeeder::class);
         $this->call(RegionSeeder::class);
@@ -47,6 +48,8 @@ class DatabaseSeeder extends Seeder
         $this->call(TaskTypeSeeder::class);
         $this->call(TaskUnitSeeder::class);
         $this->call(TranslatorSeeder::class);
+        $this->call(TranslatorPriceListSeeder::class);
+        $this->call(TranslatorTypeSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(PermissionsSeeder::class);
 //        $this->call(\SqlFileSeeder::class);

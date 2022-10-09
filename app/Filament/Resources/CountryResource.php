@@ -93,6 +93,7 @@ class CountryResource extends Resource
     {
         return [
             CountryResource\RelationManagers\CustomersRelationManager::class,
+            CountryResource\RelationManagers\TranslatorsRelationManager::class,
         ];
     }
 

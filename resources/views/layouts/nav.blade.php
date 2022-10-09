@@ -60,6 +60,11 @@
                             Opportunities
                             </x-dropdown-link>
                             @endcan
+                            @can('view-any', App\Models\Translator::class)
+                            <x-dropdown-link href="{{ route('translators.index') }}">
+                            Translators
+                            </x-dropdown-link>
+                            @endcan
                     </x-nav-dropdown>
 
                     @if (Auth::user()->can('view-any', Spatie\Permission\Models\Role::class) || 
@@ -170,6 +175,11 @@
                 @can('view-any', App\Models\Opportunity::class)
                 <x-responsive-nav-link href="{{ route('opportunities.index') }}">
                 Opportunities
+                </x-responsive-nav-link>
+                @endcan
+                @can('view-any', App\Models\Translator::class)
+                <x-responsive-nav-link href="{{ route('translators.index') }}">
+                Translators
                 </x-responsive-nav-link>
                 @endcan
 

@@ -19,4 +19,9 @@ class Country extends Model
     {
         return $this->hasMany(Customer::class);
     }
+
+    public function translators()
+    {
+        return $this->hasMany(Translator::class);
+    }
 }

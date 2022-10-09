@@ -79,7 +79,10 @@ class TaskTypeResource extends Resource
 
     public static function getRelations(): array
     {
-        return [TaskTypeResource\RelationManagers\TasksRelationManager::class];
+        return [
+            TaskTypeResource\RelationManagers\TasksRelationManager::class,
+            TaskTypeResource\RelationManagers\TranslatorPriceListsRelationManager::class,
+        ];
     }
 
     public static function getPages(): array

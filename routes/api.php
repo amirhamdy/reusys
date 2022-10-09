@@ -8,18 +8,24 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\PortalController;
 use App\Http\Controllers\Api\ProjectController;
+use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\JobTasksController;
 use App\Http\Controllers\Api\PricebookController;
+use App\Http\Controllers\Api\TranslatorController;
 use App\Http\Controllers\Api\PermissionController;
 use App\Http\Controllers\Api\ProductlineController;
 use App\Http\Controllers\Api\ProjectJobsController;
 use App\Http\Controllers\Api\OpportunityController;
+use App\Http\Controllers\Api\TranslatorTasksController;
+use App\Http\Controllers\Api\TranslatorContactsController;
 use App\Http\Controllers\Api\ProductlineProjectsController;
 use App\Http\Controllers\Api\PricebookPricelistsController;
+use App\Http\Controllers\Api\TranslatorPriceListController;
 use App\Http\Controllers\Api\CustomerProductlinesController;
 use App\Http\Controllers\Api\PricebookProductlinesController;
 use App\Http\Controllers\Api\ProductlineOpportunitiesController;
+use App\Http\Controllers\Api\TranslatorTranslatorPriceListsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -131,4 +137,36 @@ Route::name('api.')
         Route::apiResource('portals', PortalController::class);
 
         Route::apiResource('opportunities', OpportunityController::class);
+
+        Route::apiResource('translators', TranslatorController::class);
+
+        // Translator Tasks
+        Route::get('/translators/{translator}/tasks', [
+            TranslatorTasksController::class,
+            'index',
+        ])->name('translators.tasks.index');
+        Route::post('/translators/{translator}/tasks', [
+            TranslatorTasksController::class,
+            'store',
+        ])->name('translators.tasks.store');
+
+        // Translator Translator Price Lists
+        Route::get('/translators/{translator}/translator-price-lists', [
+            TranslatorTranslatorPriceListsController::class,
+            'index',
+        ])->name('translators.translator-price-lists.index');
+        Route::post('/translators/{translator}/translator-price-lists', [
+            TranslatorTranslatorPriceListsController::class,
+            'store',
+        ])->name('translators.translator-price-lists.store');
+
+        // Translator Contacts
+        Route::get('/translators/{translator}/contacts', [
+            TranslatorContactsController::class,
+            'index',
+        ])->name('translators.contacts.index');
+        Route::post('/translators/{translator}/contacts', [
+            TranslatorContactsController::class,
+            'store',
+        ])->name('translators.contacts.store');
     });
