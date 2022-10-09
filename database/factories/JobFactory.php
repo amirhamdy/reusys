@@ -27,6 +27,7 @@ class JobFactory extends Factory
             'amount' => $this->faker->randomNumber(0),
             'is_free_job' => $this->faker->boolean,
             'is_minimum_charge_used' => $this->faker->boolean,
+            'cost' => $this->faker->randomNumber(2),
             'source_language_id' => \App\Models\Language::factory(),
             'target_language_id' => \App\Models\Language::factory(),
             'job_type_id' => \App\Models\JobType::factory(),

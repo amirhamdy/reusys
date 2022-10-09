@@ -4,18 +4,21 @@ namespace App\Models;
 
 use App\Models\Scopes\Searchable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Job extends Model
 {
     use HasFactory;
     use Searchable;
+    use SoftDeletes;
 
     protected $fillable = [
         'name',
         'amount',
         'is_free_job',
         'is_minimum_charge_used',
+        'cost',
         'project_id',
         'source_language_id',
         'target_language_id',
