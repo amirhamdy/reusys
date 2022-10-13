@@ -37,7 +37,7 @@
                         </x-inputs.select>
                     </x-inputs.group>
 
-                    <x-inputs.group class="w-full lg:w-6/12">
+                    <x-inputs.group class="w-full">
                         <x-inputs.select
                             name="translatorPriceList.source_language_id"
                             label="Source Language"
@@ -50,7 +50,7 @@
                         </x-inputs.select>
                     </x-inputs.group>
 
-                    <x-inputs.group class="w-full lg:w-6/12">
+                    <x-inputs.group class="w-full">
                         <x-inputs.select
                             name="translatorPriceList.target_language_id"
                             label="Target Language"
@@ -63,7 +63,7 @@
                         </x-inputs.select>
                     </x-inputs.group>
 
-                    <x-inputs.group class="w-full lg:w-4/12">
+                    <x-inputs.group class="w-full">
                         <x-inputs.select
                             name="translatorPriceList.subject_matter_id"
                             label="Subject Matter"
@@ -76,7 +76,7 @@
                         </x-inputs.select>
                     </x-inputs.group>
 
-                    <x-inputs.group class="w-full lg:w-4/12">
+                    <x-inputs.group class="w-full">
                         <x-inputs.select
                             name="translatorPriceList.currency_id"
                             label="Currency"
@@ -89,7 +89,7 @@
                         </x-inputs.select>
                     </x-inputs.group>
 
-                    <x-inputs.group class="w-full lg:w-4/12">
+                    <x-inputs.group class="w-full">
                         <x-inputs.select
                             name="translatorPriceList.task_unit_id"
                             label="Task Unit"
@@ -102,7 +102,7 @@
                         </x-inputs.select>
                     </x-inputs.group>
 
-                    <x-inputs.group class="w-full lg:w-6/12">
+                    <x-inputs.group class="w-full">
                         <x-inputs.number
                             name="translatorPriceList.unit_price"
                             label="Unit Price"
@@ -112,7 +112,7 @@
                         ></x-inputs.number>
                     </x-inputs.group>
 
-                    <x-inputs.group class="w-full lg:w-6/12">
+                    <x-inputs.group class="w-full">
                         <x-inputs.number
                             name="translatorPriceList.minimum_charge"
                             label="Minimum Charge"

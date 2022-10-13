@@ -25,17 +25,6 @@ class TranslatorsRelationManager extends HasManyRelationManager
     {
         return $form->schema([
             Grid::make(['default' => 0])->schema([
-                BelongsToSelect::make('translator_type_id')
-                    ->rules(['required', 'exists:translator_types,id'])
-                    ->relationship('translatorType', 'name')
-                    ->searchable()
-                    ->placeholder('Translator Type')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 12,
-                    ]),
-
                 TextInput::make('name')
                     ->rules(['required', 'max:255', 'string'])
                     ->placeholder('Name')
@@ -51,7 +40,7 @@ class TranslatorsRelationManager extends HasManyRelationManager
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
-                        'lg' => 6,
+                        'lg' => 12,
                     ]),
 
                 Select::make('gender')
@@ -66,7 +55,7 @@ class TranslatorsRelationManager extends HasManyRelationManager
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
-                        'lg' => 6,
+                        'lg' => 12,
                     ]),
 
                 DatePicker::make('date_of_birth')
@@ -75,7 +64,7 @@ class TranslatorsRelationManager extends HasManyRelationManager
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
-                        'lg' => 6,
+                        'lg' => 12,
                     ]),
 
                 TextInput::make('nationality')
@@ -84,12 +73,11 @@ class TranslatorsRelationManager extends HasManyRelationManager
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
-                        'lg' => 6,
+                        'lg' => 12,
                     ]),
 
                 TextInput::make('experience')
-                    ->rules(['nullable', 'numeric'])
-                    ->numeric()
+                    ->rules(['nullable', 'max:255', 'string'])
                     ->placeholder('Experience')
                     ->columnSpan([
                         'default' => 12,
@@ -103,16 +91,7 @@ class TranslatorsRelationManager extends HasManyRelationManager
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
-                        'lg' => 6,
-                    ]),
-
-                TextInput::make('id_other')
-                    ->rules(['nullable', 'max:255', 'string'])
-                    ->placeholder('Id Other')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 6,
+                        'lg' => 12,
                     ]),
 
                 TextInput::make('vat_number')
@@ -121,7 +100,16 @@ class TranslatorsRelationManager extends HasManyRelationManager
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
-                        'lg' => 6,
+                        'lg' => 12,
+                    ]),
+
+                TextInput::make('id_other')
+                    ->rules(['nullable', 'max:255', 'string'])
+                    ->placeholder('Id Other')
+                    ->columnSpan([
+                        'default' => 12,
+                        'md' => 12,
+                        'lg' => 12,
                     ]),
 
                 TextInput::make('timezone')
@@ -130,7 +118,7 @@ class TranslatorsRelationManager extends HasManyRelationManager
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
-                        'lg' => 6,
+                        'lg' => 12,
                     ]),
 
                 TextInput::make('website')
@@ -139,7 +127,7 @@ class TranslatorsRelationManager extends HasManyRelationManager
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
-                        'lg' => 6,
+                        'lg' => 12,
                     ]),
 
                 TextInput::make('skype')
@@ -148,7 +136,7 @@ class TranslatorsRelationManager extends HasManyRelationManager
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
-                        'lg' => 6,
+                        'lg' => 12,
                     ]),
 
                 TextInput::make('address')
@@ -157,7 +145,7 @@ class TranslatorsRelationManager extends HasManyRelationManager
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
-                        'lg' => 6,
+                        'lg' => 12,
                     ]),
 
                 TextInput::make('city')
@@ -166,7 +154,7 @@ class TranslatorsRelationManager extends HasManyRelationManager
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
-                        'lg' => 6,
+                        'lg' => 12,
                     ]),
 
                 TextInput::make('postal_code')
@@ -175,7 +163,7 @@ class TranslatorsRelationManager extends HasManyRelationManager
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
-                        'lg' => 6,
+                        'lg' => 12,
                     ]),
 
                 TextInput::make('payment_after')
@@ -184,7 +172,7 @@ class TranslatorsRelationManager extends HasManyRelationManager
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
-                        'lg' => 6,
+                        'lg' => 12,
                     ]),
 
                 Toggle::make('nda')
@@ -205,26 +193,33 @@ class TranslatorsRelationManager extends HasManyRelationManager
                         'lg' => 12,
                     ]),
 
-                BelongsToSelect::make('native_language_id')
-                    ->rules(['nullable', 'exists:languages,id'])
-                    ->relationship('nativeLanguage', 'name')
-                    ->searchable()
+                TextInput::make('native_language')
+                    ->rules(['nullable', 'max:255', 'string'])
                     ->placeholder('Native Language')
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
-                        'lg' => 6,
+                        'lg' => 12,
                     ]),
 
-                BelongsToSelect::make('second_language_id')
-                    ->rules(['nullable', 'exists:languages,id'])
-                    ->relationship('secondLanguage', 'name')
-                    ->searchable()
+                TextInput::make('second_language')
+                    ->rules(['nullable', 'max:255', 'string'])
                     ->placeholder('Second Language')
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
-                        'lg' => 6,
+                        'lg' => 12,
+                    ]),
+
+                BelongsToSelect::make('translator_type_id')
+                    ->rules(['required', 'exists:translator_types,id'])
+                    ->relationship('translatorType', 'name')
+                    ->searchable()
+                    ->placeholder('Translator Type')
+                    ->columnSpan([
+                        'default' => 12,
+                        'md' => 12,
+                        'lg' => 12,
                     ]),
 
                 BelongsToSelect::make('currency_id')
@@ -235,7 +230,7 @@ class TranslatorsRelationManager extends HasManyRelationManager
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
-                        'lg' => 6,
+                        'lg' => 12,
                     ]),
             ]),
         ]);
@@ -245,9 +240,6 @@ class TranslatorsRelationManager extends HasManyRelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('translatorType.name')->limit(
-                    50
-                ),
                 Tables\Columns\TextColumn::make('name')->limit(50),
                 Tables\Columns\TextColumn::make('degree')->limit(50),
                 Tables\Columns\TextColumn::make('gender')->enum([
@@ -257,10 +249,10 @@ class TranslatorsRelationManager extends HasManyRelationManager
                 ]),
                 Tables\Columns\TextColumn::make('date_of_birth')->date(),
                 Tables\Columns\TextColumn::make('nationality')->limit(50),
-                Tables\Columns\TextColumn::make('experience'),
+                Tables\Columns\TextColumn::make('experience')->limit(50),
                 Tables\Columns\TextColumn::make('id_number')->limit(50),
-                Tables\Columns\TextColumn::make('id_other')->limit(50),
                 Tables\Columns\TextColumn::make('vat_number')->limit(50),
+                Tables\Columns\TextColumn::make('id_other')->limit(50),
                 Tables\Columns\TextColumn::make('timezone')->limit(50),
                 Tables\Columns\TextColumn::make('website')->limit(50),
                 Tables\Columns\TextColumn::make('skype')->limit(50),
@@ -270,10 +262,9 @@ class TranslatorsRelationManager extends HasManyRelationManager
                 Tables\Columns\TextColumn::make('payment_after')->limit(50),
                 Tables\Columns\BooleanColumn::make('nda'),
                 Tables\Columns\BooleanColumn::make('cv'),
-                Tables\Columns\TextColumn::make('nativeLanguage.name')->limit(
-                    50
-                ),
-                Tables\Columns\TextColumn::make('secondLanguage.name')->limit(
+                Tables\Columns\TextColumn::make('native_language')->limit(50),
+                Tables\Columns\TextColumn::make('second_language')->limit(50),
+                Tables\Columns\TextColumn::make('translatorType.name')->limit(
                     50
                 ),
                 Tables\Columns\TextColumn::make('country.name')->limit(50),
@@ -313,16 +304,6 @@ class TranslatorsRelationManager extends HasManyRelationManager
 
                 MultiSelectFilter::make('translator_type_id')->relationship(
                     'translatorType',
-                    'name'
-                ),
-
-                MultiSelectFilter::make('native_language_id')->relationship(
-                    'nativeLanguage',
-                    'name'
-                ),
-
-                MultiSelectFilter::make('second_language_id')->relationship(
-                    'secondLanguage',
                     'name'
                 ),
 

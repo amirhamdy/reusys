@@ -34,7 +34,7 @@
                         ></x-inputs.text>
                     </x-inputs.group>
 
-                    <x-inputs.group class="w-full lg:w-4/12">
+                    <x-inputs.group class="w-full">
                         <x-inputs.text
                             name="contact.phone"
                             label="Phone"
@@ -44,7 +44,7 @@
                         ></x-inputs.text>
                     </x-inputs.group>
 
-                    <x-inputs.group class="w-full lg:w-4/12">
+                    <x-inputs.group class="w-full">
                         <x-inputs.email
                             name="contact.email"
                             label="Email"
@@ -54,7 +54,7 @@
                         ></x-inputs.email>
                     </x-inputs.group>
 
-                    <x-inputs.group class="w-full lg:w-4/12">
+                    <x-inputs.group class="w-full">
                         <x-inputs.text
                             name="contact.position"
                             label="Position"

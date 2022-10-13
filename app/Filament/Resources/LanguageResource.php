@@ -98,8 +98,6 @@ class LanguageResource extends Resource
             LanguageResource\RelationManagers\JobsRelationManager::class,
             LanguageResource\RelationManagers\OpportunitiesRelationManager::class,
             LanguageResource\RelationManagers\OpportunitiesRelationManager::class,
-            LanguageResource\RelationManagers\TranslatorsRelationManager::class,
-            LanguageResource\RelationManagers\TranslatorsRelationManager::class,
             LanguageResource\RelationManagers\TranslatorPriceListsRelationManager::class,
             LanguageResource\RelationManagers\TranslatorPriceListsRelationManager::class,
         ];
