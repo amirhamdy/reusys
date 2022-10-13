@@ -30,9 +30,9 @@ class Translator extends Model
         'payment_after',
         'nda',
         'cv',
+        'native_language',
+        'second_language',
         'translator_type_id',
-        'native_language_id',
-        'second_language_id',
         'country_id',
         'currency_id',
     ];
@@ -68,16 +68,6 @@ class Translator extends Model
     public function translatorPriceLists()
     {
         return $this->hasMany(TranslatorPriceList::class);
-    }
-
-    public function nativeLanguage()
-    {
-        return $this->belongsTo(Language::class, 'native_language_id');
-    }
-
-    public function secondLanguage()
-    {
-        return $this->belongsTo(Language::class, 'second_language_id');
     }
 
     public function contacts()

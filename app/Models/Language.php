@@ -45,16 +45,6 @@ class Language extends Model
         return $this->hasMany(Opportunity::class, 'target_language_id');
     }
 
-    public function translators()
-    {
-        return $this->hasMany(Translator::class, 'native_language_id');
-    }
-
-    public function translators2()
-    {
-        return $this->hasMany(Translator::class, 'second_language_id');
-    }
-
     public function translatorPriceLists()
     {
         return $this->hasMany(TranslatorPriceList::class, 'source_language_id');

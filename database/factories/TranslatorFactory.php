@@ -28,7 +28,7 @@ class TranslatorFactory extends Factory
             'gender' => \Arr::random(['male', 'female', 'other']),
             'date_of_birth' => $this->faker->date,
             'nationality' => $this->faker->text(255),
-            'experience' => $this->faker->randomNumber(0),
+            'experience' => $this->faker->text(255),
             'id_number' => $this->faker->text(255),
             'vat_number' => $this->faker->text(255),
             'id_other' => $this->faker->text(255),
@@ -41,11 +41,11 @@ class TranslatorFactory extends Factory
             'payment_after' => $this->faker->text(255),
             'nda' => $this->faker->boolean,
             'cv' => $this->faker->boolean,
+            'native_language' => $this->faker->text(255),
+            'second_language' => $this->faker->text(255),
             'translator_type_id' => \App\Models\TranslatorType::factory(),
             'currency_id' => \App\Models\Currency::factory(),
             'country_id' => \App\Models\Country::factory(),
-            'native_language_id' => \App\Models\Language::factory(),
-            'second_language_id' => \App\Models\Language::factory(),
         ];
     }
 }

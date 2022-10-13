@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->enum('gender', ['male', 'female', 'other'])->nullable();
             $table->date('date_of_birth')->nullable();
             $table->string('nationality')->nullable();
-            $table->integer('experience')->nullable();
+            $table->string('experience')->nullable();
             $table->string('id_number')->nullable();
             $table->string('vat_number')->nullable();
             $table->string('id_other')->nullable();
@@ -32,9 +32,9 @@ return new class extends Migration {
             $table->string('payment_after');
             $table->boolean('nda')->default(0);
             $table->boolean('cv')->default(0);
+            $table->string('native_language')->nullable();
+            $table->string('second_language')->nullable();
             $table->unsignedBigInteger('translator_type_id');
-            $table->unsignedBigInteger('native_language_id')->nullable();
-            $table->unsignedBigInteger('second_language_id')->nullable();
             $table->unsignedBigInteger('country_id');
             $table->unsignedBigInteger('currency_id');
 
