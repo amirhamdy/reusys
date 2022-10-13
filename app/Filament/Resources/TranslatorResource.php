@@ -352,9 +352,9 @@ class TranslatorResource extends Resource
     {
         return [
             'index' => Pages\ListTranslators::route('/'),
-            'create' => Pages\CreateTranslator::route('/create'),
+//            'create' => Pages\CreateTranslator::route('/create'),
             'view' => Pages\ViewTranslator::route('/{record}'),
-            'edit' => Pages\EditTranslator::route('/{record}/edit'),
+//            'edit' => Pages\EditTranslator::route('/{record}/edit'),
         ];
     }
 
