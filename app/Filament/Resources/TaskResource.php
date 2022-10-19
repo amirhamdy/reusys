@@ -177,28 +177,33 @@ class TaskResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->limit(50),
-                Tables\Columns\TextColumn::make('job.name')->limit(50),
-                Tables\Columns\TextColumn::make('start_date')->date(),
-                Tables\Columns\TextColumn::make('delivery_date')->date(),
-                Tables\Columns\TextColumn::make('taskType.name')->limit(50),
-                Tables\Columns\TextColumn::make('taskUnit.name')->limit(50),
-                Tables\Columns\TextColumn::make('subjectMatter.name')->limit(
-                    50
-                ),
-                Tables\Columns\TextColumn::make('translator.name')->limit(50),
+                Tables\Columns\TextColumn::make('name')->limit(30)->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('job.name')->limit(20)->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('start_date')->date()->sortable(),
+                Tables\Columns\TextColumn::make('delivery_date')->date()->sortable(),
+                Tables\Columns\TextColumn::make('taskType.name')->limit(30)->sortable(),
+                Tables\Columns\TextColumn::make('taskUnit.name')->limit(30)->sortable(),
+                Tables\Columns\TextColumn::make('subjectMatter.name')->limit(30)->sortable(),
+                Tables\Columns\TextColumn::make('translator.name')->limit(30)->label('Resource')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('amount'),
-                Tables\Columns\TextColumn::make('is_paid')->enum([
+                Tables\Columns\BadgeColumn::make('is_paid')->enum([
                     'Paid' => 'Paid',
                     'Not Paid' => 'Not paid',
                     'Waived Cost' => 'Waived cost',
-                ]),
-                Tables\Columns\TextColumn::make('status')->enum([
+                ])->colors([
+                    'success' => 'Paid',
+                    'danger' => 'Not Paid',
+                    'warning' => 'Waived Cost',
+                ])->label('Payment Status')->searchable()->sortable(),
+                Tables\Columns\BadgeColumn::make('status')->enum([
                     'Not Started' => 'Not started',
                     'In Progress' => 'In progress',
                     'Completed' => 'Completed',
-                ]),
-                Tables\Columns\TextColumn::make('notes')->limit(50),
+                ])->colors([
+                    'danger' => 'Not Started',
+                    'warning' => 'In Progress',
+                    'success' => 'Completed',
+                ])->searchable()->sortable(),
             ])
             ->filters([
                 Tables\Filters\Filter::make('created_at')
