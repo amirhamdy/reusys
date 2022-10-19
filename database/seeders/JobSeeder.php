@@ -17,6 +17,7 @@ class JobSeeder extends Seeder
     {
         DB::table('jobs')->delete();
 
+        $data = array();
         $path = public_path('../database/dump/jobs.csv');
         $jobs = readCSVFile($path);
 
@@ -32,8 +33,12 @@ class JobSeeder extends Seeder
                 $j['updated_at'] = $j['created_at'];
                 $j['is_free_job'] = $j['cost'] == 0;
 
-                DB::table('jobs')->insert($j);
+                $data[] = $j;
             }
+        }
+
+        foreach (array_chunk($data, 2000) as $t) {
+            DB::table('jobs')->insert($t);
         }
     }
 }
