@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Task;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use function Symfony\Component\Translation\t;
 
 class TaskSeeder extends Seeder
 {
@@ -35,24 +34,24 @@ class TaskSeeder extends Seeder
                     'start_date' => $t['task_startdate'],
                     'delivery_date' => $t['task_enddate'],
                     'amount' => $t['task_amount'],
-                    'is_paid' => $t['task_paid'],
+                    'is_paid' => $t['task_paid'] == 'waive' ? 'Waived Cost' : $t['task_paid'],
+                    'status' => $t['task_status'],
+                    'cost' => $t['task_cost'],
+                    'payment_date' => $t['task_payment_date'] != 'NULL' ? $t['task_payment_date'] : null,
                     'notes' => $t['task_note'],
                     'job_id' => $t['job_ID'],
                     'task_type_id' => $t['task_type_ID'],
                     'task_unit_id' => $t['unit_ID'],
-                    'subject_matter_id' => $t['task_subject_matter_ID'] == NULL ? 700 : $t['task_subject_matter_ID'],
-                    'task_status_id' => $t['task_status'],
+                    'subject_matter_id' => $t['task_subject_matter_ID'] != 'NULL' ? $t['task_subject_matter_ID'] : 700,
                     'translator_id' => $t['resource_ID'],
                     'created_at' => $t['created_date'],
                     'updated_at' => $t['created_date'],
                 );
 
-                DB::table('tasks')->insert($t);
-
                 $data[] = $input;
             }
         }
 
-//        DB::table('tasks')->insert($data);
+        DB::table('tasks')->insert($data);
     }
 }

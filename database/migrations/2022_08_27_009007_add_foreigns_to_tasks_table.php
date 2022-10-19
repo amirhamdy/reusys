@@ -21,13 +21,6 @@ return new class extends Migration {
                 ->onDelete('CASCADE');
 
             $table
-                ->foreign('task_type_id')
-                ->references('id')
-                ->on('task_types')
-                ->onUpdate('CASCADE')
-                ->onDelete('CASCADE');
-
-            $table
                 ->foreign('task_unit_id')
                 ->references('id')
                 ->on('task_units')
@@ -59,7 +52,6 @@ return new class extends Migration {
     {
         Schema::table('tasks', function (Blueprint $table) {
             $table->dropForeign(['job_id']);
-            $table->dropForeign(['task_type_id']);
             $table->dropForeign(['task_unit_id']);
             $table->dropForeign(['subject_matter_id']);
             $table->dropForeign(['translator_id']);
