@@ -42,13 +42,6 @@ return new class extends Migration {
                 ->onDelete('CASCADE');
 
             $table
-                ->foreign('task_status_id')
-                ->references('id')
-                ->on('task_statuses')
-                ->onUpdate('CASCADE')
-                ->onDelete('CASCADE');
-
-            $table
                 ->foreign('translator_id')
                 ->references('id')
                 ->on('translators')
@@ -69,7 +62,6 @@ return new class extends Migration {
             $table->dropForeign(['task_type_id']);
             $table->dropForeign(['task_unit_id']);
             $table->dropForeign(['subject_matter_id']);
-            $table->dropForeign(['task_status_id']);
             $table->dropForeign(['translator_id']);
         });
     }
