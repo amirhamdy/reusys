@@ -18,8 +18,6 @@ class Task extends Model
         'amount',
         'is_paid',
         'notes',
-        'is_minimum_charge_used',
-        'send_details_to_resource',
         'job_id',
         'task_type_id',
         'task_unit_id',
@@ -33,9 +31,6 @@ class Task extends Model
     protected $casts = [
         'start_date' => 'date',
         'delivery_date' => 'date',
-        'is_paid' => 'boolean',
-        'is_minimum_charge_used' => 'boolean',
-        'send_details_to_resource' => 'boolean',
     ];
 
     public function job()
