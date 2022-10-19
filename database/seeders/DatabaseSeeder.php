@@ -44,7 +44,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RegionSeeder::class);
         $this->call(SubjectMatterSeeder::class);
         $this->call(TaskSeeder::class);
-        $this->call(TaskStatusSeeder::class);
         $this->call(TaskTypeSeeder::class);
         $this->call(TaskUnitSeeder::class);
         $this->call(TranslatorSeeder::class);

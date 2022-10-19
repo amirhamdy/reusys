@@ -26,14 +26,16 @@ class TaskFactory extends Factory
             'name' => $this->faker->name,
             'start_date' => $this->faker->date,
             'delivery_date' => $this->faker->date,
+            'status' => 'Not Started',
             'amount' => $this->faker->randomNumber(0),
-            'is_paid' => 'false',
+            'is_paid' => 'Not Paid',
+            'cost' => $this->faker->randomNumber(2),
+            'payment_date' => $this->faker->date,
             'notes' => $this->faker->text,
             'job_id' => \App\Models\Job::factory(),
             'task_type_id' => \App\Models\TaskType::factory(),
             'task_unit_id' => \App\Models\TaskUnit::factory(),
             'subject_matter_id' => \App\Models\SubjectMatter::factory(),
-            'task_status_id' => \App\Models\TaskStatus::factory(),
             'translator_id' => \App\Models\Translator::factory(),
         ];
     }

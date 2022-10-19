@@ -55,7 +55,7 @@ class TaskResource extends Resource
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
-                            'lg' => 6,
+                            'lg' => 12,
                         ]),
 
                     DatePicker::make('delivery_date')
@@ -64,7 +64,7 @@ class TaskResource extends Resource
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
-                            'lg' => 6,
+                            'lg' => 12,
                         ]),
 
                     BelongsToSelect::make('task_type_id')
@@ -75,7 +75,7 @@ class TaskResource extends Resource
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
-                            'lg' => 6,
+                            'lg' => 12,
                         ]),
 
                     BelongsToSelect::make('task_unit_id')
@@ -86,7 +86,7 @@ class TaskResource extends Resource
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
-                            'lg' => 6,
+                            'lg' => 12,
                         ]),
 
                     BelongsToSelect::make('subject_matter_id')
@@ -97,18 +97,7 @@ class TaskResource extends Resource
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
-                            'lg' => 6,
-                        ]),
-
-                    BelongsToSelect::make('task_status_id')
-                        ->rules(['required', 'exists:task_statuses,id'])
-                        ->relationship('taskStatus', 'name')
-                        ->searchable()
-                        ->placeholder('Task Status')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 6,
+                            'lg' => 12,
                         ]),
 
                     BelongsToSelect::make('translator_id')
@@ -119,18 +108,17 @@ class TaskResource extends Resource
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
-                            'lg' => 4,
+                            'lg' => 12,
                         ]),
 
                     TextInput::make('amount')
                         ->rules(['required', 'numeric'])
                         ->numeric()
                         ->placeholder('Amount')
-                        ->default('1')
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
-                            'lg' => 4,
+                            'lg' => 12,
                         ]),
 
                     Select::make('is_paid')
@@ -142,11 +130,29 @@ class TaskResource extends Resource
                             'Waived Cost' => 'Waived cost',
                         ])
                         ->placeholder('Is Paid')
-                        ->default('false')
+                        ->default('Not paid')
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
-                            'lg' => 4,
+                            'lg' => 12,
+                        ]),
+
+                    Select::make('status')
+                        ->rules([
+                            'required',
+                            'in:not started,in progress,completed',
+                        ])
+                        ->searchable()
+                        ->options([
+                            'Not Started' => 'Not started',
+                            'In Progress' => 'In progress',
+                            'Completed' => 'Completed',
+                        ])
+                        ->placeholder('Status')
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 12,
                         ]),
 
                     RichEditor::make('notes')
@@ -175,13 +181,17 @@ class TaskResource extends Resource
                 Tables\Columns\TextColumn::make('subjectMatter.name')->limit(
                     50
                 ),
-                Tables\Columns\TextColumn::make('taskStatus.name')->limit(50),
                 Tables\Columns\TextColumn::make('translator.name')->limit(50),
                 Tables\Columns\TextColumn::make('amount'),
                 Tables\Columns\TextColumn::make('is_paid')->enum([
                     'Paid' => 'Paid',
                     'Not Paid' => 'Not paid',
                     'Waived Cost' => 'Waived cost',
+                ]),
+                Tables\Columns\TextColumn::make('status')->enum([
+                    'Not Started' => 'Not started',
+                    'In Progress' => 'In progress',
+                    'Completed' => 'Completed',
                 ]),
                 Tables\Columns\TextColumn::make('notes')->limit(50),
             ])
@@ -231,11 +241,6 @@ class TaskResource extends Resource
 
                 MultiSelectFilter::make('subject_matter_id')->relationship(
                     'subjectMatter',
-                    'name'
-                ),
-
-                MultiSelectFilter::make('task_status_id')->relationship(
-                    'taskStatus',
                     'name'
                 ),
 

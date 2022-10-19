@@ -15,14 +15,16 @@ class Task extends Model
         'name',
         'start_date',
         'delivery_date',
+        'status',
         'amount',
         'is_paid',
+        'cost',
+        'payment_date',
         'notes',
         'job_id',
         'task_type_id',
         'task_unit_id',
         'subject_matter_id',
-        'task_status_id',
         'translator_id',
     ];
 
@@ -31,6 +33,7 @@ class Task extends Model
     protected $casts = [
         'start_date' => 'date',
         'delivery_date' => 'date',
+        'payment_date' => 'date',
     ];
 
     public function job()
@@ -51,11 +54,6 @@ class Task extends Model
     public function subjectMatter()
     {
         return $this->belongsTo(SubjectMatter::class);
-    }
-
-    public function taskStatus()
-    {
-        return $this->belongsTo(TaskStatus::class);
     }
 
     public function translator()

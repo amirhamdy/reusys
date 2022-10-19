@@ -147,12 +147,6 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'update tasks']);
         Permission::create(['name' => 'delete tasks']);
 
-        Permission::create(['name' => 'list taskstatuses']);
-        Permission::create(['name' => 'view taskstatuses']);
-        Permission::create(['name' => 'create taskstatuses']);
-        Permission::create(['name' => 'update taskstatuses']);
-        Permission::create(['name' => 'delete taskstatuses']);
-
         Permission::create(['name' => 'list tasktypes']);
         Permission::create(['name' => 'view tasktypes']);
         Permission::create(['name' => 'create tasktypes']);
