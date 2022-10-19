@@ -17,6 +17,7 @@ class CustomerSeeder extends Seeder
     {
         DB::table('customers')->delete();
 
+        $data = array();
         $path = public_path('../database/dump/customers.csv');
         $customers = readCSVFile($path);
 
@@ -66,8 +67,13 @@ class CustomerSeeder extends Seeder
                         break;
                 }
 
-                DB::table('customers')->insert($c);
+                $data[] = $c;
             }
+        }
+
+        foreach (array_chunk($data,2000) as $t)
+        {
+            DB::table('customers')->insert($t);
         }
     }
 }
