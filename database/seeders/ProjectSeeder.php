@@ -17,6 +17,7 @@ class ProjectSeeder extends Seeder
     {
         DB::table('projects')->delete();
 
+        $data = array();
         $path = public_path('../database/dump/projects.csv');
         $projects = readCSVFile($path);
 
@@ -29,8 +30,12 @@ class ProjectSeeder extends Seeder
                 $p = array_combine($keys, $values);
                 $p['updated_at'] = $p['created_at'];
 
-                DB::table('projects')->insert($p);
+                $data[] = $p;
             }
+        }
+
+        foreach (array_chunk($data, 2000) as $t) {
+            DB::table('projects')->insert($t);
         }
     }
 }
