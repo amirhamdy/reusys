@@ -7,7 +7,6 @@ use Filament\Tables;
 use Filament\Resources\{Form, Table};
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\RichEditor;
@@ -116,34 +115,23 @@ class TasksRelationManager extends HasManyRelationManager
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
-                        'lg' => 12,
+                        'lg' => 4,
                     ]),
 
-                Toggle::make('is_paid')
-                    ->rules(['required', 'boolean'])
+                Select::make('is_paid')
+                    ->rules(['required', 'in:paid,not paid,waived cost'])
+                    ->searchable()
+                    ->options([
+                        'Paid' => 'Paid',
+                        'Not Paid' => 'Not paid',
+                        'Waived Cost' => 'Waived cost',
+                    ])
+                    ->placeholder('Is Paid')
                     ->default('false')
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
-                        'lg' => 12,
-                    ]),
-
-                Toggle::make('is_minimum_charge_used')
-                    ->rules(['required', 'boolean'])
-                    ->default('false')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 12,
-                    ]),
-
-                Toggle::make('send_details_to_resource')
-                    ->rules(['required', 'boolean'])
-                    ->default('false')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 12,
+                        'lg' => 4,
                     ]),
 
                 RichEditor::make('notes')
@@ -174,9 +162,11 @@ class TasksRelationManager extends HasManyRelationManager
                 Tables\Columns\TextColumn::make('taskStatus.name')->limit(50),
                 Tables\Columns\TextColumn::make('translator.name')->limit(50),
                 Tables\Columns\TextColumn::make('amount'),
-                Tables\Columns\BooleanColumn::make('is_paid'),
-                Tables\Columns\BooleanColumn::make('is_minimum_charge_used'),
-                Tables\Columns\BooleanColumn::make('send_details_to_resource'),
+                Tables\Columns\TextColumn::make('is_paid')->enum([
+                    'Paid' => 'Paid',
+                    'Not Paid' => 'Not paid',
+                    'Waived Cost' => 'Waived cost',
+                ]),
                 Tables\Columns\TextColumn::make('notes')->limit(50),
             ])
             ->filters([

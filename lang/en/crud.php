@@ -129,8 +129,6 @@ return [
             'translator_id' => 'Translator',
             'amount' => 'Amount',
             'is_paid' => 'Is Paid',
-            'is_minimum_charge_used' => 'Is Minimum Charge Used',
-            'send_details_to_resource' => 'Send Details To Resource',
             'notes' => 'Notes',
         ],
     ],
