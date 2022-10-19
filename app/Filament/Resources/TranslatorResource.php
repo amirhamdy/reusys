@@ -260,35 +260,13 @@ class TranslatorResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->limit(50),
-                Tables\Columns\TextColumn::make('degree')->limit(50),
-                Tables\Columns\TextColumn::make('gender')->enum([
-                    'male' => 'Male',
-                    'female' => 'Female',
-                    'other' => 'Other',
-                ]),
-                Tables\Columns\TextColumn::make('date_of_birth')->date(),
-                Tables\Columns\TextColumn::make('nationality')->limit(50),
-                Tables\Columns\TextColumn::make('experience')->limit(50),
-                Tables\Columns\TextColumn::make('id_number')->limit(50),
-                Tables\Columns\TextColumn::make('vat_number')->limit(50),
-                Tables\Columns\TextColumn::make('id_other')->limit(50),
-                Tables\Columns\TextColumn::make('timezone')->limit(50),
-                Tables\Columns\TextColumn::make('website')->limit(50),
-                Tables\Columns\TextColumn::make('skype')->limit(50),
-                Tables\Columns\TextColumn::make('address')->limit(50),
-                Tables\Columns\TextColumn::make('city')->limit(50),
-                Tables\Columns\TextColumn::make('postal_code')->limit(50),
-                Tables\Columns\TextColumn::make('payment_after')->limit(50),
+                Tables\Columns\TextColumn::make('name')->limit(50)->sortable()->searchable(),
                 Tables\Columns\BooleanColumn::make('nda'),
                 Tables\Columns\BooleanColumn::make('cv'),
                 Tables\Columns\TextColumn::make('native_language')->limit(50),
                 Tables\Columns\TextColumn::make('second_language')->limit(50),
-                Tables\Columns\TextColumn::make('translatorType.name')->limit(
-                    50
-                ),
+                Tables\Columns\TextColumn::make('translatorType.name')->limit(50)->sortable(),
                 Tables\Columns\TextColumn::make('country.name')->limit(50),
-                Tables\Columns\TextColumn::make('currency.name')->limit(50),
             ])
             ->filters([
                 Tables\Filters\Filter::make('created_at')
@@ -302,7 +280,7 @@ class TranslatorResource extends Resource
                                 $data['created_from'],
                                 fn(
                                     Builder $query,
-                                    $date
+                                            $date
                                 ): Builder => $query->whereDate(
                                     'created_at',
                                     '>=',
@@ -313,7 +291,7 @@ class TranslatorResource extends Resource
                                 $data['created_until'],
                                 fn(
                                     Builder $query,
-                                    $date
+                                            $date
                                 ): Builder => $query->whereDate(
                                     'created_at',
                                     '<=',
@@ -329,11 +307,6 @@ class TranslatorResource extends Resource
 
                 MultiSelectFilter::make('country_id')->relationship(
                     'country',
-                    'name'
-                ),
-
-                MultiSelectFilter::make('currency_id')->relationship(
-                    'currency',
                     'name'
                 ),
             ]);
