@@ -131,9 +131,9 @@ class TaskResource extends Resource
                         ->rules(['required', 'in:paid,not paid,waived cost'])
                         ->searchable()
                         ->options([
-                            'Paid' => 'Paid',
-                            'Not Paid' => 'Not paid',
-                            'Waived Cost' => 'Waived cost',
+                            'paid' => 'Paid',
+                            'not paid' => 'Not paid',
+                            'waived cost' => 'Waived cost',
                         ])
                         ->placeholder('Payment Status')
                         ->columnSpan([
@@ -149,9 +149,9 @@ class TaskResource extends Resource
                         ])
                         ->searchable()
                         ->options([
-                            'Not Started' => 'Not started',
-                            'In Progress' => 'In progress',
-                            'Completed' => 'Completed',
+                            'not started' => 'Not started',
+                            'in progress' => 'In progress',
+                            'completed' => 'Completed',
                         ])
                         ->placeholder('Status')
                         ->columnSpan([
