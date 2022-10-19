@@ -18,9 +18,7 @@ return new class extends Migration {
             $table->date('start_date');
             $table->date('delivery_date');
             $table->integer('amount');
-            $table
-                ->enum('is_paid', ['Paid', 'Not Paid', 'Waived Cost'])
-                ->default('false');
+            $table->enum('is_paid', ['Paid', 'Not Paid', 'Waived Cost'])->default('Not Paid');
             $table->text('notes')->nullable();
             $table->unsignedBigInteger('job_id');
             $table->unsignedBigInteger('task_type_id');

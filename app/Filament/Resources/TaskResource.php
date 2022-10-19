@@ -3,7 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Models\Task;
-use Filament\{Tables, Forms};
+use Filament\{Forms\Components\Toggle, Tables, Forms};
 use Filament\Resources\{Form, Table, Resource};
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Card;
@@ -39,7 +39,7 @@ class TaskResource extends Resource
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
-                            'lg' => 12,
+                            'lg' => 6,
                         ]),
 
                     BelongsToSelect::make('job_id')
@@ -50,7 +50,7 @@ class TaskResource extends Resource
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
-                            'lg' => 12,
+                            'lg' => 6,
                         ]),
 
                     DatePicker::make('start_date')
@@ -123,7 +123,7 @@ class TaskResource extends Resource
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
-                            'lg' => 4,
+                            'lg' => 5,
                         ]),
 
                     TextInput::make('amount')
@@ -134,7 +134,7 @@ class TaskResource extends Resource
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
-                            'lg' => 4,
+                            'lg' => 2,
                         ]),
 
                     Select::make('is_paid')
@@ -146,11 +146,28 @@ class TaskResource extends Resource
                             'Waived Cost' => 'Waived cost',
                         ])
                         ->placeholder('Is Paid')
-                        ->default('false')
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
-                            'lg' => 4,
+                            'lg' => 5,
+                        ]),
+
+                    Toggle::make('use_minimum_charge')
+                        ->rules(['boolean'])
+                        ->default(false)
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 12,
+                        ]),
+
+                    Toggle::make('send_details_to_resource')
+                        ->rules(['boolean'])
+                        ->default(false)
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 12,
                         ]),
 
                     RichEditor::make('notes')
@@ -187,7 +204,6 @@ class TaskResource extends Resource
                     'Not Paid' => 'Not paid',
                     'Waived Cost' => 'Waived cost',
                 ]),
-                Tables\Columns\TextColumn::make('notes')->limit(50),
             ])
             ->filters([
                 Tables\Filters\Filter::make('created_at')
@@ -201,7 +217,7 @@ class TaskResource extends Resource
                                 $data['created_from'],
                                 fn(
                                     Builder $query,
-                                    $date
+                                            $date
                                 ): Builder => $query->whereDate(
                                     'created_at',
                                     '>=',
@@ -212,7 +228,7 @@ class TaskResource extends Resource
                                 $data['created_until'],
                                 fn(
                                     Builder $query,
-                                    $date
+                                            $date
                                 ): Builder => $query->whereDate(
                                     'created_at',
                                     '<=',

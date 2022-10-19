@@ -27,7 +27,7 @@ class TaskFactory extends Factory
             'start_date' => $this->faker->date,
             'delivery_date' => $this->faker->date,
             'amount' => $this->faker->randomNumber(0),
-            'is_paid' => 'false',
+            'is_paid' => 'Paid',
             'notes' => $this->faker->text,
             'job_id' => \App\Models\Job::factory(),
             'task_type_id' => \App\Models\TaskType::factory(),
