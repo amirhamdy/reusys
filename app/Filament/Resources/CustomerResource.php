@@ -176,24 +176,13 @@ class CustomerResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->limit(50),
-                Tables\Columns\TextColumn::make('phone')->limit(50),
-                Tables\Columns\TextColumn::make('email')->limit(50),
-//                Tables\Columns\TextColumn::make('fax')->limit(50),
-//                Tables\Columns\TextColumn::make('address')->limit(50),
-//                Tables\Columns\TextColumn::make('billing_address')->limit(50),
-//                Tables\Columns\TextColumn::make('postal_code')->limit(50),
-//                Tables\Columns\TextColumn::make('website')->limit(50),
-                Tables\Columns\TextColumn::make('city')->limit(50),
-                Tables\Columns\TextColumn::make('customerStatus.name')->limit(
-                    50
-                ),
-                Tables\Columns\TextColumn::make('country.name')->limit(50),
-                Tables\Columns\TextColumn::make('region.name')->limit(50),
-                Tables\Columns\TextColumn::make('customerRating.name')->limit(
-                    50
-                ),
-                Tables\Columns\TextColumn::make('industry.name')->limit(50),
+                Tables\Columns\TextColumn::make('name')->limit(30)->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('email')->limit(50)->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('customerStatus.name')->limit(20)->label('Status'),
+                Tables\Columns\TextColumn::make('country.name')->limit(20)->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('region.name')->limit(20)->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('customerRating.name')->limit(20)->sortable()->label('Rating'),
+                Tables\Columns\TextColumn::make('industry.name')->limit(20)->sortable()->searchable(),
             ])
             ->filters([
                 Tables\Filters\Filter::make('created_at')
