@@ -87,10 +87,11 @@ class ProjectResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->limit(50),
+                Tables\Columns\TextColumn::make('id')->sortable()->searchable()->label('ID'),
+                Tables\Columns\TextColumn::make('name')->limit(50)->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('start_date')->date(),
                 Tables\Columns\TextColumn::make('end_date')->date(),
-                Tables\Columns\TextColumn::make('productline.name')->limit(50),
+                Tables\Columns\TextColumn::make('productline.name')->limit(50)->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('po_number')->limit(50),
             ])
             ->filters([

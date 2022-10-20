@@ -176,6 +176,7 @@ class CustomerResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('id')->sortable()->searchable()->label('ID'),
                 Tables\Columns\TextColumn::make('name')->limit(30)->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('email')->limit(50)->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('customerStatus.name')->limit(20)->label('Status'),

@@ -260,6 +260,7 @@ class TranslatorResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('id')->sortable()->searchable()->label('ID'),
                 Tables\Columns\TextColumn::make('name')->limit(50)->sortable()->searchable(),
                 Tables\Columns\BooleanColumn::make('nda'),
                 Tables\Columns\BooleanColumn::make('cv'),

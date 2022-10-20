@@ -177,6 +177,7 @@ class TaskResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('id')->sortable()->searchable()->label('ID'),
                 Tables\Columns\TextColumn::make('name')->limit(30)->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('job.name')->limit(20)->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('start_date')->date()->sortable(),

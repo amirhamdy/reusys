@@ -131,16 +131,13 @@ class JobResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->limit(50),
-                Tables\Columns\TextColumn::make('project.name')->limit(50),
-                Tables\Columns\TextColumn::make('sourceLanguage.name')->limit(
-                    50
-                ),
-                Tables\Columns\TextColumn::make('targetLanguage.name')->limit(
-                    50
-                ),
-                Tables\Columns\TextColumn::make('jobType.name')->limit(50),
-                Tables\Columns\TextColumn::make('jobUnit.name')->limit(50),
+                Tables\Columns\TextColumn::make('id')->sortable()->searchable()->label('ID'),
+                Tables\Columns\TextColumn::make('name')->limit(50)->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('project.name')->limit(50)->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('sourceLanguage.name')->limit(50)->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('targetLanguage.name')->limit(50)->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('jobType.name')->limit(50)->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('jobUnit.name')->limit(50)->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('amount'),
                 Tables\Columns\BooleanColumn::make('is_free_job'),
                 Tables\Columns\BooleanColumn::make('is_minimum_charge_used'),
@@ -157,7 +154,7 @@ class JobResource extends Resource
                                 $data['created_from'],
                                 fn(
                                     Builder $query,
-                                    $date
+                                            $date
                                 ): Builder => $query->whereDate(
                                     'created_at',
                                     '>=',
@@ -168,7 +165,7 @@ class JobResource extends Resource
                                 $data['created_until'],
                                 fn(
                                     Builder $query,
-                                    $date
+                                            $date
                                 ): Builder => $query->whereDate(
                                     'created_at',
                                     '<=',
