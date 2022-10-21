@@ -73,8 +73,8 @@ class LatestJobs extends BaseWidget
     protected function getTableActions(): array
     {
         return [
-            Tables\Actions\Action::make('edit')
-                ->url(fn(Job $record): string => JobResource::getUrl('edit', ['record' => $record])),
+            Tables\Actions\Action::make('view')
+                ->url(fn(Job $record): string => JobResource::getUrl('view', ['record' => $record])),
         ];
     }
 }
