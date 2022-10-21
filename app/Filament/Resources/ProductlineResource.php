@@ -44,7 +44,7 @@ class ProductlineResource extends Resource
 
                     BelongsToSelect::make('pricebook_id')
                         ->rules(['required', 'exists:pricebooks,id'])
-                        ->relationship('pricebook', 'name')
+                        ->relationship('pricebook', 'name')->preload()
                         ->searchable()
                         ->placeholder('Pricebook')
                         ->columnSpan([
@@ -55,7 +55,7 @@ class ProductlineResource extends Resource
 
                     BelongsToSelect::make('customer_id')
                         ->rules(['required', 'exists:customers,id'])
-                        ->relationship('customer', 'name')
+                        ->relationship('customer', 'name')->preload()
                         ->searchable()
                         ->placeholder('Customer')
                         ->columnSpan([

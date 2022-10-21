@@ -44,7 +44,7 @@ class PricebookResource extends Resource
 
                     BelongsToSelect::make('currency_id')
                         ->rules(['required', 'exists:currencies,id'])
-                        ->relationship('currency', 'name')
+                        ->relationship('currency', 'name')->preload()
                         ->searchable()
                         ->placeholder('Currency')
                         ->columnSpan([

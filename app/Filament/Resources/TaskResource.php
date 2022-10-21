@@ -44,7 +44,7 @@ class TaskResource extends Resource
 
                     BelongsToSelect::make('job_id')
                         ->rules(['required', 'exists:jobs,id'])
-                        ->relationship('job', 'name')
+                        ->relationship('job', 'name')->preload()
                         ->searchable()
                         ->placeholder('Job')
                         ->columnSpan([
@@ -73,7 +73,7 @@ class TaskResource extends Resource
 
                     BelongsToSelect::make('task_type_id')
                         ->rules(['required', 'exists:task_types,id'])
-                        ->relationship('taskType', 'name')
+                        ->relationship('taskType', 'name')->preload()
                         ->searchable()
                         ->placeholder('Task Type')
                         ->columnSpan([
@@ -84,7 +84,7 @@ class TaskResource extends Resource
 
                     BelongsToSelect::make('task_unit_id')
                         ->rules(['required', 'exists:task_units,id'])
-                        ->relationship('taskUnit', 'name')
+                        ->relationship('taskUnit', 'name')->preload()
                         ->searchable()
                         ->placeholder('Task Unit')
                         ->columnSpan([
@@ -95,7 +95,7 @@ class TaskResource extends Resource
 
                     BelongsToSelect::make('subject_matter_id')
                         ->rules(['required', 'exists:subject_matters,id'])
-                        ->relationship('subjectMatter', 'name')
+                        ->relationship('subjectMatter', 'name')->preload()
                         ->searchable()
                         ->placeholder('Subject Matter')
                         ->columnSpan([
@@ -107,7 +107,7 @@ class TaskResource extends Resource
                     BelongsToSelect::make('translator_id')
                         ->label('Resource')
                         ->rules(['required', 'exists:translators,id'])
-                        ->relationship('translator', 'name')
+                        ->relationship('translator', 'name')->preload()
                         ->searchable()
                         ->placeholder('Resource')
                         ->columnSpan([

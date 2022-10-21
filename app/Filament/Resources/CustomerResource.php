@@ -115,7 +115,7 @@ class CustomerResource extends Resource
 
                     BelongsToSelect::make('customer_status_id')
                         ->rules(['required', 'exists:customer_statuses,id'])
-                        ->relationship('customerStatus', 'name')
+                        ->relationship('customerStatus', 'name')->preload()
                         ->searchable()
                         ->placeholder('Customer Status')
                         ->columnSpan([
@@ -126,7 +126,7 @@ class CustomerResource extends Resource
 
                     BelongsToSelect::make('country_id')
                         ->rules(['required', 'exists:countries,id'])
-                        ->relationship('country', 'name')
+                        ->relationship('country', 'name')->preload()
                         ->searchable()
                         ->placeholder('Country')
                         ->columnSpan([
@@ -137,7 +137,7 @@ class CustomerResource extends Resource
 
                     BelongsToSelect::make('region_id')
                         ->rules(['required', 'exists:regions,id'])
-                        ->relationship('region', 'name')
+                        ->relationship('region', 'name')->preload()
                         ->searchable()
                         ->placeholder('Region')
                         ->columnSpan([
@@ -148,7 +148,7 @@ class CustomerResource extends Resource
 
                     BelongsToSelect::make('customer_rating_id')
                         ->rules(['required', 'exists:customer_ratings,id'])
-                        ->relationship('customerRating', 'name')
+                        ->relationship('customerRating', 'name')->preload()
                         ->searchable()
                         ->placeholder('Customer Rating')
                         ->columnSpan([
@@ -159,7 +159,7 @@ class CustomerResource extends Resource
 
                     BelongsToSelect::make('industry_id')
                         ->rules(['required', 'exists:industries,id'])
-                        ->relationship('industry', 'name')
+                        ->relationship('industry', 'name')->preload()
                         ->searchable()
                         ->placeholder('Industry')
                         ->columnSpan([

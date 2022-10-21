@@ -221,7 +221,7 @@ class TranslatorResource extends Resource
 
                     BelongsToSelect::make('translator_type_id')
                         ->rules(['required', 'exists:translator_types,id'])
-                        ->relationship('translatorType', 'name')
+                        ->relationship('translatorType', 'name')->preload()
                         ->searchable()
                         ->placeholder('Translator Type')
                         ->columnSpan([
@@ -232,7 +232,7 @@ class TranslatorResource extends Resource
 
                     BelongsToSelect::make('country_id')
                         ->rules(['required', 'exists:countries,id'])
-                        ->relationship('country', 'name')
+                        ->relationship('country', 'name')->preload()
                         ->searchable()
                         ->placeholder('Country')
                         ->columnSpan([
@@ -243,7 +243,7 @@ class TranslatorResource extends Resource
 
                     BelongsToSelect::make('currency_id')
                         ->rules(['required', 'exists:currencies,id'])
-                        ->relationship('currency', 'name')
+                        ->relationship('currency', 'name')->preload()
                         ->searchable()
                         ->placeholder('Currency')
                         ->columnSpan([

@@ -61,7 +61,7 @@ class ProjectResource extends Resource
 
                     BelongsToSelect::make('productline_id')
                         ->rules(['required', 'exists:productlines,id'])
-                        ->relationship('productline', 'name')
+                        ->relationship('productline', 'name')->preload()
                         ->searchable()
                         ->placeholder('Productline')
                         ->columnSpan([
