@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Models\Customer;
+use App\Models\Productline;
 use App\Models\Project;
 use Filament\{Tables, Forms};
 use Filament\Resources\{Form, Table, Resource};
@@ -41,18 +43,13 @@ class ProjectResource extends Resource
                             'lg' => 12,
                         ]),
 
-                    DatePicker::make('start_date')
-                        ->rules(['required', 'date'])
-                        ->placeholder('Start Date')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 6,
-                        ]),
-
-                    DatePicker::make('end_date')
-                        ->rules(['required', 'date'])
-                        ->placeholder('End Date')
+                    BelongsToSelect::make('customer_id')
+                        ->rules(['required', 'exists:customers,id'])
+                        ->options(Customer::all()->pluck('name', 'id'))->preload()
+                        ->searchable()->disablePlaceholderSelection()
+                        ->placeholder('Customer')->label('Customer')
+                        ->reactive()
+                        ->afterStateUpdated(fn(callable $set) => $set('productline_id', null))
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
@@ -61,13 +58,39 @@ class ProjectResource extends Resource
 
                     BelongsToSelect::make('productline_id')
                         ->rules(['required', 'exists:productlines,id'])
-                        ->relationship('productline', 'name')->preload()
+                        ->options(function (callable $get) {
+                            $customer = Customer::find($get('customer_id'));
+
+                            if ($customer) {
+                                return $customer->productlines->pluck('name', 'id');
+                            }
+
+                            return [];
+                        })->preload()
                         ->searchable()
-                        ->placeholder('Productline')
+                        ->placeholder('Productline')->label('Productline')
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
                             'lg' => 6,
+                        ]),
+
+                    DatePicker::make('start_date')
+                        ->rules(['required', 'date'])
+                        ->placeholder('Start Date')
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 4,
+                        ]),
+
+                    DatePicker::make('end_date')
+                        ->rules(['required', 'date'])
+                        ->placeholder('End Date')
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 4,
                         ]),
 
                     TextInput::make('po_number')
@@ -76,7 +99,7 @@ class ProjectResource extends Resource
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
-                            'lg' => 6,
+                            'lg' => 4,
                         ]),
                 ]),
             ]),
@@ -106,7 +129,7 @@ class ProjectResource extends Resource
                                 $data['created_from'],
                                 fn(
                                     Builder $query,
-                                    $date
+                                            $date
                                 ): Builder => $query->whereDate(
                                     'created_at',
                                     '>=',
@@ -117,7 +140,7 @@ class ProjectResource extends Resource
                                 $data['created_until'],
                                 fn(
                                     Builder $query,
-                                    $date
+                                            $date
                                 ): Builder => $query->whereDate(
                                     'created_at',
                                     '<=',
