@@ -177,16 +177,16 @@ class TaskResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->sortable()->searchable()->label('ID'),
+                Tables\Columns\TextColumn::make('id')->sortable()->searchable()->label('ID')->toggleable(),
                 Tables\Columns\TextColumn::make('name')->limit(30)->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('job.name')->limit(20)->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('start_date')->date()->sortable(),
-                Tables\Columns\TextColumn::make('delivery_date')->date()->sortable(),
-                Tables\Columns\TextColumn::make('taskType.name')->limit(30)->sortable(),
-                Tables\Columns\TextColumn::make('taskUnit.name')->limit(30)->sortable(),
-                Tables\Columns\TextColumn::make('subjectMatter.name')->limit(30)->sortable(),
-                Tables\Columns\TextColumn::make('translator.name')->limit(30)->label('Resource')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('amount'),
+                Tables\Columns\TextColumn::make('job.name')->limit(20)->searchable()->sortable()->toggleable(),
+                Tables\Columns\TextColumn::make('start_date')->date()->sortable()->toggleable(),
+                Tables\Columns\TextColumn::make('delivery_date')->date()->sortable()->toggleable(),
+                Tables\Columns\TextColumn::make('taskType.name')->limit(30)->sortable()->toggleable(),
+                Tables\Columns\TextColumn::make('taskUnit.name')->limit(30)->sortable()->toggleable(),
+                Tables\Columns\TextColumn::make('subjectMatter.name')->limit(30)->sortable()->toggleable(),
+                Tables\Columns\TextColumn::make('translator.name')->limit(30)->label('Resource')->searchable()->sortable()->toggleable(),
+                Tables\Columns\TextColumn::make('amount')->toggleable(),
                 Tables\Columns\BadgeColumn::make('is_paid')->enum([
                     'Paid' => 'Paid',
                     'Not Paid' => 'Not paid',
@@ -195,7 +195,7 @@ class TaskResource extends Resource
                     'success' => 'Paid',
                     'danger' => 'Not Paid',
                     'warning' => 'Waived Cost',
-                ])->label('Payment Status')->searchable()->sortable(),
+                ])->label('Payment Status')->searchable()->sortable()->toggleable(),
                 Tables\Columns\BadgeColumn::make('status')->enum([
                     'Not Started' => 'Not started',
                     'In Progress' => 'In progress',
@@ -204,7 +204,7 @@ class TaskResource extends Resource
                     'danger' => 'Not Started',
                     'warning' => 'In Progress',
                     'success' => 'Completed',
-                ])->searchable()->sortable(),
+                ])->searchable()->sortable()->toggleable(),
             ])
             ->filters([
                 Tables\Filters\Filter::make('created_at')

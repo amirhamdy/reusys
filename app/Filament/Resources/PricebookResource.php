@@ -61,9 +61,9 @@ class PricebookResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->sortable()->searchable()->label('ID'),
+                Tables\Columns\TextColumn::make('id')->sortable()->searchable()->label('ID')->toggleable(),
                 Tables\Columns\TextColumn::make('name')->limit(50)->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('currency.name')->limit(50)->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('currency.name')->limit(50)->sortable()->searchable()->toggleable(),
             ])
             ->filters([
                 Tables\Filters\Filter::make('created_at')
