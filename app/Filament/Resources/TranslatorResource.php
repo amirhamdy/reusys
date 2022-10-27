@@ -25,6 +25,12 @@ class TranslatorResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    protected static ?string $title = 'Resources';
+
+    protected static ?string $navigationLabel = 'Resources';
+
+    protected static ?string $slug = 'resources';
+
     protected static ?string $navigationGroup = '   ';
 
     protected static ?string $recordTitleAttribute = 'name';
