@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('productline_id');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

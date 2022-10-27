@@ -32,6 +32,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('translator_id');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

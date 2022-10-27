@@ -23,6 +23,7 @@ return new class extends Migration {
             $table->date('hiring_date');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
