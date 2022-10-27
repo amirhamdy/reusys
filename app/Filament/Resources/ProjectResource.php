@@ -3,13 +3,11 @@
 namespace App\Filament\Resources;
 
 use App\Models\Customer;
-use App\Models\Productline;
 use App\Models\Project;
 use Filament\{Tables, Forms};
 use Filament\Resources\{Form, Table, Resource};
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Card;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use Illuminate\Database\Eloquent\Builder;
