@@ -30,6 +30,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('customer_status_id');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

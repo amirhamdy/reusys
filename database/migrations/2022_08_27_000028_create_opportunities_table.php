@@ -28,6 +28,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('opportunity_unit_id');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

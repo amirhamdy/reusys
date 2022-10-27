@@ -25,6 +25,7 @@ return new class extends Migration {
             $table->integer('minimum_charge')->default(0);
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
