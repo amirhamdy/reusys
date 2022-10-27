@@ -5,7 +5,6 @@ namespace App\Filament\Resources;
 use App\Models\Portal;
 use Filament\{Tables, Forms};
 use Filament\Resources\{Form, Table, Resource};
-use Livewire\Component;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\TextInput;
@@ -58,12 +57,7 @@ class PortalResource extends Resource
                         ]),
 
                     TextInput::make('password')
-                        ->password()
-                        ->dehydrateStateUsing(fn($state) => \Hash::make($state))
-                        ->required(
-                            fn(Component $livewire) => $livewire instanceof
-                                Pages\CreatePortal
-                        )
+                        ->rules(['required', 'max:255', 'string'])
                         ->placeholder('Password')
                         ->columnSpan([
                             'default' => 12,
@@ -79,10 +73,10 @@ class PortalResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->limit(50),
-                Tables\Columns\TextColumn::make('url')->limit(50),
-                Tables\Columns\TextColumn::make('username')->limit(50),
-                Tables\Columns\TextColumn::make('password'),
+                Tables\Columns\TextColumn::make('name')->limit(30),
+                Tables\Columns\TextColumn::make('url')->limit(30),
+                Tables\Columns\TextColumn::make('username')->limit(30),
+                Tables\Columns\TextColumn::make('password')->limit(30),
             ])
             ->filters([
                 Tables\Filters\Filter::make('created_at')

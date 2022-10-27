@@ -15,5 +15,5 @@ class Portal extends Model
 
     protected $searchableFields = ['*'];
 
-    protected $hidden = ['password'];
+    protected $hidden = [];
 }
