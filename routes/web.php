@@ -48,5 +48,5 @@ Route::prefix('/')
         Route::resource('tasks', TaskController::class);
         Route::resource('portals', PortalController::class);
         Route::resource('opportunities', OpportunityController::class);
-        Route::resource('translators', TranslatorController::class);
+        Route::resource('resources', TranslatorController::class);
     });

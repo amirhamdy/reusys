@@ -159,28 +159,28 @@
                         />
                     </th>
                     <th class="px-4 py-3 text-left">
-                        @lang('crud.translator_translator_price_lists.inputs.task_type_id')
+                        @lang('crud.resources_pricelists.inputs.task_type_id')
                     </th>
                     <th class="px-4 py-3 text-left">
-                        @lang('crud.translator_translator_price_lists.inputs.source_language_id')
+                        @lang('crud.resources_pricelists.inputs.source_language_id')
                     </th>
                     <th class="px-4 py-3 text-left">
-                        @lang('crud.translator_translator_price_lists.inputs.target_language_id')
+                        @lang('crud.resources_pricelists.inputs.target_language_id')
                     </th>
                     <th class="px-4 py-3 text-left">
-                        @lang('crud.translator_translator_price_lists.inputs.subject_matter_id')
+                        @lang('crud.resources_pricelists.inputs.subject_matter_id')
                     </th>
                     <th class="px-4 py-3 text-left">
-                        @lang('crud.translator_translator_price_lists.inputs.currency_id')
+                        @lang('crud.resources_pricelists.inputs.currency_id')
                     </th>
                     <th class="px-4 py-3 text-left">
-                        @lang('crud.translator_translator_price_lists.inputs.task_unit_id')
+                        @lang('crud.resources_pricelists.inputs.task_unit_id')
                     </th>
                     <th class="px-4 py-3 text-right">
-                        @lang('crud.translator_translator_price_lists.inputs.unit_price')
+                        @lang('crud.resources_pricelists.inputs.unit_price')
                     </th>
                     <th class="px-4 py-3 text-right">
-                        @lang('crud.translator_translator_price_lists.inputs.minimum_charge')
+                        @lang('crud.resources_pricelists.inputs.minimum_charge')
                     </th>
                     <th></th>
                 </tr>

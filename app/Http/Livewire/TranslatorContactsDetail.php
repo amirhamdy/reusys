@@ -46,7 +46,7 @@ class TranslatorContactsDetail extends Component
     public function newContact()
     {
         $this->editing = false;
-        $this->modalTitle = trans('crud.translator_contacts.new_title');
+        $this->modalTitle = trans('crud.resource_contacts.new_title');
         $this->resetContactData();
 
         $this->showModal();
@@ -55,7 +55,7 @@ class TranslatorContactsDetail extends Component
     public function editContact(Contact $contact)
     {
         $this->editing = true;
-        $this->modalTitle = trans('crud.translator_contacts.edit_title');
+        $this->modalTitle = trans('crud.resource_contacts.edit_title');
         $this->contact = $contact;
 
         $this->dispatchBrowserEvent('refresh');
