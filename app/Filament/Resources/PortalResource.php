@@ -31,39 +31,23 @@ class PortalResource extends Resource
                     TextInput::make('name')
                         ->rules(['required', 'max:255', 'string'])
                         ->placeholder('Name')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 12,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                     TextInput::make('url')
                         ->rules(['required', 'url'])
                         ->url()
                         ->placeholder('Url')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 12,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     TextInput::make('username')
                         ->rules(['required', 'max:255', 'string'])
                         ->placeholder('Username')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 6,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     TextInput::make('password')
                         ->rules(['required', 'max:255', 'string'])
                         ->placeholder('Password')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 6,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
                 ]),
             ]),
         ]);
@@ -73,9 +57,9 @@ class PortalResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->limit(30),
-                Tables\Columns\TextColumn::make('url')->limit(30),
-                Tables\Columns\TextColumn::make('username')->limit(30),
+                Tables\Columns\TextColumn::make('name')->limit(30)->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('url')->limit(30)->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('username')->limit(30)->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('password')->limit(30),
             ])
             ->filters([
@@ -90,7 +74,7 @@ class PortalResource extends Resource
                                 $data['created_from'],
                                 fn(
                                     Builder $query,
-                                    $date
+                                            $date
                                 ): Builder => $query->whereDate(
                                     'created_at',
                                     '>=',
@@ -101,7 +85,7 @@ class PortalResource extends Resource
                                 $data['created_until'],
                                 fn(
                                     Builder $query,
-                                    $date
+                                            $date
                                 ): Builder => $query->whereDate(
                                     'created_at',
                                     '<=',
