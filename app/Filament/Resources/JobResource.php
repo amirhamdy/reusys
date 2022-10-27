@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\JobResource\Widgets\JobStats;
+use App\Models\Customer;
 use App\Models\Job;
 use App\Models\Pricelist;
 use App\Models\Productline;
@@ -42,7 +43,6 @@ class JobResource extends Resource
                         ->placeholder('Name')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
-                    /*
                     BelongsToSelect::make('customer_id')
                         ->rules(['required', 'exists:customers,id'])
                         ->options(Customer::all()->pluck('name', 'id'))->preload()
@@ -56,32 +56,31 @@ class JobResource extends Resource
                         ->rules(['required', 'exists:productlines,id'])
                         ->options(function (callable $get) {
                             $customer = Customer::find($get('customer_id'));
-
-                            if ($customer) {
-                                return $customer->productlines->pluck('name', 'id');
-                            }
-
+                            if ($customer) return $customer->productlines->pluck('name', 'id');
                             return [];
                         })->preload()
+                        ->afterStateUpdated(fn(callable $set) => $set('project_id', null))
                         ->searchable()
+                        ->reactive()
                         ->placeholder('Productline')->label('Productline')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
-                    */
 
                     BelongsToSelect::make('project_id')
                         ->rules(['required', 'exists:projects,id'])
-                        ->relationship('project', 'name')->preload()
-                        ->searchable()
-                        ->reactive()
+                        ->options(function (callable $get) {
+                            $select = Productline::find($get('productline_id'));
+                            if ($select) return $select->projects->pluck('name', 'id');
+                            return [];
+                        })->preload()
+                        ->searchable()->reactive()
                         ->placeholder('Project')
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12])
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4])
                         ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
 
                     BelongsToSelect::make('source_language_id')
                         ->rules(['required', 'exists:languages,id'])
                         ->relationship('sourceLanguage', 'name')->preload()
-                        ->searchable()
-                        ->reactive()
+                        ->searchable()->reactive()
                         ->placeholder('Source Language')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6])
                         ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
@@ -89,8 +88,7 @@ class JobResource extends Resource
                     BelongsToSelect::make('target_language_id')
                         ->rules(['required', 'exists:languages,id'])
                         ->relationship('targetLanguage', 'name')->preload()
-                        ->searchable()
-                        ->reactive()
+                        ->searchable()->reactive()
                         ->placeholder('Target Language')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6])
                         ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
@@ -98,19 +96,17 @@ class JobResource extends Resource
                     BelongsToSelect::make('job_type_id')
                         ->rules(['required', 'exists:job_types,id'])
                         ->relationship('jobType', 'name')->preload()
-                        ->searchable()
-                        ->reactive()
+                        ->searchable()->reactive()
                         ->placeholder('Job Type')
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6])
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4])
                         ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
 
                     BelongsToSelect::make('job_unit_id')
                         ->rules(['required', 'exists:job_units,id'])
                         ->relationship('jobUnit', 'name')->preload()
-                        ->searchable()
-                        ->reactive()
+                        ->searchable()->reactive()
                         ->placeholder('Job Unit')
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6])
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4])
                         ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
 
                     TextInput::make('amount')
@@ -119,10 +115,11 @@ class JobResource extends Resource
                         ->placeholder('Amount')
                         ->default(1)
                         ->reactive()
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12])
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4])
                         ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
 
                     TextInput::make('cost')
+                        ->hint('This is a not editable calculated cost depending on your selections.')
                         ->rules(['required', 'numeric'])
                         ->numeric()->disabled()
                         ->placeholder('Cost')
@@ -211,9 +208,9 @@ class JobResource extends Resource
                         ->title('No pricelist found!')
                         ->body('Please check the selected productline and make sure it has a valid pricelist to continue.')
                         ->actions([
-                            Action::make('Open productline page')
+                            Action::make('Open pricebook page')
                                 ->button()
-                                ->url("/dashboard/productlines/$productline->id", shouldOpenInNewTab: true)
+                                ->url("/dashboard/pricebooks/$productline->pricebook_id", shouldOpenInNewTab: true)
                         ])
                         ->send();
                 }
