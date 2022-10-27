@@ -101,16 +101,16 @@
                         />
                     </th>
                     <th class="px-4 py-3 text-left">
-                        @lang('crud.translator_contacts.inputs.name')
+                        @lang('crud.resource_contacts.inputs.name')
                     </th>
                     <th class="px-4 py-3 text-left">
-                        @lang('crud.translator_contacts.inputs.phone')
+                        @lang('crud.resource_contacts.inputs.phone')
                     </th>
                     <th class="px-4 py-3 text-left">
-                        @lang('crud.translator_contacts.inputs.email')
+                        @lang('crud.resource_contacts.inputs.email')
                     </th>
                     <th class="px-4 py-3 text-left">
-                        @lang('crud.translator_contacts.inputs.position')
+                        @lang('crud.resource_contacts.inputs.position')
                     </th>
                     <th></th>
                 </tr>

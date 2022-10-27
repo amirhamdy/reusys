@@ -90,9 +90,7 @@ class TranslatorTranslatorPriceListsDetail extends Component
     public function newTranslatorPriceList()
     {
         $this->editing = false;
-        $this->modalTitle = trans(
-            'crud.translator_translator_price_lists.new_title'
-        );
+        $this->modalTitle = trans('crud.resources_pricelists.new_title');
         $this->resetTranslatorPriceListData();
 
         $this->showModal();
@@ -102,9 +100,7 @@ class TranslatorTranslatorPriceListsDetail extends Component
         TranslatorPriceList $translatorPriceList
     ) {
         $this->editing = true;
-        $this->modalTitle = trans(
-            'crud.translator_translator_price_lists.edit_title'
-        );
+        $this->modalTitle = trans('crud.resources_pricelists.edit_title');
         $this->translatorPriceList = $translatorPriceList;
 
         $this->dispatchBrowserEvent('refresh');

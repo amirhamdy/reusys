@@ -171,13 +171,13 @@ return [
         ],
     ],
 
-    'translators' => [
-        'name' => 'Translators',
-        'index_title' => 'Translators List',
-        'new_title' => 'New Translator',
-        'create_title' => 'Create Translator',
-        'edit_title' => 'Edit Translator',
-        'show_title' => 'Show Translator',
+    'resources' => [
+        'name' => 'Resources',
+        'index_title' => 'Resources List',
+        'new_title' => 'New Resource',
+        'create_title' => 'Create Resource',
+        'edit_title' => 'Edit Resource',
+        'show_title' => 'Show Resource',
         'inputs' => [
             'name' => 'Name',
             'degree' => 'Degree',
@@ -205,27 +205,8 @@ return [
         ],
     ],
 
-    'translator_translator_price_lists' => [
-        'name' => 'Translator Translator Price Lists',
-        'index_title' => 'TranslatorPriceLists List',
-        'new_title' => 'New Translator price list',
-        'create_title' => 'Create TranslatorPriceList',
-        'edit_title' => 'Edit TranslatorPriceList',
-        'show_title' => 'Show TranslatorPriceList',
-        'inputs' => [
-            'task_type_id' => 'Task Type',
-            'source_language_id' => 'Source Language',
-            'target_language_id' => 'Target Language',
-            'subject_matter_id' => 'Subject Matter',
-            'currency_id' => 'Currency',
-            'task_unit_id' => 'Task Unit',
-            'unit_price' => 'Unit Price',
-            'minimum_charge' => 'Minimum Charge',
-        ],
-    ],
-
-    'translator_contacts' => [
-        'name' => 'Translator Contacts',
+    'resource_contacts' => [
+        'name' => 'Resource Contacts',
         'index_title' => 'Contacts List',
         'new_title' => 'New Contact',
         'create_title' => 'Create Contact',
@@ -236,6 +217,25 @@ return [
             'phone' => 'Phone',
             'email' => 'Email',
             'position' => 'Position',
+        ],
+    ],
+
+    'resources_pricelists' => [
+        'name' => 'Resources Pricelists',
+        'index_title' => 'Resource Pricelists',
+        'new_title' => 'New Resource Pricelist',
+        'create_title' => 'Create Resource Pricelist',
+        'edit_title' => 'Edit Resource Pricelist',
+        'show_title' => 'Show Resource Pricelist',
+        'inputs' => [
+            'task_type_id' => 'Task Type',
+            'source_language_id' => 'Source Language',
+            'target_language_id' => 'Target Language',
+            'subject_matter_id' => 'Subject Matter',
+            'currency_id' => 'Currency',
+            'task_unit_id' => 'Task Unit',
+            'unit_price' => 'Unit Price',
+            'minimum_charge' => 'Minimum Charge',
         ],
     ],
 

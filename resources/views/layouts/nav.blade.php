@@ -62,7 +62,7 @@
                             @endcan
                             @can('view-any', App\Models\Translator::class)
                             <x-dropdown-link href="{{ route('translators.index') }}">
-                            Translators
+                            Resources
                             </x-dropdown-link>
                             @endcan
                     </x-nav-dropdown>
@@ -179,7 +179,7 @@
                 @endcan
                 @can('view-any', App\Models\Translator::class)
                 <x-responsive-nav-link href="{{ route('translators.index') }}">
-                Translators
+                Resources
                 </x-responsive-nav-link>
                 @endcan
 

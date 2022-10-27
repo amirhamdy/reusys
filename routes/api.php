@@ -138,7 +138,7 @@ Route::name('api.')
 
         Route::apiResource('opportunities', OpportunityController::class);
 
-        Route::apiResource('translators', TranslatorController::class);
+        Route::apiResource('resources', TranslatorController::class);
 
         // Translator Tasks
         Route::get('/translators/{translator}/tasks', [
