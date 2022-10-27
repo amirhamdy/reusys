@@ -31,7 +31,7 @@ class TranslatorTranslatorPriceListsDetail extends Component
     public $allSelected = false;
     public $showingModal = false;
 
-    public $modalTitle = 'New TranslatorPriceList';
+    public $modalTitle = 'New Resource Pricelist';
 
     protected $rules = [
         'translatorPriceList.task_type_id' => [

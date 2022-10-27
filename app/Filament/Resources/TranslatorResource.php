@@ -2,11 +2,10 @@
 
 namespace App\Filament\Resources;
 
+use Closure;
 use App\Models\Translator;
 use Filament\{Tables, Forms};
 use Filament\Resources\{Form, Table, Resource};
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\TextInput;
@@ -16,6 +15,8 @@ use Filament\Forms\Components\BelongsToSelect;
 use Filament\Tables\Filters\MultiSelectFilter;
 use App\Filament\Resources\TranslatorResource\Pages;
 use Filament\Forms\Components\Wizard;
+use Filament\Forms\Components\Wizard\Step;
+use Filament\Forms\Components\Section;
 
 class TranslatorResource extends Resource
 {
@@ -39,239 +40,213 @@ class TranslatorResource extends Resource
     {
         return $form->schema([
             Wizard::make([
-                Wizard\Step::make('Details')
-                    ->schema([
-                        Forms\Components\Section::make('Basic Details')
-                            ->schema([
-                                TextInput::make('name')
-                                    ->rules(['required', 'max:255', 'string'])
-                                    ->placeholder('Name')
-                                    ->columnSpan([
-                                        'default' => 12,
-                                        'md' => 12,
-                                        'lg' => 12,
-                                    ]),
-
-                                TextInput::make('degree')
-                                    ->rules(['nullable', 'max:255', 'string'])
-                                    ->placeholder('Degree')
-                                    ->columnSpan([
-                                        'default' => 12,
-                                        'md' => 12,
-                                        'lg' => 12,
-                                    ]),
-
-                                Select::make('gender')
-                                    ->rules(['nullable', 'in:male,female,other'])
-                                    ->searchable()
-                                    ->options([
-                                        'male' => 'Male',
-                                        'female' => 'Female',
-                                        'other' => 'Other',
-                                    ])
-                                    ->placeholder('Gender')
-                                    ->columnSpan([
-                                        'default' => 12,
-                                        'md' => 12,
-                                        'lg' => 12,
-                                    ]),
-
-                                DatePicker::make('date_of_birth')
-                                    ->rules(['nullable', 'date'])
-                                    ->placeholder('Date Of Birth')
-                                    ->columnSpan([
-                                        'default' => 12,
-                                        'md' => 12,
-                                        'lg' => 12,
-                                    ]),
-
-                                TextInput::make('nationality')
-                                    ->rules(['nullable', 'max:255', 'string'])
-                                    ->placeholder('Nationality')
-                                    ->columnSpan([
-                                        'default' => 12,
-                                        'md' => 12,
-                                        'lg' => 12,
-                                    ]),
-
-                                TextInput::make('experience')
-                                    ->rules(['nullable', 'max:255', 'string'])
-                                    ->placeholder('Experience')
-                                    ->columnSpan([
-                                        'default' => 12,
-                                        'md' => 12,
-                                        'lg' => 12,
-                                    ]),
-
-                                TextInput::make('id_number')
-                                    ->rules(['nullable', 'max:255', 'string'])
-                                    ->placeholder('Id Number')
-                                    ->columnSpan([
-                                        'default' => 12,
-                                        'md' => 12,
-                                        'lg' => 12,
-                                    ]),
-
-                                TextInput::make('vat_number')
-                                    ->rules(['nullable', 'max:255', 'string'])
-                                    ->placeholder('Vat Number')
-                                    ->columnSpan([
-                                        'default' => 12,
-                                        'md' => 12,
-                                        'lg' => 12,
-                                    ]),
-
-                                TextInput::make('id_other')
-                                    ->rules(['nullable', 'max:255', 'string'])
-                                    ->placeholder('Id Other')
-                                    ->columnSpan([
-                                        'default' => 12,
-                                        'md' => 12,
-                                        'lg' => 12,
-                                    ]),
-
-                                TextInput::make('timezone')
-                                    ->rules(['nullable', 'max:255', 'string'])
-                                    ->placeholder('Timezone')
-                                    ->columnSpan([
-                                        'default' => 12,
-                                        'md' => 12,
-                                        'lg' => 12,
-                                    ]),
-
-                                TextInput::make('website')
-                                    ->rules(['nullable', 'max:255', 'string'])
-                                    ->placeholder('Website')
-                                    ->columnSpan([
-                                        'default' => 12,
-                                        'md' => 12,
-                                        'lg' => 12,
-                                    ]),
-
-                                TextInput::make('skype')
-                                    ->rules(['nullable', 'max:255', 'string'])
-                                    ->placeholder('Skype')
-                                    ->columnSpan([
-                                        'default' => 12,
-                                        'md' => 12,
-                                        'lg' => 12,
-                                    ]),
-                            ])
-                    ]),
-                Wizard\Step::make('Delivery')
-                    ->schema([
-                        Forms\Components\Section::make('More Details')
-                            ->schema([
-                                TextInput::make('native_language')
-                                    ->rules(['nullable', 'max:255', 'string'])
-                                    ->placeholder('Native Language')
-                                    ->columnSpan([
-                                        'default' => 12,
-                                        'md' => 12,
-                                        'lg' => 12,
-                                    ]),
-
-                                TextInput::make('second_language')
-                                    ->rules(['nullable', 'max:255', 'string'])
-                                    ->placeholder('Second Language')
-                                    ->columnSpan([
-                                        'default' => 12,
-                                        'md' => 12,
-                                        'lg' => 12,
-                                    ]),
-
-                                BelongsToSelect::make('translator_type_id')
-                                    ->rules(['required', 'exists:translator_types,id'])
-                                    ->relationship('translatorType', 'name')->preload()
-                                    ->searchable()
-                                    ->placeholder('Translator Type')
-                                    ->columnSpan([
-                                        'default' => 12,
-                                        'md' => 12,
-                                        'lg' => 12,
-                                    ]),
-
-                                BelongsToSelect::make('country_id')
-                                    ->rules(['required', 'exists:countries,id'])
-                                    ->relationship('country', 'name')->preload()
-                                    ->searchable()
-                                    ->placeholder('Country')
-                                    ->columnSpan([
-                                        'default' => 12,
-                                        'md' => 12,
-                                        'lg' => 12,
-                                    ]),
-
-                                BelongsToSelect::make('currency_id')
-                                    ->rules(['required', 'exists:currencies,id'])
-                                    ->relationship('currency', 'name')->preload()
-                                    ->searchable()
-                                    ->placeholder('Currency')
-                                    ->columnSpan([
-                                        'default' => 12,
-                                        'md' => 12,
-                                        'lg' => 12,
-                                    ]),
-                            ]),
-                    ]),
-                Wizard\Step::make('Address')
-                    ->schema([
-                        TextInput::make('address')
-                            ->rules(['nullable', 'max:255', 'string'])
-                            ->placeholder('Address')
-                            ->columnSpan([
-                                'default' => 12,
-                                'md' => 12,
-                                'lg' => 12,
-                            ]),
-
-                        TextInput::make('city')
-                            ->rules(['nullable', 'max:255', 'string'])
-                            ->placeholder('City')
-                            ->columnSpan([
-                                'default' => 12,
-                                'md' => 12,
-                                'lg' => 12,
-                            ]),
-
-                        TextInput::make('postal_code')
-                            ->rules(['nullable', 'max:255', 'string'])
-                            ->placeholder('Postal Code')
-                            ->columnSpan([
-                                'default' => 12,
-                                'md' => 12,
-                                'lg' => 12,
-                            ]),
-
-                        TextInput::make('payment_after')
-                            ->rules(['required', 'max:255', 'string'])
-                            ->placeholder('Payment After')
-                            ->columnSpan([
-                                'default' => 12,
-                                'md' => 12,
-                                'lg' => 12,
-                            ]),
-
-                        Toggle::make('nda')
-                            ->rules(['required', 'boolean'])
-                            ->default('0')
-                            ->columnSpan([
-                                'default' => 12,
-                                'md' => 12,
-                                'lg' => 12,
-                            ]),
-
-                        Toggle::make('cv')
-                            ->rules(['required', 'boolean'])
-                            ->default('0')
-                            ->columnSpan([
-                                'default' => 12,
-                                'md' => 12,
-                                'lg' => 12,
-                            ]),
-                    ]),
+                static::getFirstStep(),
+                static::getSecondStep(),
+                static::getThirdStep()
             ]),
         ])->columns(1);
+    }
+
+    public static function getFirstStep(): Step
+    {
+        return Step::make('Resource Type')
+            ->schema([
+                Section::make('Select Resource Type')
+                    ->schema([
+                        BelongsToSelect::make('translator_type_id')
+                            ->rules(['required', 'exists:translator_types,id'])
+                            ->relationship('translatorType', 'name')->preload()
+                            ->searchable()
+                            ->disableLabel()
+                            ->placeholder('Resource Type')
+                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12])
+                    ])
+            ]);
+    }
+
+    public static function getSecondStep(): Step
+    {
+//        echo static::$translator_type_id;
+
+        return Step::make('Resource Details')
+            ->schema([
+                Section::make('Basic Details')
+                    ->schema([
+                        BelongsToSelect::make('translator_type_id')
+                            ->rules(['required', 'exists:translator_types,id'])
+                            ->relationship('translatorType', 'name')->preload()
+                            ->searchable()
+                            ->disableLabel()
+                            ->placeholder('Resource Type')
+                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
+
+                        TextInput::make('name')
+                            ->rules(['required', 'max:255', 'string'])
+                            ->placeholder('Name')
+                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
+
+                        TextInput::make('degree')
+                            ->rules(['nullable', 'max:255', 'string'])
+                            ->placeholder('Degree')
+                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
+
+                        Select::make('gender')
+                            ->rules(['nullable', 'in:male,female,other'])
+                            ->searchable()
+                            ->options([
+                                'male' => 'Male',
+                                'female' => 'Female',
+                                'other' => 'Other',
+                            ])
+                            ->placeholder('Gender')
+                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
+
+                        DatePicker::make('date_of_birth')
+                            ->rules(['nullable', 'date'])
+                            ->placeholder('Date Of Birth')
+                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
+
+                        TextInput::make('nationality')
+                            ->rules(['nullable', 'max:255', 'string'])
+                            ->placeholder('Nationality')
+                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
+
+                        TextInput::make('experience')
+                            ->rules(['nullable', 'max:255', 'string'])
+                            ->placeholder('Experience')
+                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
+
+                        TextInput::make('id_number')
+                            ->rules(['nullable', 'max:255', 'string'])
+                            ->placeholder('Id Number')
+                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
+
+                        TextInput::make('vat_number')
+                            ->rules(['nullable', 'max:255', 'string'])
+                            ->placeholder('Vat Number')
+                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
+
+                        TextInput::make('id_other')
+                            ->rules(['nullable', 'max:255', 'string'])
+                            ->placeholder('Id Other')
+                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
+
+                        TextInput::make('timezone')
+                            ->rules(['nullable', 'max:255', 'string'])
+                            ->placeholder('Timezone')
+                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
+
+                        TextInput::make('website')
+                            ->rules(['nullable', 'max:255', 'string'])
+                            ->placeholder('Website')
+                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
+
+                        TextInput::make('skype')
+                            ->rules(['nullable', 'max:255', 'string'])
+                            ->placeholder('Skype')
+                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
+                    ])
+            ]);
+    }
+
+    public static function getThirdStep(): Step
+    {
+        return Step::make('Delivery')
+            ->schema([Section::make('More Details')
+                ->schema([TextInput::make('native_language')
+                    ->rules(['nullable', 'max:255', 'string'])
+                    ->placeholder('Native Language')
+                    ->columnSpan(['default' => 12,
+                        'md' => 12,
+                        'lg' => 12,]),
+
+                    TextInput::make('second_language')
+                        ->rules(['nullable', 'max:255', 'string'])
+                        ->placeholder('Second Language')
+                        ->columnSpan(['default' => 12,
+                            'md' => 12,
+                            'lg' => 12,]),
+
+
+                    BelongsToSelect::make('country_id')
+                        ->rules(['required', 'exists:countries,id'])
+                        ->relationship('country', 'name')->preload()
+                        ->searchable()
+                        ->placeholder('Country')
+                        ->columnSpan(['default' => 12,
+                            'md' => 12,
+                            'lg' => 12,]),
+
+                    BelongsToSelect::make('currency_id')
+                        ->rules(['required', 'exists:currencies,id'])
+                        ->relationship('currency', 'name')->preload()
+                        ->searchable()
+                        ->placeholder('Currency')
+                        ->columnSpan(['default' => 12,
+                            'md' => 12,
+                            'lg' => 12,]),]),]);
+    }
+
+    public static function getForthStep(): Step
+    {
+        return Step::make('Address')
+            ->schema([TextInput::make('address')
+                ->rules(['nullable', 'max:255', 'string'])
+                ->placeholder('Address')
+                ->columnSpan(['default' => 12,
+                    'md' => 12,
+                    'lg' => 12,]),
+
+                TextInput::make('city')
+                    ->rules(['nullable', 'max:255', 'string'])
+                    ->placeholder('City')
+                    ->columnSpan(['default' => 12,
+                        'md' => 12,
+                        'lg' => 12,]),
+
+                TextInput::make('postal_code')
+                    ->rules(['nullable', 'max:255', 'string'])
+                    ->placeholder('Postal Code')
+                    ->columnSpan(['default' => 12,
+                        'md' => 12,
+                        'lg' => 12,]),
+
+                TextInput::make('payment_after')
+                    ->rules(['required', 'max:255', 'string'])
+                    ->placeholder('Payment After')
+                    ->columnSpan(['default' => 12,
+                        'md' => 12,
+                        'lg' => 12,]),
+
+                Toggle::make('nda')
+                    ->rules(['required', 'boolean'])
+                    ->default('0')
+                    ->columnSpan(['default' => 12,
+                        'md' => 12,
+                        'lg' => 12,]),
+
+                Toggle::make('cv')
+                    ->rules(['required', 'boolean'])
+                    ->default('0')
+                    ->columnSpan(['default' => 12,
+                        'md' => 12,
+                        'lg' => 12,]),]);
+    }
+
+    public static function getNameFormField(): Forms\Components\TextInput
+    {
+        return TextInput::make('name')
+            ->required()
+            ->reactive()
+            ->afterStateUpdated(fn($state, callable $set) => $set('slug', Str::slug($state)));
+    }
+
+    public static function getSlugFormField(): Forms\Components\TextInput
+    {
+        return TextInput::make('slug')
+            ->disabled()
+            ->required()
+            ->unique(Category::class, 'slug', fn($record) => $record);
     }
 
     public static function table(Table $table): Table
