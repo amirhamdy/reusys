@@ -23,6 +23,7 @@ class CreateTranslator extends CreateRecord
             TranslatorResource::getFirstStep(),
             TranslatorResource::getSecondStep(),
             TranslatorResource::getThirdStep(),
+            TranslatorResource::getForthStep(),
         ];
     }
 }
