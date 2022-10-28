@@ -43,7 +43,7 @@ class ProjectResource extends Resource
                         ->searchable()->disablePlaceholderSelection()
                         ->placeholder('Customer')->label('Customer')
                         ->reactive()
-                        ->afterStateUpdated(fn(callable $set) => $set('productline_id', null))
+                        ->afterStateUpdated(fn(callable $set) => $set('productline_id', ''))
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     BelongsToSelect::make('productline_id')
