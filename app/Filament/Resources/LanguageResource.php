@@ -29,20 +29,12 @@ class LanguageResource extends Resource
                     TextInput::make('name')
                         ->rules(['required', 'max:255', 'string'])
                         ->placeholder('Name')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 12,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                     TextInput::make('code')
                         ->rules(['required', 'max:255', 'string'])
                         ->placeholder('Code')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 12,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
                 ]),
             ]),
         ]);

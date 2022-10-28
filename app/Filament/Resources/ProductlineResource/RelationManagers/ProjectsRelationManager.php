@@ -27,38 +27,22 @@ class ProjectsRelationManager extends HasManyRelationManager
                 TextInput::make('name')
                     ->rules(['required', 'max:255', 'string'])
                     ->placeholder('Name')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 12,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                 DatePicker::make('start_date')
                     ->rules(['required', 'date'])
                     ->placeholder('Start Date')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 6,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                 DatePicker::make('end_date')
                     ->rules(['required', 'date'])
                     ->placeholder('End Date')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 6,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                 TextInput::make('po_number')
                     ->rules(['required', 'max:255', 'string'])
                     ->placeholder('Po Number')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 6,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
             ]),
         ]);
     }
@@ -85,7 +69,7 @@ class ProjectsRelationManager extends HasManyRelationManager
                                 $data['created_from'],
                                 fn(
                                     Builder $query,
-                                    $date
+                                            $date
                                 ): Builder => $query->whereDate(
                                     'created_at',
                                     '>=',
@@ -96,7 +80,7 @@ class ProjectsRelationManager extends HasManyRelationManager
                                 $data['created_until'],
                                 fn(
                                     Builder $query,
-                                    $date
+                                            $date
                                 ): Builder => $query->whereDate(
                                     'created_at',
                                     '<=',

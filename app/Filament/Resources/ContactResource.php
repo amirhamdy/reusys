@@ -32,50 +32,30 @@ class ContactResource extends Resource
                     TextInput::make('name')
                         ->rules(['required', 'max:255', 'string'])
                         ->placeholder('Name')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 12,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                     TextInput::make('phone')
                         ->rules(['required', 'max:255', 'string'])
                         ->placeholder('Phone')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 12,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                     TextInput::make('email')
                         ->rules(['required', 'email'])
                         ->email()
                         ->placeholder('Email')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 12,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                     TextInput::make('position')
                         ->rules(['nullable', 'max:255', 'string'])
                         ->placeholder('Position')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 12,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                     BelongsToSelect::make('translator_id')
                         ->rules(['required', 'exists:translators,id'])
                         ->relationship('translator', 'name')
                         ->searchable()
                         ->placeholder('Translator')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 12,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
                 ]),
             ]),
         ]);

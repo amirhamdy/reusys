@@ -34,139 +34,83 @@ class CustomerResource extends Resource
                     TextInput::make('name')
                         ->rules(['required', 'max:255', 'string'])
                         ->placeholder('Name')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 12,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                     TextInput::make('phone')
                         ->rules(['required', 'max:255', 'string'])
                         ->placeholder('Phone')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 4,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     TextInput::make('email')
                         ->rules(['required', 'email'])
                         ->email()
                         ->placeholder('Email')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 4,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     TextInput::make('fax')
                         ->rules(['nullable', 'max:255', 'string'])
                         ->placeholder('Fax')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 4,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     TextInput::make('address')
                         ->rules(['nullable', 'max:255', 'string'])
                         ->placeholder('Address')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 6,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     TextInput::make('billing_address')
                         ->rules(['nullable', 'max:255', 'string'])
                         ->placeholder('Billing Address')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 6,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     TextInput::make('postal_code')
                         ->rules(['nullable', 'max:255', 'string'])
                         ->placeholder('Postal Code')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 4,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     TextInput::make('website')
                         ->rules(['nullable', 'max:255', 'string'])
                         ->placeholder('Website')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 4,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     TextInput::make('city')
                         ->rules(['nullable', 'max:255', 'string'])
                         ->placeholder('City')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 4,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     BelongsToSelect::make('customer_status_id')
                         ->rules(['required', 'exists:customer_statuses,id'])
                         ->relationship('customerStatus', 'name')->preload()
                         ->searchable()
                         ->placeholder('Customer Status')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 4,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     BelongsToSelect::make('country_id')
                         ->rules(['required', 'exists:countries,id'])
                         ->relationship('country', 'name')->preload()
                         ->searchable()
                         ->placeholder('Country')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 4,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     BelongsToSelect::make('region_id')
                         ->rules(['required', 'exists:regions,id'])
                         ->relationship('region', 'name')->preload()
                         ->searchable()
                         ->placeholder('Region')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 4,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     BelongsToSelect::make('customer_rating_id')
                         ->rules(['required', 'exists:customer_ratings,id'])
                         ->relationship('customerRating', 'name')->preload()
                         ->searchable()
                         ->placeholder('Customer Rating')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 6,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     BelongsToSelect::make('industry_id')
                         ->rules(['required', 'exists:industries,id'])
                         ->relationship('industry', 'name')->preload()
                         ->searchable()
                         ->placeholder('Industry')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 6,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
                 ]),
             ]),
         ]);

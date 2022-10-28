@@ -36,22 +36,14 @@ class PricebookResource extends Resource
                     TextInput::make('name')
                         ->rules(['required', 'max:255', 'string'])
                         ->placeholder('Name')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 12,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                     BelongsToSelect::make('currency_id')
                         ->rules(['required', 'exists:currencies,id'])
                         ->relationship('currency', 'name')->preload()
                         ->searchable()
                         ->placeholder('Currency')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 12,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
                 ]),
             ]),
         ]);

@@ -35,12 +35,12 @@ class ProductlinesRelationManager extends HasManyRelationManager
                 BelongsToSelect::make('pricebook_id')
                     ->rules(['required', 'exists:pricebooks,id'])
                     ->relationship('pricebook', 'name')
-                    ->searchable()
+                    ->searchable()->preload()
                     ->placeholder('Pricebook')
                     ->columnSpan([
                         'default' => 12,
                         'md' => 12,
-                        'lg' => 6,
+                        'lg' => 12,
                     ]),
             ]),
         ]);

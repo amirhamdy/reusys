@@ -36,73 +36,45 @@ class TaskResource extends Resource
                     TextInput::make('name')
                         ->rules(['required', 'max:255', 'string'])
                         ->placeholder('Name')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 6,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     BelongsToSelect::make('job_id')
                         ->rules(['required', 'exists:jobs,id'])
                         ->relationship('job', 'name')->preload()
                         ->searchable()
                         ->placeholder('Job')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 6,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     DatePicker::make('start_date')
                         ->rules(['required', 'date'])
                         ->placeholder('Start Date')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 6,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     DatePicker::make('delivery_date')
                         ->rules(['required', 'date'])
                         ->placeholder('Delivery Date')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 6,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     BelongsToSelect::make('task_type_id')
                         ->rules(['required', 'exists:task_types,id'])
                         ->relationship('taskType', 'name')->preload()
                         ->searchable()
                         ->placeholder('Task Type')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 6,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     BelongsToSelect::make('task_unit_id')
                         ->rules(['required', 'exists:task_units,id'])
                         ->relationship('taskUnit', 'name')->preload()
                         ->searchable()
                         ->placeholder('Task Unit')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 6,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     BelongsToSelect::make('subject_matter_id')
                         ->rules(['required', 'exists:subject_matters,id'])
                         ->relationship('subjectMatter', 'name')->preload()
                         ->searchable()
                         ->placeholder('Subject Matter')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 6,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     BelongsToSelect::make('translator_id')
                         ->label('Resource')
@@ -110,21 +82,13 @@ class TaskResource extends Resource
                         ->relationship('translator', 'name')->preload()
                         ->searchable()
                         ->placeholder('Resource')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 6,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     TextInput::make('amount')
                         ->rules(['required', 'numeric'])
                         ->numeric()
                         ->placeholder('Amount')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 4,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     Select::make('is_paid')
                         ->label('Payment Status')
@@ -136,11 +100,7 @@ class TaskResource extends Resource
                             'waived cost' => 'Waived cost',
                         ])
                         ->placeholder('Payment Status')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 4,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     Select::make('status')
                         ->rules([
@@ -154,20 +114,12 @@ class TaskResource extends Resource
                             'completed' => 'Completed',
                         ])
                         ->placeholder('Status')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 4,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     RichEditor::make('notes')
                         ->rules(['nullable', 'max:255', 'string'])
                         ->placeholder('Notes')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 12,
-                        ]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
                 ]),
             ]),
         ]);

@@ -28,111 +28,67 @@ class OpportunitiesRelationManager extends HasManyRelationManager
                 TextInput::make('name')
                     ->rules(['required', 'max:255', 'string'])
                     ->placeholder('Name')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 12,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                 DatePicker::make('date')
                     ->rules(['required', 'date'])
                     ->placeholder('Date')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 6,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
-                RichEditor::make('description')
+                TextInput::make('status')
                     ->rules(['required', 'max:255', 'string'])
-                    ->placeholder('Description')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 6,
-                    ]),
+                    ->placeholder('Status')
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
+
+                TextInput::make('probability_to_win')
+                    ->rules(['required', 'max:255', 'string'])
+                    ->placeholder('Probability To Win')
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                 TextInput::make('amount')
                     ->rules(['required', 'numeric'])
                     ->numeric()
                     ->placeholder('Amount')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 6,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                 TextInput::make('price')
                     ->rules(['required', 'numeric'])
                     ->numeric()
                     ->placeholder('Price')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 6,
-                    ]),
-
-                TextInput::make('probability_to_win')
-                    ->rules(['required', 'max:255', 'string'])
-                    ->placeholder('Probability To Win')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 6,
-                    ]),
-
-                TextInput::make('status')
-                    ->rules(['required', 'max:255', 'string'])
-                    ->placeholder('Status')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 6,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                 BelongsToSelect::make('source_language_id')
                     ->rules(['required', 'exists:languages,id'])
                     ->relationship('sourceLanguage', 'name')
                     ->searchable()
                     ->placeholder('Source Language')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 6,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                 BelongsToSelect::make('target_language_id')
                     ->rules(['required', 'exists:languages,id'])
                     ->relationship('targetLanguage', 'name')
                     ->searchable()
                     ->placeholder('Target Language')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 6,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                 BelongsToSelect::make('opportunity_type_id')
                     ->rules(['required', 'exists:opportunity_types,id'])
                     ->relationship('opportunityType', 'name')
                     ->searchable()
                     ->placeholder('Opportunity Type')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 4,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                 BelongsToSelect::make('opportunity_unit_id')
                     ->rules(['required', 'exists:opportunity_units,id'])
                     ->relationship('opportunityUnit', 'name')
                     ->searchable()
                     ->placeholder('Opportunity Unit')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 4,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
+
+                RichEditor::make('description')
+                    ->rules(['required', 'max:255', 'string'])
+                    ->placeholder('Description')
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
             ]),
         ]);
     }
@@ -176,7 +132,7 @@ class OpportunitiesRelationManager extends HasManyRelationManager
                                 $data['created_from'],
                                 fn(
                                     Builder $query,
-                                    $date
+                                            $date
                                 ): Builder => $query->whereDate(
                                     'created_at',
                                     '>=',
@@ -187,7 +143,7 @@ class OpportunitiesRelationManager extends HasManyRelationManager
                                 $data['created_until'],
                                 fn(
                                     Builder $query,
-                                    $date
+                                            $date
                                 ): Builder => $query->whereDate(
                                     'created_at',
                                     '<=',
