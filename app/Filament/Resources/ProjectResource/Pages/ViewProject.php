@@ -16,7 +16,7 @@ class ViewProject extends ViewRecord
         $productline = Productline::find($data['productline_id']);
 
         $data['productline_id'] = $productline->name;
-        $data['customer_id'] = Customer::find($productline['customer_id'])->name;
+        $data['customer_id'] = $productline->customer->name;
 
         return $data;
     }

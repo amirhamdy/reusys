@@ -59,10 +59,9 @@ class JobResource extends Resource
                             if ($customer) return $customer->productlines->pluck('name', 'id');
                             return [];
                         })->preload()
-                        ->afterStateUpdated(fn(callable $set) => $set('project_id', null))
-                        ->searchable()
-                        ->reactive()
+                        ->searchable()->reactive()
                         ->placeholder('Productline')->label('Productline')
+                        ->afterStateUpdated(fn(callable $set) => $set('project_id', null))
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     BelongsToSelect::make('project_id')
@@ -73,7 +72,7 @@ class JobResource extends Resource
                             return [];
                         })->preload()
                         ->searchable()->reactive()
-                        ->placeholder('Project')
+                        ->placeholder('Project')->label('Project')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4])
                         ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
 

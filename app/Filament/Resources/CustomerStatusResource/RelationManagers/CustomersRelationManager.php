@@ -26,11 +26,7 @@ class CustomersRelationManager extends HasManyRelationManager
                 TextInput::make('name')
                     ->rules(['required', 'max:255', 'string'])
                     ->placeholder('Name')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 12,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                 TextInput::make('phone')
                     ->rules(['required', 'max:255', 'string'])
@@ -63,20 +59,12 @@ class CustomersRelationManager extends HasManyRelationManager
                 TextInput::make('address')
                     ->rules(['nullable', 'max:255', 'string'])
                     ->placeholder('Address')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 6,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                 TextInput::make('billing_address')
                     ->rules(['nullable', 'max:255', 'string'])
                     ->placeholder('Billing Address')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 6,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                 TextInput::make('postal_code')
                     ->rules(['nullable', 'max:255', 'string'])
@@ -132,22 +120,14 @@ class CustomersRelationManager extends HasManyRelationManager
                     ->relationship('customerRating', 'name')
                     ->searchable()
                     ->placeholder('Customer Rating')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 6,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                 BelongsToSelect::make('industry_id')
                     ->rules(['required', 'exists:industries,id'])
                     ->relationship('industry', 'name')
                     ->searchable()
                     ->placeholder('Industry')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 6,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
             ]),
         ]);
     }

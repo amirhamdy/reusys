@@ -187,7 +187,8 @@ class ProductlineSeeder extends Seeder
             ['id' => 8000221, 'name' => 'Fidus', 'customer_id' => 1004344, 'pricebook_id' => 300130, 'created_at' => '2021-11-11 16:15:42', 'updated_at' => '2021-11-11 16:15:42'],
             ['id' => 8000222, 'name' => 'Maithili Test', 'customer_id' => 1004345, 'pricebook_id' => 300131, 'created_at' => '2021-11-29 11:09:11', 'updated_at' => '2021-11-29 11:09:11'],
             ['id' => 8000223, 'name' => 'Dar El Shifa- test', 'customer_id' => 1004346, 'pricebook_id' => 300132, 'created_at' => '2021-12-02 17:54:33', 'updated_at' => '2021-12-02 17:54:33'],
-            ['id' => 8000224, 'name' => 'legal documents', 'customer_id' => 1000225, 'pricebook_id' => 300134, 'created_at' => '2022-02-03 14:32:57', 'updated_at' => '2022-02-03 14:32:57']
+            ['id' => 8000224, 'name' => 'legal documents', 'customer_id' => 1000225, 'pricebook_id' => 300134, 'created_at' => '2022-02-03 14:32:57', 'updated_at' => '2022-02-03 14:32:57'],
+            ['id' => 8000225, 'name' => 'Amir LINE', 'customer_id' => 1004347, 'pricebook_id' => 300135, 'created_at' => '2022-02-03 14:32:57', 'updated_at' => '2022-02-03 14:32:57'],
         ];
 
         /*

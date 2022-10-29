@@ -30,87 +30,55 @@ class TranslatorPriceListsRelationManager extends HasManyRelationManager
                     ->relationship('taskType', 'name')
                     ->searchable()
                     ->placeholder('Task Type')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 12,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                 BelongsToSelect::make('source_language_id')
                     ->rules(['required', 'exists:languages,id'])
                     ->relationship('sourceLanguage', 'name')
                     ->searchable()
                     ->placeholder('Source Language')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 12,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                 BelongsToSelect::make('target_language_id')
                     ->rules(['required', 'exists:languages,id'])
                     ->relationship('targetLanguage', 'name')
                     ->searchable()
                     ->placeholder('Target Language')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 12,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                 BelongsToSelect::make('currency_id')
                     ->rules(['required', 'exists:currencies,id'])
                     ->relationship('currency', 'name')
                     ->searchable()
                     ->placeholder('Currency')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 12,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                 BelongsToSelect::make('task_unit_id')
                     ->rules(['required', 'exists:task_units,id'])
                     ->relationship('taskUnit', 'name')
                     ->searchable()
                     ->placeholder('Task Unit')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 12,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                 BelongsToSelect::make('translator_id')
                     ->rules(['required', 'exists:translators,id'])
                     ->relationship('translator', 'name')
                     ->searchable()
                     ->placeholder('Translator')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 12,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                 TextInput::make('unit_price')
                     ->rules(['required', 'numeric'])
                     ->numeric()
                     ->placeholder('Unit Price')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 12,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                 TextInput::make('minimum_charge')
                     ->rules(['required', 'numeric'])
                     ->numeric()
                     ->placeholder('Minimum Charge')
                     ->default('0')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 12,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
             ]),
         ]);
     }

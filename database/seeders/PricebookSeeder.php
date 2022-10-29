@@ -149,6 +149,7 @@ class PricebookSeeder extends Seeder
             ['id' => 300132, 'name' => 'Dar El Shifa', 'currency_id' => 1, 'created_at' => '2021-11-15 12:14:14', 'updated_at' => '2021-11-15 12:14:14'],
             ['id' => 300133, 'name' => 'Dar El Shifa', 'currency_id' => 1, 'created_at' => '2021-12-02 16:22:40', 'updated_at' => '2021-12-02 16:22:40'],
             ['id' => 300134, 'name' => 'INGCO International', 'currency_id' => 1, 'created_at' => '2022-02-03 14:25:57', 'updated_at' => '2022-02-03 14:25:57'],
+            ['id' => 300135, 'name' => 'Amir PRICEBOOK', 'currency_id' => 1, 'created_at' => '2022-02-03 14:25:57', 'updated_at' => '2022-02-03 14:25:57'],
         ];
 
         DB::table('pricebooks')->insert($data);

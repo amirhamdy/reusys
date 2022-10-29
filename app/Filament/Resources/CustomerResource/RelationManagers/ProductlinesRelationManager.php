@@ -26,22 +26,14 @@ class ProductlinesRelationManager extends HasManyRelationManager
                 TextInput::make('name')
                     ->rules(['required', 'max:255', 'string'])
                     ->placeholder('Name')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 12,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                 BelongsToSelect::make('pricebook_id')
                     ->rules(['required', 'exists:pricebooks,id'])
                     ->relationship('pricebook', 'name')
                     ->searchable()->preload()
                     ->placeholder('Pricebook')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 12,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
             ]),
         ]);
     }

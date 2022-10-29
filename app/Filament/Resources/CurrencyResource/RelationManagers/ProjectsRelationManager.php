@@ -27,22 +27,14 @@ class ProjectsRelationManager extends HasManyRelationManager
                 TextInput::make('name')
                     ->rules(['required', 'max:255', 'string'])
                     ->placeholder('Name')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 12,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                 BelongsToSelect::make('productline_id')
                     ->rules(['required', 'exists:productlines,id'])
                     ->relationship('productline', 'name')
                     ->searchable()
                     ->placeholder('Productline')
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 12,
-                        'lg' => 6,
-                    ]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                 DatePicker::make('start_date')
                     ->rules(['required', 'date'])

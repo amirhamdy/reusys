@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\JobResource\Pages;
 
 use App\Filament\Resources\JobResource;
+use App\Models\Project;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 
@@ -65,5 +66,16 @@ class EditJob extends EditRecord
             ->icon('heroicon-o-document-text')
             ->iconColor('success')
             ->send();
+    }
+
+    protected function mutateFormDataBeforeFill(array $data): array
+    {
+        $project = Project::find($data['project_id']);
+
+//        $data['project_id'] = $project->name;
+        $data['productline_id'] = $project->productline->name;
+        $data['customer_id'] = $project->productline->customer->name;
+
+        return $data;
     }
 }

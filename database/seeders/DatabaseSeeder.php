@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,7 +21,7 @@ class DatabaseSeeder extends Seeder
 //                'password' => Hash::make('password'),
 //            ]);
 
-        $this->call(ContactSeeder::class);
+//        $this->call(ContactSeeder::class);
         $this->call(CountrySeeder::class);
         $this->call(CurrencySeeder::class);
         $this->call(RegionSeeder::class);
