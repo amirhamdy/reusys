@@ -2,24 +2,24 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\JobResource\Pages;
 use App\Filament\Resources\JobResource\Widgets\JobStats;
 use App\Models\Customer;
 use App\Models\Job;
 use App\Models\Pricelist;
 use App\Models\Productline;
 use App\Models\Project;
-use Filament\{Notifications\Notification, Tables, Forms};
-use Filament\Resources\{Form, Table, Resource};
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Card;
-use Filament\Forms\Components\Toggle;
-use Filament\Forms\Components\TextInput;
-use Illuminate\Database\Eloquent\Builder;
-use App\Filament\Resources\JobResource\Pages;
-use Filament\Forms\Components\BelongsToSelect;
-use Filament\Tables\Filters\MultiSelectFilter;
 use Closure;
+use Filament\{Forms, Notifications\Notification, Tables};
+use Filament\Forms\Components\BelongsToSelect;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Notifications\Actions\Action;
+use Filament\Resources\{Form, Resource, Table};
+use Filament\Tables\Filters\MultiSelectFilter;
+use Illuminate\Database\Eloquent\Builder;
 
 class JobResource extends Resource
 {
@@ -118,10 +118,10 @@ class JobResource extends Resource
                         ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
 
                     TextInput::make('cost')
-                        ->hint('This is a not editable calculated cost depending on your selections.')
+                        ->hint('This is a calculated not editable cost depending on your selections.')
                         ->rules(['required', 'numeric'])
                         ->numeric()->disabled()
-                        ->placeholder('Cost')
+                        ->placeholder('This is a calculated not editable cost depending on your selections')
                         ->default(null)
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 

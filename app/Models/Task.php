@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use App\Models\Scopes\Searchable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Task extends Model
 {
@@ -28,6 +28,8 @@ class Task extends Model
         'task_unit_id',
         'subject_matter_id',
         'translator_id',
+        'is_free_task',
+        'is_minimum_charge_used',
     ];
 
     protected $searchableFields = ['*'];
@@ -36,6 +38,8 @@ class Task extends Model
         'start_date' => 'date',
         'delivery_date' => 'date',
         'payment_date' => 'date',
+        'is_free_task' => 'boolean',
+        'is_minimum_charge_used' => 'boolean',
     ];
 
     public function job()

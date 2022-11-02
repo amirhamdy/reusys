@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     /**
@@ -23,6 +23,8 @@ return new class extends Migration {
                 ->enum('is_paid', ['Paid', 'Not Paid', 'Waived Cost'])
                 ->default('Not Paid');
             $table->float('cost');
+            $table->boolean('is_free_task');
+            $table->boolean('is_minimum_charge_used');
             $table->date('payment_date')->nullable();
             $table->text('notes')->nullable();
             $table->unsignedBigInteger('job_id');

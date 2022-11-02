@@ -2,21 +2,21 @@
 
 namespace App\Filament\Resources;
 
-use Closure;
-use App\Models\Translator;
-use Filament\{Tables, Forms};
-use Filament\Resources\{Form, Table, Resource};
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Toggle;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\DatePicker;
-use Illuminate\Database\Eloquent\Builder;
-use Filament\Forms\Components\BelongsToSelect;
-use Filament\Tables\Filters\MultiSelectFilter;
 use App\Filament\Resources\TranslatorResource\Pages;
+use App\Models\Translator;
+use Closure;
+use Filament\{Forms, Tables};
+use Filament\Forms\Components\BelongsToSelect;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Wizard;
 use Filament\Forms\Components\Wizard\Step;
-use Filament\Forms\Components\Section;
+use Filament\Resources\{Form, Resource, Table};
+use Filament\Tables\Filters\MultiSelectFilter;
+use Illuminate\Database\Eloquent\Builder;
 
 class TranslatorResource extends Resource
 {
@@ -242,7 +242,7 @@ class TranslatorResource extends Resource
             ]);
     }
 
-    public static function getNameFormField(): Forms\Components\TextInput
+    /*    public static function getNameFormField(): Forms\Components\TextInput
     {
         return TextInput::make('name')
             ->required()
@@ -256,7 +256,7 @@ class TranslatorResource extends Resource
             ->disabled()
             ->required()
             ->unique(Category::class, 'slug', fn($record) => $record);
-    }
+    }*/
 
     public static function table(Table $table): Table
     {
@@ -318,8 +318,8 @@ class TranslatorResource extends Resource
     public static function getRelations(): array
     {
         return [
-            TranslatorResource\RelationManagers\TasksRelationManager::class,
             TranslatorResource\RelationManagers\TranslatorPriceListsRelationManager::class,
+            TranslatorResource\RelationManagers\TasksRelationManager::class,
             TranslatorResource\RelationManagers\ContactsRelationManager::class,
         ];
     }

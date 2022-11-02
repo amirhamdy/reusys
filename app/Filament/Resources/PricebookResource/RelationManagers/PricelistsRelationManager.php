@@ -3,15 +3,14 @@
 namespace App\Filament\Resources\PricebookResource\RelationManagers;
 
 use Filament\Forms;
-use Filament\Tables;
-use Filament\Resources\{Form, Table};
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
-use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\BelongsToSelect;
-use Filament\Tables\Filters\MultiSelectFilter;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\TextInput;
+use Filament\Resources\{Form, Table};
 use Filament\Resources\RelationManagers\HasManyRelationManager;
+use Filament\Tables;
+use Filament\Tables\Filters\MultiSelectFilter;
+use Illuminate\Database\Eloquent\Builder;
 
 class PricelistsRelationManager extends HasManyRelationManager
 {
@@ -28,35 +27,35 @@ class PricelistsRelationManager extends HasManyRelationManager
                 BelongsToSelect::make('subject_matter_id')
                     ->rules(['required', 'exists:subject_matters,id'])
                     ->relationship('subjectMatter', 'name')
-                    ->searchable()
+                    ->searchable()->preload()
                     ->placeholder('Subject Matter')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                 BelongsToSelect::make('job_type_id')
                     ->rules(['required', 'exists:job_types,id'])
                     ->relationship('jobType', 'name')
-                    ->searchable()
+                    ->searchable()->preload()
                     ->placeholder('Job Type')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                 BelongsToSelect::make('job_unit_id')
                     ->rules(['required', 'exists:job_units,id'])
                     ->relationship('jobUnit', 'name')
-                    ->searchable()
+                    ->searchable()->preload()
                     ->placeholder('Job Unit')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                 BelongsToSelect::make('source_language_id')
                     ->rules(['required', 'exists:languages,id'])
                     ->relationship('sourceLanguage', 'name')
-                    ->searchable()
+                    ->searchable()->preload()
                     ->placeholder('Source Language')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                 BelongsToSelect::make('target_language_id')
                     ->rules(['required', 'exists:languages,id'])
                     ->relationship('targetLanguage', 'name')
-                    ->searchable()
+                    ->searchable()->preload()
                     ->placeholder('Target Language')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 

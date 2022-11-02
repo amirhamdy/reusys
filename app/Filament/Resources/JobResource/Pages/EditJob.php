@@ -72,7 +72,6 @@ class EditJob extends EditRecord
     {
         $project = Project::find($data['project_id']);
 
-//        $data['project_id'] = $project->name;
         $data['productline_id'] = $project->productline->name;
         $data['customer_id'] = $project->productline->customer->name;
 

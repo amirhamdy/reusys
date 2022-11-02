@@ -45,6 +45,8 @@ class TaskSeeder extends Seeder
                     'translator_id' => $t['resource_ID'],
                     'created_at' => $t['created_date'],
                     'updated_at' => $t['created_date'],
+                    'is_minimum_charge_used' => false,
+                    'is_free_task' => $t['task_cost'] == 0,
                 );
 
                 $data[] = $input;

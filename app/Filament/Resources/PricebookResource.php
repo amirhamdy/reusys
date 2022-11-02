@@ -2,17 +2,16 @@
 
 namespace App\Filament\Resources;
 
-use App\Models\Pricebook;
-use Filament\{Tables, Forms};
-use Filament\Resources\{Form, Table, Resource};
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Card;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
-use Illuminate\Database\Eloquent\Builder;
-use Filament\Forms\Components\BelongsToSelect;
-use Filament\Tables\Filters\MultiSelectFilter;
 use App\Filament\Resources\PricebookResource\Pages;
+use App\Models\Pricebook;
+use Filament\{Forms, Tables};
+use Filament\Forms\Components\BelongsToSelect;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\TextInput;
+use Filament\Resources\{Form, Resource, Table};
+use Filament\Tables\Filters\MultiSelectFilter;
+use Illuminate\Database\Eloquent\Builder;
 
 class PricebookResource extends Resource
 {
@@ -69,7 +68,7 @@ class PricebookResource extends Resource
                                 $data['created_from'],
                                 fn(
                                     Builder $query,
-                                    $date
+                                            $date
                                 ): Builder => $query->whereDate(
                                     'created_at',
                                     '>=',
@@ -80,7 +79,7 @@ class PricebookResource extends Resource
                                 $data['created_until'],
                                 fn(
                                     Builder $query,
-                                    $date
+                                            $date
                                 ): Builder => $query->whereDate(
                                     'created_at',
                                     '<=',
@@ -99,8 +98,8 @@ class PricebookResource extends Resource
     public static function getRelations(): array
     {
         return [
-            PricebookResource\RelationManagers\ProductlinesRelationManager::class,
             PricebookResource\RelationManagers\PricelistsRelationManager::class,
+            PricebookResource\RelationManagers\ProductlinesRelationManager::class,
         ];
     }
 
