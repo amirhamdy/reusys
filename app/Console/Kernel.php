@@ -16,6 +16,11 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        // Backups (to Google Drive)
+//        $schedule->command('backup:clean')->dailyAt('01:30');
+        $schedule->command('backup:run')->daily();
+        $schedule->command('backup:run --only-db')->everySixHours();
+//        $schedule->command("backup:run --only-db --only-to-disk=s3")->weeklyOn(6, '7:00');
     }
 
     /**
