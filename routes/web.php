@@ -53,7 +53,7 @@ Route::prefix('/')
     });
 
 Route::get('db_backup', function () {
-    Artisan::call('backup:run --only-db');
+    Artisan::call('backup:run --only-db --disable-notifications');
     dd("DB Backup done!");
 });
 
