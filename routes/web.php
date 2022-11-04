@@ -1,18 +1,19 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\JobController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\TaskController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\PortalController;
-use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\PricebookController;
-use App\Http\Controllers\TranslatorController;
-use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\ProductlineController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\OpportunityController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\PortalController;
+use App\Http\Controllers\PricebookController;
+use App\Http\Controllers\ProductlineController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\TranslatorController;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,3 +51,13 @@ Route::prefix('/')
         Route::resource('opportunities', OpportunityController::class);
         Route::resource('resources', TranslatorController::class);
     });
+
+Route::get('db_backup', function () {
+    Artisan::call('backup:run --only-db');
+    dd("DB Backup done!");
+});
+
+Route::get('full_backup', function () {
+    Artisan::call('backup:run');
+    dd("DB Backup done!");
+});
