@@ -125,7 +125,7 @@ return [
             'task_type_id' => 'Task Type',
             'task_unit_id' => 'Task Unit',
             'subject_matter_id' => 'Subject Matter',
-            'translator_id' => 'Translator',
+            'translator_id' => 'Resource',
             'amount' => 'Amount',
             'is_paid' => 'Is Paid',
             'status' => 'Status',
@@ -199,7 +199,7 @@ return [
             'cv' => 'Cv',
             'native_language' => 'Native Language',
             'second_language' => 'Second Language',
-            'translator_type_id' => 'Translator Type',
+            'translator_type_id' => 'Resource Type',
             'country_id' => 'Country',
             'currency_id' => 'Currency',
         ],
@@ -258,6 +258,21 @@ return [
         'show_title' => 'Show Permission',
         'inputs' => [
             'name' => 'Name',
+        ],
+    ],
+
+    'banks' => [
+        'name' => 'Banks',
+        'index_title' => 'Banks List',
+        'new_title' => 'New Bank',
+        'create_title' => 'Create Bank',
+        'edit_title' => 'Edit Bank',
+        'show_title' => 'Show Bank',
+        'inputs' => [
+            'name' => 'Name',
+            'account_number' => 'Account Number',
+            'routing_number' => 'Routing Number',
+            'country_id' => 'Country',
         ],
     ],
 ];

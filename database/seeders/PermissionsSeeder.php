@@ -4,8 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 
 class PermissionsSeeder extends Seeder
@@ -178,6 +178,12 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'update translatortypes']);
         Permission::create(['name' => 'delete translatortypes']);
 
+//        Permission::create(['name' => 'list banks']);
+//        Permission::create(['name' => 'view banks']);
+//        Permission::create(['name' => 'create banks']);
+//        Permission::create(['name' => 'update banks']);
+//        Permission::create(['name' => 'delete banks']);
+
         // Create user role and assign existing permissions
         $currentPermissions = Permission::all();
         $userRole = Role::create(['name' => 'user']);
@@ -202,6 +208,7 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'update users']);
         Permission::create(['name' => 'delete users']);
 
+        // TODO: remove super-user role form each user
         // Create admin role and assign all permissions
         $allPermissions = Permission::all();
         $adminRole = Role::create(['name' => 'super-admin']);

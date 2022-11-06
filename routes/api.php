@@ -1,31 +1,32 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\JobController;
-use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\RoleController;
-use App\Http\Controllers\Api\PortalController;
-use App\Http\Controllers\Api\ProjectController;
+use App\Http\Controllers\Api\BankController;
 use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\CustomerController;
-use App\Http\Controllers\Api\JobTasksController;
-use App\Http\Controllers\Api\PricebookController;
-use App\Http\Controllers\Api\TranslatorController;
-use App\Http\Controllers\Api\PermissionController;
-use App\Http\Controllers\Api\ProductlineController;
-use App\Http\Controllers\Api\ProjectJobsController;
-use App\Http\Controllers\Api\OpportunityController;
-use App\Http\Controllers\Api\TranslatorTasksController;
-use App\Http\Controllers\Api\TranslatorContactsController;
-use App\Http\Controllers\Api\ProductlineProjectsController;
-use App\Http\Controllers\Api\PricebookPricelistsController;
-use App\Http\Controllers\Api\TranslatorPriceListController;
 use App\Http\Controllers\Api\CustomerProductlinesController;
+use App\Http\Controllers\Api\JobController;
+use App\Http\Controllers\Api\JobTasksController;
+use App\Http\Controllers\Api\OpportunityController;
+use App\Http\Controllers\Api\PermissionController;
+use App\Http\Controllers\Api\PortalController;
+use App\Http\Controllers\Api\PricebookController;
+use App\Http\Controllers\Api\PricebookPricelistsController;
 use App\Http\Controllers\Api\PricebookProductlinesController;
+use App\Http\Controllers\Api\ProductlineController;
 use App\Http\Controllers\Api\ProductlineOpportunitiesController;
+use App\Http\Controllers\Api\ProductlineProjectsController;
+use App\Http\Controllers\Api\ProjectController;
+use App\Http\Controllers\Api\ProjectJobsController;
+use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\Api\TaskController;
+use App\Http\Controllers\Api\TranslatorContactsController;
+use App\Http\Controllers\Api\TranslatorController;
+use App\Http\Controllers\Api\TranslatorPriceListController;
+use App\Http\Controllers\Api\TranslatorTasksController;
 use App\Http\Controllers\Api\TranslatorTranslatorPriceListsController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -169,4 +170,7 @@ Route::name('api.')
             TranslatorContactsController::class,
             'store',
         ])->name('translators.contacts.store');
+
+        // Banks
+        Route::apiResource('banks', BankController::class);
     });
