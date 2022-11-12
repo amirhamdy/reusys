@@ -46,10 +46,10 @@ class DatabaseSeeder extends Seeder
         $this->call(SubjectMatterSeeder::class);
         $this->call(TranslatorTypeSeeder::class);
         $this->call(TranslatorSeeder::class);
-        $this->call(TranslatorPriceListSeeder::class);
         $this->call(TaskUnitSeeder::class);
         $this->call(TaskTypeSeeder::class);
         $this->call(TaskSeeder::class);
+        $this->call(TranslatorPriceListSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(PermissionsSeeder::class);
 //        $this->call(\SqlFileSeeder::class);

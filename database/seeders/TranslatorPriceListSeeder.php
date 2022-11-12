@@ -30,6 +30,9 @@ class TranslatorPriceListSeeder extends Seeder
 
                 unset($c['creator_ID']);
                 $c['updated_at'] = $c['created_at'];
+                if ($c['task_unit_id'] == 0) {
+                    $c['task_unit_id'] = 339;
+                }
 
                 $data[] = $c;
             }
