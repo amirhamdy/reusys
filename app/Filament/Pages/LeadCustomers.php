@@ -3,6 +3,7 @@
 namespace App\Filament\Pages;
 
 use App\Filament\Resources\CustomerResource;
+use App\Models\Customer;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -23,5 +24,10 @@ class LeadCustomers extends ListRecords
     protected function getTableQuery(): Builder
     {
         return parent::getTableQuery()->where('customer_status_id', '=', 1);
+    }
+
+    protected static function getNavigationBadge(): ?string
+    {
+        return Customer::where('customer_status_id', '=', 1)->count();
     }
 }

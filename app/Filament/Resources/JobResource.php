@@ -25,11 +25,11 @@ class JobResource extends Resource
 {
     protected static ?string $model = Job::class;
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 1;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    protected static ?string $navigationGroup = '  ';
+    protected static ?string $navigationGroup = 'Jobs';
 
     protected static ?string $recordTitleAttribute = 'name';
 

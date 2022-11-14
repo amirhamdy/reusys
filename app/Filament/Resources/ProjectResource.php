@@ -2,18 +2,18 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\ProjectResource\Pages;
 use App\Models\Customer;
 use App\Models\Project;
-use Filament\{Tables, Forms};
-use Filament\Resources\{Form, Table, Resource};
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Card;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\DatePicker;
-use Illuminate\Database\Eloquent\Builder;
+use Filament\{Forms, Tables};
 use Filament\Forms\Components\BelongsToSelect;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\TextInput;
+use Filament\Resources\{Form, Resource, Table};
 use Filament\Tables\Filters\MultiSelectFilter;
-use App\Filament\Resources\ProjectResource\Pages;
+use Illuminate\Database\Eloquent\Builder;
 
 class ProjectResource extends Resource
 {
@@ -23,7 +23,7 @@ class ProjectResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    protected static ?string $navigationGroup = '  ';
+    protected static ?string $navigationGroup = 'Projects';
 
     protected static ?string $recordTitleAttribute = 'name';
 

@@ -24,7 +24,7 @@ class TranslatorResource extends Resource
 
     protected static ?string $modelLabel = 'Resource';
 
-    protected static ?int $navigationSort = 9;
+    protected static ?int $navigationSort = 6;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
@@ -34,7 +34,7 @@ class TranslatorResource extends Resource
 
     protected static ?string $slug = 'resources';
 
-    protected static ?string $navigationGroup = '   ';
+    protected static ?string $navigationGroup = 'Resources';
 
     protected static ?string $recordTitleAttribute = 'name';
 

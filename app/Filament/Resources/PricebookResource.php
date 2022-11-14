@@ -17,13 +17,13 @@ class PricebookResource extends Resource
 {
     protected static ?string $model = Pricebook::class;
 
-    protected static ?int $navigationSort = 6;
+    protected static ?int $navigationSort = 7;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $navigationLabel = 'Price Books';
 
-    protected static ?string $navigationGroup = '   ';
+    protected static ?string $navigationGroup = 'Price Books';
 
     protected static ?string $recordTitleAttribute = 'name';
 

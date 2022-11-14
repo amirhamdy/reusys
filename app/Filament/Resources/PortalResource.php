@@ -2,24 +2,24 @@
 
 namespace App\Filament\Resources;
 
-use App\Models\Portal;
-use Filament\{Tables, Forms};
-use Filament\Resources\{Form, Table, Resource};
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Card;
-use Filament\Forms\Components\TextInput;
-use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\PortalResource\Pages;
+use App\Models\Portal;
+use Filament\{Forms, Tables};
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\TextInput;
+use Filament\Resources\{Form, Resource, Table};
+use Illuminate\Database\Eloquent\Builder;
 
 class PortalResource extends Resource
 {
     protected static ?string $model = Portal::class;
 
-    protected static ?int $navigationSort = 7;
+    protected static ?int $navigationSort = 8;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    protected static ?string $navigationGroup = '    ';
+    protected static ?string $navigationGroup = 'Portals';
 
     protected static ?string $recordTitleAttribute = 'name';
 

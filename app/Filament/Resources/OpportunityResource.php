@@ -2,29 +2,28 @@
 
 namespace App\Filament\Resources;
 
-use App\Models\Opportunity;
-use Filament\{Tables, Forms};
-use Filament\Resources\{Form, Table, Resource};
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Card;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\RichEditor;
-use Illuminate\Database\Eloquent\Builder;
-use Filament\Forms\Components\BelongsToSelect;
-use Filament\Tables\Filters\MultiSelectFilter;
 use App\Filament\Resources\OpportunityResource\Pages;
+use App\Models\Opportunity;
+use Filament\{Forms, Tables};
+use Filament\Forms\Components\BelongsToSelect;
+use Filament\Forms\Components\Card;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\TextInput;
+use Filament\Resources\{Form, Resource, Table};
+use Filament\Tables\Filters\MultiSelectFilter;
+use Illuminate\Database\Eloquent\Builder;
 
 class OpportunityResource extends Resource
 {
     protected static ?string $model = Opportunity::class;
 
-    protected static ?int $navigationSort = 8;
+    protected static ?int $navigationSort = 9;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    protected static ?string $navigationGroup = '    ';
+    protected static ?string $navigationGroup = 'Opportunities';
 
     protected static ?string $recordTitleAttribute = 'name';
 
