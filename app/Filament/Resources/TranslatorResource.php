@@ -22,6 +22,8 @@ class TranslatorResource extends Resource
 {
     protected static ?string $model = Translator::class;
 
+    protected static ?string $modelLabel = 'Resource';
+
     protected static ?int $navigationSort = 9;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
