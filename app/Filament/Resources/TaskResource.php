@@ -10,7 +10,7 @@ use App\Models\Project;
 use App\Models\Task;
 use App\Models\TranslatorPriceList;
 use Closure;
-use Filament\{Forms, Forms\Components\Toggle, Notifications\Actions\Action, Notifications\Notification, Tables};
+use Filament\{Forms\Components\Toggle, Notifications\Actions\Action, Notifications\Notification, Tables};
 use Filament\Forms\Components\BelongsToSelect;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\DatePicker;
@@ -20,7 +20,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\{Form, Resource, Table};
 use Filament\Tables\Filters\MultiSelectFilter;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
 class TaskResource extends Resource
 {
@@ -45,14 +45,16 @@ class TaskResource extends Resource
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                     BelongsToSelect::make('customer_id')
+                        ->hiddenOn(['view', 'edit'])
                         ->rules(['required', 'exists:customers,id'])
                         ->options(Customer::all()->pluck('name', 'id'))->preload()
                         ->searchable()->disablePlaceholderSelection()
                         ->placeholder('Customer')->label('Customer')
                         ->afterStateUpdated(fn(callable $set) => $set('productline_id', null))->reactive()
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     BelongsToSelect::make('productline_id')
+                        ->hiddenOn(['view', 'edit'])
                         ->rules(['required', 'exists:productlines,id'])
                         ->options(function (callable $get) {
                             $customer = Customer::find($get('customer_id'));
@@ -62,9 +64,10 @@ class TaskResource extends Resource
                         ->searchable()
                         ->placeholder('Productline')->label('Productline')
                         ->afterStateUpdated(fn(callable $set) => $set('project_id', null))->reactive()
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     BelongsToSelect::make('project_id')
+                        ->hiddenOn(['view', 'edit'])
                         ->rules(['required', 'exists:projects,id'])
                         ->options(function (callable $get) {
                             $productline = Productline::find($get('productline_id'));
@@ -73,10 +76,11 @@ class TaskResource extends Resource
                         })->preload()
                         ->searchable()->reactive()
                         ->placeholder('Project')->label('Project')
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6])
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4])
                         ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
 
                     BelongsToSelect::make('job_id')
+                        ->hiddenOn(['view', 'edit'])
                         ->rules(['required', 'exists:jobs,id'])
                         ->options(function (callable $get) {
                             $project = Project::find($get('project_id'));
@@ -86,7 +90,7 @@ class TaskResource extends Resource
                         ->searchable()->preload()
                         ->placeholder('Job')->label('Job')
                         ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get))->reactive()
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                     DatePicker::make('start_date')
                         ->rules(['required', 'date'])
@@ -140,16 +144,16 @@ class TaskResource extends Resource
 
                     Select::make('is_paid')
                         ->label('Payment Status')
-                        ->rules(['required', 'in:paid,not paid,waived cost'])
+                        ->rules(['required', 'in:Paid,Not Paid,Waived Cost'])
                         ->searchable()
-                        ->options(['paid' => 'Paid', 'not paid' => 'Not paid', 'waived cost' => 'Waived cost'])
+                        ->options(['Paid' => 'Paid', 'Not Paid' => 'Not Paid', 'Waived Cost' => 'Waived Cost'])
                         ->placeholder('Payment Status')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     Select::make('status')
-                        ->rules(['required', 'in:not started,in progress,completed',])
+                        ->rules(['required', 'in:Not Started,In Progress,Completed',])
                         ->searchable()
-                        ->options(['not started' => 'Not started', 'in progress' => 'In progress', 'completed' => 'Completed'])
+                        ->options(['Not Started' => 'Not Started', 'In Progress' => 'In Progress', 'Completed' => 'Completed'])
                         ->placeholder('Status')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
@@ -275,58 +279,65 @@ class TaskResource extends Resource
                 ])->searchable()->sortable()->toggleable(),
             ])
             ->filters([
-                Tables\Filters\Filter::make('created_at')
-                    ->form([
-                        Forms\Components\DatePicker::make('created_from'),
-                        Forms\Components\DatePicker::make('created_until'),
-                    ])
-                    ->query(function (Builder $query, array $data): Builder {
-                        return $query
-                            ->when(
-                                $data['created_from'],
-                                fn(
-                                    Builder $query,
-                                            $date
-                                ): Builder => $query->whereDate(
-                                    'created_at',
-                                    '>=',
-                                    $date
-                                )
-                            )
-                            ->when(
-                                $data['created_until'],
-                                fn(
-                                    Builder $query,
-                                            $date
-                                ): Builder => $query->whereDate(
-                                    'created_at',
-                                    '<=',
-                                    $date
-                                )
-                            );
-                    }),
+                MultiSelectFilter::make('job_id')
+                    ->relationship('job', 'name')
+                    ->label('Job'),
 
-                MultiSelectFilter::make('job_id')->relationship('job', 'name'),
+                MultiSelectFilter::make('task_type_id')
+                    ->relationship('taskType', 'name')
+                    ->label('Taks Type'),
 
-                MultiSelectFilter::make('task_type_id')->relationship(
-                    'taskType',
-                    'name'
-                ),
-
-                MultiSelectFilter::make('task_unit_id')->relationship(
-                    'taskUnit',
-                    'name'
-                ),
-
-                MultiSelectFilter::make('subject_matter_id')->relationship(
-                    'subjectMatter',
-                    'name'
-                ),
+                MultiSelectFilter::make('task_unit_id')
+                    ->relationship('taskUnit', 'name')
+                    ->label('Task Unit'),
 
                 MultiSelectFilter::make('translator_id')->relationship(
                     'translator',
                     'name'
-                ),
+                )->label('Resource'),
+            ])
+            ->actions([
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\ViewAction::make(),
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\DeleteAction::make(),
+                    Tables\Actions\Action::make('markAsPaid')
+                        ->label('Mark as Paid')->color('success')
+                        ->requiresConfirmation()
+                        ->modalHeading('Mark Task as Paid')
+                        ->modalSubheading('Are you sure you\'d like to mark this task as paid?')
+                        ->modalButton('Yes')
+                        ->icon('heroicon-s-pencil')
+                        ->action(function (Task $record): void {
+                            $record->is_paid = 'Paid';
+                            $record->save();
+                        })
+                ]),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkAction::make('delete')
+                    ->action(fn(Collection $records) => $records->each->delete())
+                    ->deselectRecordsAfterCompletion()
+                    ->requiresConfirmation()
+                    ->color('danger')
+                    ->icon('heroicon-o-trash')
+                    ->modalHeading('Delete Tasks')
+                    ->modalSubheading('Are you sure you\'d like to delete these tasks? This can\'t be undone.')
+                    ->modalButton('Yes, Delete'),
+                Tables\Actions\BulkAction::make('markAsPaid')
+                    ->label('Mark as Paid')->color('success')
+                    ->deselectRecordsAfterCompletion()
+                    ->requiresConfirmation()
+                    ->icon('heroicon-s-pencil')
+                    ->modalHeading('Mark Task as Paid')
+                    ->modalSubheading('Are you sure you\'d like to mark this task as paid?')
+                    ->modalButton('Yes')
+                    ->action(function (Collection $records): void {
+                        foreach ($records as $record) {
+                            $record->is_paid = 'Paid';
+                            $record->save();
+                        }
+                    })
             ]);
     }
 
@@ -344,6 +355,11 @@ class TaskResource extends Resource
             'edit' => Pages\EditTask::route('/{record}/edit'),
         ];
     }
+
+//    public function openMarkPaidModal(): void
+//    {
+//        $this->dispatchBrowserEvent('open-mark-paid-modal');
+//    }
 
     //    protected static function getNavigationBadge(): ?string
 //    {
