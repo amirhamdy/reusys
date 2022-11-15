@@ -3,7 +3,6 @@
 namespace App\Filament\Pages;
 
 use App\Filament\Resources\TaskResource;
-use App\Models\Task;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -26,8 +25,8 @@ class NotPaidTasks extends ListRecords
         return parent::getTableQuery()->where('is_paid', '=', 'Not Paid');
     }
 
-    protected static function getNavigationBadge(): ?string
-    {
-        return Task::where('is_paid', '=', 'Not Paid')->count();
-    }
+//    protected static function getNavigationBadge(): ?string
+//    {
+//        return Task::where('is_paid', '=', 'Not Paid')->count();
+//    }
 }

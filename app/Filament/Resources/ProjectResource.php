@@ -143,8 +143,8 @@ class ProjectResource extends Resource
         ];
     }
 
-    protected static function getNavigationBadge(): ?string
-    {
-        return static::getModel()::count();
-    }
+    //    protected static function getNavigationBadge(): ?string
+//    {
+//        return static::getModel()::count();
+//    }
 }

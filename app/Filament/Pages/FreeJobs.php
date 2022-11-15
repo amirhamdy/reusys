@@ -26,10 +26,10 @@ class FreeJobs extends ListRecords
         return parent::getTableQuery()->where('cost', '=', 0);
     }
 
-    protected static function getNavigationBadge(): ?string
-    {
-        return Job::where('cost', '=', 0)->count();
-    }
+//    protected static function getNavigationBadge(): ?string
+//    {
+//        return Job::where('cost', '=', 0)->count();
+//    }
 
     protected static function getNavigationBadgeColor(): ?string
     {
