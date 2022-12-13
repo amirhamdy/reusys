@@ -259,6 +259,7 @@ class TaskResource extends Resource
                 Tables\Columns\TextColumn::make('subjectMatter.name')->limit(30)->sortable()->toggleable(),
                 Tables\Columns\TextColumn::make('translator.name')->limit(30)->label('Resource')->searchable()->sortable()->toggleable(),
                 Tables\Columns\TextColumn::make('amount')->toggleable(),
+                Tables\Columns\TextColumn::make('cost')->toggleable(),
                 Tables\Columns\BadgeColumn::make('is_paid')->enum([
                     'Paid' => 'Paid',
                     'Not Paid' => 'Not paid',
