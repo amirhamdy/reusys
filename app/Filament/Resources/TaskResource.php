@@ -183,6 +183,7 @@ class TaskResource extends Resource
                 ),
                 Tables\Columns\TextColumn::make('translator.name')->limit(50),
                 Tables\Columns\TextColumn::make('amount'),
+                Tables\Columns\TextColumn::make('cost'),
                 Tables\Columns\TextColumn::make('is_paid')->enum([
                     'Paid' => 'Paid',
                     'Not Paid' => 'Not paid',
