@@ -139,17 +139,7 @@ class JobResource extends Resource
                         ->reactive()
                         ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
                 ]),
-            ])->columns(2)->columnSpan(['lg' => fn(?Job $record) => $record === null ? 3 : 2]),
-
-            Card::make()->schema([
-                Forms\Components\Placeholder::make('created_at')
-                    ->label('Created at')
-                    ->content(fn(Job $record): string => $record->created_at->diffForHumans()),
-
-                Forms\Components\Placeholder::make('updated_at')
-                    ->label('Last modified at')
-                    ->content(fn(Job $record): string => $record->updated_at->diffForHumans()),
-            ])->columnSpan(['lg' => 1])->hidden(fn(?Job $record) => $record === null),
+            ]),
         ])->columns(3);
     }
 
