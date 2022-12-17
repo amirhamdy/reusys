@@ -17,3 +17,5 @@ yarn-error.log
 /database/dump/data.php
 /database/dump/reutrans_reusys.sql
 /database/seeders/SqlFileSeeder.php
+
+laradock
