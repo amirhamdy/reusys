@@ -45,7 +45,7 @@ class JobResource extends Resource
 
                     BelongsToSelect::make('customer_id')
                         ->rules(['required', 'exists:customers,id'])
-                        ->options(Customer::all()->pluck('name', 'id'))->preload()
+                        ->options(Customer::all()->where('customer_status_id', '3')->pluck('name', 'id'))->preload()
                         ->searchable()->disablePlaceholderSelection()
                         ->placeholder('Customer')->label('Customer')
                         ->reactive()

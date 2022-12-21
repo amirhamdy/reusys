@@ -47,7 +47,7 @@ class TaskResource extends Resource
                     BelongsToSelect::make('customer_id')
                         ->hiddenOn(['view', 'edit'])
                         ->rules(['required', 'exists:customers,id'])
-                        ->options(Customer::all()->pluck('name', 'id'))->preload()
+                        ->options(Customer::all()->where('customer_status_id', '3')->pluck('name', 'id'))->preload()
                         ->searchable()->disablePlaceholderSelection()
                         ->placeholder('Customer')->label('Customer')
                         ->afterStateUpdated(fn(callable $set) => $set('productline_id', null))->reactive()
