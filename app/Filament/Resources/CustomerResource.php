@@ -33,17 +33,17 @@ class CustomerResource extends Resource
             Card::make()->schema([
                 Grid::make(['default' => 0])->schema([
                     TextInput::make('name')
-                        ->rules(['required', 'max:255', 'string'])
+                        ->rules(['required', 'max:255', 'string'])->required()
                         ->placeholder('Name')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                     TextInput::make('phone')
-                        ->rules(['required', 'max:255', 'string'])
+                        ->rules(['required', 'max:255', 'string'])->required()
                         ->placeholder('Phone')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     TextInput::make('email')
-                        ->rules(['required', 'email'])
+                        ->rules(['required', 'email'])->required()
                         ->email()
                         ->placeholder('Email')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
@@ -79,35 +79,35 @@ class CustomerResource extends Resource
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     BelongsToSelect::make('customer_status_id')
-                        ->rules(['required', 'exists:customer_statuses,id'])
+                        ->rules(['required', 'exists:customer_statuses,id'])->required()
                         ->relationship('customerStatus', 'name')->preload()
                         ->searchable()
                         ->placeholder('Customer Status')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     BelongsToSelect::make('country_id')
-                        ->rules(['required', 'exists:countries,id'])
+                        ->rules(['required', 'exists:countries,id'])->required()
                         ->relationship('country', 'name')->preload()
                         ->searchable()
                         ->placeholder('Country')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     BelongsToSelect::make('region_id')
-                        ->rules(['required', 'exists:regions,id'])
+                        ->rules(['required', 'exists:regions,id'])->required()
                         ->relationship('region', 'name')->preload()
                         ->searchable()
                         ->placeholder('Region')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     BelongsToSelect::make('customer_rating_id')
-                        ->rules(['required', 'exists:customer_ratings,id'])
+                        ->rules(['required', 'exists:customer_ratings,id'])->required()
                         ->relationship('customerRating', 'name')->preload()
                         ->searchable()
                         ->placeholder('Customer Rating')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     BelongsToSelect::make('industry_id')
-                        ->rules(['required', 'exists:industries,id'])
+                        ->rules(['required', 'exists:industries,id'])->required()
                         ->relationship('industry', 'name')->preload()
                         ->searchable()
                         ->placeholder('Industry')

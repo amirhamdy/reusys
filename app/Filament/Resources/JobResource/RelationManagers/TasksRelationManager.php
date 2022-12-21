@@ -33,22 +33,22 @@ class TasksRelationManager extends HasManyRelationManager
         return $form->schema([
                 Grid::make(['default' => 0])->schema([
                     TextInput::make('name')
-                        ->rules(['required', 'max:255', 'string'])
+                        ->rules(['required', 'max:255', 'string'])->required()
                         ->placeholder('Name')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                     DatePicker::make('start_date')
-                        ->rules(['required', 'date'])
+                        ->rules(['required', 'date'])->required()
                         ->placeholder('Start Date')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     DatePicker::make('delivery_date')
-                        ->rules(['required', 'date'])
+                        ->rules(['required', 'date'])->required()
                         ->placeholder('Delivery Date')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     BelongsToSelect::make('task_type_id')
-                        ->rules(['required', 'exists:task_types,id'])
+                        ->rules(['required', 'exists:task_types,id'])->required()
                         ->relationship('taskType', 'name')->preload()
                         ->searchable()->preload()
                         ->placeholder('Task Type')
@@ -56,7 +56,7 @@ class TasksRelationManager extends HasManyRelationManager
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     BelongsToSelect::make('task_unit_id')
-                        ->rules(['required', 'exists:task_units,id'])
+                        ->rules(['required', 'exists:task_units,id'])->required()
                         ->relationship('taskUnit', 'name')->preload()
                         ->searchable()->preload()
                         ->placeholder('Task Unit')
@@ -64,7 +64,7 @@ class TasksRelationManager extends HasManyRelationManager
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     BelongsToSelect::make('subject_matter_id')
-                        ->rules(['required', 'exists:subject_matters,id'])
+                        ->rules(['required', 'exists:subject_matters,id'])->required()
                         ->relationship('subjectMatter', 'name')->preload()
                         ->searchable()->preload()
                         ->placeholder('Subject Matter')
@@ -73,7 +73,7 @@ class TasksRelationManager extends HasManyRelationManager
 
                     BelongsToSelect::make('translator_id')
                         ->label('Resource')
-                        ->rules(['required', 'exists:translators,id'])
+                        ->rules(['required', 'exists:translators,id'])->required()
                         ->relationship('translator', 'name')->preload()
                         ->searchable()->preload()
                         ->placeholder('Resource')
@@ -81,7 +81,7 @@ class TasksRelationManager extends HasManyRelationManager
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     TextInput::make('amount')
-                        ->rules(['required', 'numeric'])
+                        ->rules(['required', 'numeric'])->required()
                         ->numeric()
                         ->placeholder('Amount')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4])
@@ -89,14 +89,14 @@ class TasksRelationManager extends HasManyRelationManager
 
                     Select::make('is_paid')
                         ->label('Payment Status')
-                        ->rules(['required', 'in:Paid,Not Paid,Waived Cost'])
+                        ->rules(['required', 'in:Paid,Not Paid,Waived Cost'])->required()
                         ->searchable()
                         ->options(['Paid' => 'Paid', 'Not Paid' => 'Not Paid', 'Waived Cost' => 'Waived Cost'])
                         ->placeholder('Payment Status')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     Select::make('status')
-                        ->rules(['required', 'in:Not Started,In Progress,Completed',])
+                        ->rules(['required', 'in:Not Started,In Progress,Completed',])->required()
                         ->searchable()
                         ->options(['Not Started' => 'Not Started', 'In Progress' => 'In Progress', 'Completed' => 'Completed'])
                         ->placeholder('Status')
@@ -104,7 +104,7 @@ class TasksRelationManager extends HasManyRelationManager
 
                     TextInput::make('cost')
                         ->hint('This is a calculated not editable cost depending on your selections.')
-                        ->rules(['required', 'numeric'])
+                        ->rules(['required', 'numeric'])->required()
                         ->numeric()->disabled()
                         ->placeholder('This is a calculated not editable cost depending on your selections')
                         ->default(null)
@@ -112,13 +112,13 @@ class TasksRelationManager extends HasManyRelationManager
 
                     Toggle::make('is_free_task')
                         ->label('Mark as a free task')
-                        ->rules(['required', 'boolean'])
+                        ->rules(['required', 'boolean'])->required()
                         ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire))->reactive()
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     Toggle::make('is_minimum_charge_used')
                         ->label('Apply minimum charge for this job')
-                        ->rules(['required', 'boolean'])
+                        ->rules(['required', 'boolean'])->required()
                         ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire))->reactive()
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 

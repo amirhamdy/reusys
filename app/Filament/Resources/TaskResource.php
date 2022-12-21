@@ -40,13 +40,13 @@ class TaskResource extends Resource
             Card::make()->schema([
                 Grid::make(['default' => 0])->schema([
                     TextInput::make('name')
-                        ->rules(['required', 'max:255', 'string'])
+                        ->rules(['required', 'max:255', 'string'])->required()
                         ->placeholder('Name')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                     BelongsToSelect::make('customer_id')
                         ->hiddenOn(['view', 'edit'])
-                        ->rules(['required', 'exists:customers,id'])
+                        ->rules(['required', 'exists:customers,id'])->required()
                         ->options(Customer::all()->where('customer_status_id', '3')->pluck('name', 'id'))->preload()
                         ->searchable()->disablePlaceholderSelection()
                         ->placeholder('Customer')->label('Customer')
@@ -55,7 +55,7 @@ class TaskResource extends Resource
 
                     BelongsToSelect::make('productline_id')
                         ->hiddenOn(['view', 'edit'])
-                        ->rules(['required', 'exists:productlines,id'])
+                        ->rules(['required', 'exists:productlines,id'])->required()
                         ->options(function (callable $get) {
                             $customer = Customer::find($get('customer_id'));
                             if ($customer) return $customer->productlines->pluck('name', 'id');
@@ -68,7 +68,7 @@ class TaskResource extends Resource
 
                     BelongsToSelect::make('project_id')
                         ->hiddenOn(['view', 'edit'])
-                        ->rules(['required', 'exists:projects,id'])
+                        ->rules(['required', 'exists:projects,id'])->required()
                         ->options(function (callable $get) {
                             $productline = Productline::find($get('productline_id'));
                             if ($productline) return $productline->projects->pluck('name', 'id');
@@ -81,7 +81,7 @@ class TaskResource extends Resource
 
                     BelongsToSelect::make('job_id')
                         ->hiddenOn(['view', 'edit'])
-                        ->rules(['required', 'exists:jobs,id'])
+                        ->rules(['required', 'exists:jobs,id'])->required()
                         ->options(function (callable $get) {
                             $project = Project::find($get('project_id'));
                             if ($project) return $project->jobs->pluck('name', 'id');
@@ -93,17 +93,17 @@ class TaskResource extends Resource
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                     DatePicker::make('start_date')
-                        ->rules(['required', 'date'])
+                        ->rules(['required', 'date'])->required()
                         ->placeholder('Start Date')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     DatePicker::make('delivery_date')
-                        ->rules(['required', 'date'])
+                        ->rules(['required', 'date'])->required()
                         ->placeholder('Delivery Date')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     BelongsToSelect::make('task_type_id')
-                        ->rules(['required', 'exists:task_types,id'])
+                        ->rules(['required', 'exists:task_types,id'])->required()
                         ->relationship('taskType', 'name')->preload()
                         ->searchable()->preload()
                         ->placeholder('Task Type')
@@ -111,7 +111,7 @@ class TaskResource extends Resource
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     BelongsToSelect::make('task_unit_id')
-                        ->rules(['required', 'exists:task_units,id'])
+                        ->rules(['required', 'exists:task_units,id'])->required()
                         ->relationship('taskUnit', 'name')->preload()
                         ->searchable()->preload()
                         ->placeholder('Task Unit')
@@ -119,7 +119,7 @@ class TaskResource extends Resource
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     BelongsToSelect::make('subject_matter_id')
-                        ->rules(['required', 'exists:subject_matters,id'])
+                        ->rules(['required', 'exists:subject_matters,id'])->required()
                         ->relationship('subjectMatter', 'name')->preload()
                         ->searchable()->preload()
                         ->placeholder('Subject Matter')
@@ -128,7 +128,7 @@ class TaskResource extends Resource
 
                     BelongsToSelect::make('translator_id')
                         ->label('Resource')
-                        ->rules(['required', 'exists:translators,id'])
+                        ->rules(['required', 'exists:translators,id'])->required()
                         ->relationship('translator', 'name')->preload()
                         ->searchable()->preload()
                         ->placeholder('Resource')
@@ -136,7 +136,7 @@ class TaskResource extends Resource
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     TextInput::make('amount')
-                        ->rules(['required', 'numeric'])
+                        ->rules(['required', 'numeric'])->required()
                         ->numeric()
                         ->placeholder('Amount')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4])
@@ -144,14 +144,14 @@ class TaskResource extends Resource
 
                     Select::make('is_paid')
                         ->label('Payment Status')
-                        ->rules(['required', 'in:Paid,Not Paid,Waived Cost'])
+                        ->rules(['required', 'in:Paid,Not Paid,Waived Cost'])->required()
                         ->searchable()
                         ->options(['Paid' => 'Paid', 'Not Paid' => 'Not Paid', 'Waived Cost' => 'Waived Cost'])
                         ->placeholder('Payment Status')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     Select::make('status')
-                        ->rules(['required', 'in:Not Started,In Progress,Completed',])
+                        ->rules(['required', 'in:Not Started,In Progress,Completed',])->required()
                         ->searchable()
                         ->options(['Not Started' => 'Not Started', 'In Progress' => 'In Progress', 'Completed' => 'Completed'])
                         ->placeholder('Status')
@@ -159,7 +159,7 @@ class TaskResource extends Resource
 
                     TextInput::make('cost')
                         ->hint('This is a calculated not editable cost depending on your selections.')
-                        ->rules(['required', 'numeric'])
+                        ->rules(['required', 'numeric'])->required()
                         ->numeric()->disabled()
                         ->placeholder('This is a calculated not editable cost depending on your selections')
                         ->default(null)
@@ -167,13 +167,13 @@ class TaskResource extends Resource
 
                     Toggle::make('is_free_task')
                         ->label('Mark as a free task')
-                        ->rules(['required', 'boolean'])
+                        ->rules(['required', 'boolean'])->required()
                         ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get))->reactive()
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     Toggle::make('is_minimum_charge_used')
                         ->label('Apply minimum charge for this job')
-                        ->rules(['required', 'boolean'])
+                        ->rules(['required', 'boolean'])->required()
                         ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get))->reactive()
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 

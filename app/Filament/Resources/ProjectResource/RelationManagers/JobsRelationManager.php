@@ -20,6 +20,7 @@ use Filament\Forms\Components\BelongsToSelect;
 use Filament\Tables\Filters\MultiSelectFilter;
 use Filament\Resources\RelationManagers\HasManyRelationManager;
 use Livewire\Component as Livewire;
+use Filament\Tables\Actions\CreateAction;
 
 class JobsRelationManager extends HasManyRelationManager
 {
@@ -32,12 +33,12 @@ class JobsRelationManager extends HasManyRelationManager
         return $form->schema([
                 Grid::make(['default' => 0])->schema([
                     TextInput::make('name')
-                        ->rules(['required', 'max:255', 'string'])
+                        ->rules(['required', 'max:255', 'string'])->required()
                         ->placeholder('Name')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                     BelongsToSelect::make('source_language_id')
-                        ->rules(['required', 'exists:languages,id'])
+                        ->rules(['required', 'exists:languages,id'])->required()
                         ->relationship('sourceLanguage', 'name')->preload()
                         ->searchable()->reactive()
                         ->placeholder('Source Language')
@@ -45,7 +46,7 @@ class JobsRelationManager extends HasManyRelationManager
                         ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire)),
 
                     BelongsToSelect::make('target_language_id')
-                        ->rules(['required', 'exists:languages,id'])
+                        ->rules(['required', 'exists:languages,id'])->required()
                         ->relationship('targetLanguage', 'name')->preload()
                         ->searchable()->reactive()
                         ->placeholder('Target Language')
@@ -53,7 +54,7 @@ class JobsRelationManager extends HasManyRelationManager
                         ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire)),
 
                     BelongsToSelect::make('job_type_id')
-                        ->rules(['required', 'exists:job_types,id'])
+                        ->rules(['required', 'exists:job_types,id'])->required()
                         ->relationship('jobType', 'name')->preload()
                         ->searchable()->reactive()
                         ->placeholder('Job Type')
@@ -61,7 +62,7 @@ class JobsRelationManager extends HasManyRelationManager
                         ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire)),
 
                     BelongsToSelect::make('job_unit_id')
-                        ->rules(['required', 'exists:job_units,id'])
+                        ->rules(['required', 'exists:job_units,id'])->required()
                         ->relationship('jobUnit', 'name')->preload()
                         ->searchable()->reactive()
                         ->placeholder('Job Unit')
@@ -69,7 +70,7 @@ class JobsRelationManager extends HasManyRelationManager
                         ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire)),
 
                     TextInput::make('amount')
-                        ->rules(['required', 'numeric'])
+                        ->rules(['required', 'numeric'])->required()
                         ->numeric()
                         ->placeholder('Amount')
                         ->default(1)
@@ -79,7 +80,7 @@ class JobsRelationManager extends HasManyRelationManager
 
                     TextInput::make('cost')
                         ->hint('This is a calculated not editable cost depending on your selections.')
-                        ->rules(['required', 'numeric'])
+                        ->rules(['required', 'numeric'])->required()
                         ->numeric()->disabled()
                         ->placeholder('This is a calculated not editable cost depending on your selections')
                         ->default(null)
@@ -87,14 +88,14 @@ class JobsRelationManager extends HasManyRelationManager
 
                     Toggle::make('is_free_job')
                         ->label('Mark as a free job')
-                        ->rules(['required', 'boolean'])
+                        ->rules(['required', 'boolean'])->required()
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6])
                         ->reactive()
                         ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire)),
 
                     Toggle::make('is_minimum_charge_used')
                         ->label('Apply minimum charge for this job')
-                        ->rules(['required', 'boolean'])
+                        ->rules(['required', 'boolean'])->required()
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6])
                         ->reactive()
                         ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire)),
@@ -243,5 +244,13 @@ class JobsRelationManager extends HasManyRelationManager
                     'name'
                 ),
             ]);
+//            ->appendActions([
+//                CreateAction::make()
+//                    ->after(function (array $data): array {
+//                        dd($data);
+//                        redirect(url('jobs'));
+//                        return $data;
+//                    })
+//            ]);
     }
 }

@@ -25,22 +25,22 @@ class ProjectsRelationManager extends HasManyRelationManager
         return $form->schema([
             Grid::make(['default' => 0])->schema([
                 TextInput::make('name')
-                    ->rules(['required', 'max:255', 'string'])
+                    ->rules(['required', 'max:255', 'string'])->required()
                     ->placeholder('Name')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                 DatePicker::make('start_date')
-                    ->rules(['required', 'date'])
+                    ->rules(['required', 'date'])->required()
                     ->placeholder('Start Date')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                 DatePicker::make('end_date')
-                    ->rules(['required', 'date'])
+                    ->rules(['required', 'date'])->required()
                     ->placeholder('End Date')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                 TextInput::make('po_number')
-                    ->rules(['required', 'max:255', 'string'])
+                    ->rules(['required', 'max:255', 'string'])->required()
                     ->placeholder('Po Number')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
             ]),

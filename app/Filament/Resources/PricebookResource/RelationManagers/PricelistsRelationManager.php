@@ -25,42 +25,42 @@ class PricelistsRelationManager extends HasManyRelationManager
         return $form->schema([
             Grid::make(['default' => 0])->schema([
                 BelongsToSelect::make('subject_matter_id')
-                    ->rules(['required', 'exists:subject_matters,id'])
+                    ->rules(['required', 'exists:subject_matters,id'])->required()
                     ->relationship('subjectMatter', 'name')
                     ->searchable()->preload()
                     ->placeholder('Subject Matter')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                 BelongsToSelect::make('job_type_id')
-                    ->rules(['required', 'exists:job_types,id'])
+                    ->rules(['required', 'exists:job_types,id'])->required()
                     ->relationship('jobType', 'name')
                     ->searchable()->preload()
                     ->placeholder('Job Type')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                 BelongsToSelect::make('job_unit_id')
-                    ->rules(['required', 'exists:job_units,id'])
+                    ->rules(['required', 'exists:job_units,id'])->required()
                     ->relationship('jobUnit', 'name')
                     ->searchable()->preload()
                     ->placeholder('Job Unit')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                 BelongsToSelect::make('source_language_id')
-                    ->rules(['required', 'exists:languages,id'])
+                    ->rules(['required', 'exists:languages,id'])->required()
                     ->relationship('sourceLanguage', 'name')
                     ->searchable()->preload()
                     ->placeholder('Source Language')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                 BelongsToSelect::make('target_language_id')
-                    ->rules(['required', 'exists:languages,id'])
+                    ->rules(['required', 'exists:languages,id'])->required()
                     ->relationship('targetLanguage', 'name')
                     ->searchable()->preload()
                     ->placeholder('Target Language')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                 TextInput::make('unit_price')
-                    ->rules(['required', 'numeric'])
+                    ->rules(['required', 'numeric'])->required()
                     ->numeric()
                     ->placeholder('Unit Price')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),

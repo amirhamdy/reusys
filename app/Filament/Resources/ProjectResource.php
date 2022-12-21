@@ -34,11 +34,11 @@ class ProjectResource extends Resource
                 Grid::make(['default' => 0])->schema([
                     TextInput::make('name')
                         ->rules(['required', 'max:255', 'string'])
-                        ->placeholder('Name')
+                        ->placeholder('Name')->required()
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                     BelongsToSelect::make('customer_id')
-                        ->rules(['required', 'exists:customers,id'])
+                        ->rules(['required', 'exists:customers,id'])->required()
                         ->options(Customer::all()->where('customer_status_id', '3')->pluck('name', 'id'))->preload()
                         ->searchable()->disablePlaceholderSelection()
                         ->placeholder('Customer')->label('Customer')
@@ -47,7 +47,7 @@ class ProjectResource extends Resource
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     BelongsToSelect::make('productline_id')
-                        ->rules(['required', 'exists:productlines,id'])
+                        ->rules(['required', 'exists:productlines,id'])->required()
                         ->options(function (callable $get) {
                             $customer = Customer::find($get('customer_id'));
                             if ($customer) return $customer->productlines->pluck('name', 'id');
@@ -58,19 +58,19 @@ class ProjectResource extends Resource
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     DatePicker::make('start_date')
-                        ->rules(['required', 'date'])
+                        ->rules(['required', 'date'])->required()
                         ->beforeOrEqual('end_date')
                         ->placeholder('Start Date')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     DatePicker::make('end_date')
-                        ->rules(['required', 'date'])
+                        ->rules(['required', 'date'])->required()
                         ->afterOrEqual('start_date')
                         ->placeholder('End Date')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     TextInput::make('po_number')
-                        ->rules(['required', 'max:255', 'string'])
+                        ->rules(['required', 'max:255', 'string'])->required()
                         ->placeholder('Po Number')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
                 ]),

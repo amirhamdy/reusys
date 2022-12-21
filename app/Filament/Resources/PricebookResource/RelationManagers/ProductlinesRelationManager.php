@@ -24,12 +24,12 @@ class ProductlinesRelationManager extends HasManyRelationManager
         return $form->schema([
             Grid::make(['default' => 0])->schema([
                 TextInput::make('name')
-                    ->rules(['required', 'max:255', 'string'])
+                    ->rules(['required', 'max:255', 'string'])->required()
                     ->placeholder('Name')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                 BelongsToSelect::make('customer_id')
-                    ->rules(['required', 'exists:customers,id'])
+                    ->rules(['required', 'exists:customers,id'])->required()
                     ->relationship('customer', 'name')
                     ->searchable()
                     ->placeholder('Customer')

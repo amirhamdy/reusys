@@ -57,7 +57,7 @@ class TranslatorResource extends Resource
                 Section::make('Select Resource Type')
                     ->schema([
                         BelongsToSelect::make('translator_type_id')
-                            ->rules(['required', 'exists:translator_types,id'])
+                            ->rules(['required', 'exists:translator_types,id'])->required()
                             ->relationship('translatorType', 'name')->preload()
                             ->searchable()->disableLabel()->reactive()
                             ->placeholder('Resource Type')
@@ -73,7 +73,7 @@ class TranslatorResource extends Resource
                 Section::make('Basic Details')
                     ->schema([
                         TextInput::make('name')
-                            ->rules(['required', 'max:255', 'string'])
+                            ->rules(['required', 'max:255', 'string'])->required()
                             ->placeholder('Name')
                             ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
@@ -174,7 +174,7 @@ class TranslatorResource extends Resource
                             ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                         BelongsToSelect::make('country_id')
-                            ->rules(['required', 'exists:countries,id'])
+                            ->rules(['required', 'exists:countries,id'])->required()
                             ->relationship('country', 'name')->preload()
                             ->searchable()
                             ->placeholder('Country')
@@ -183,7 +183,7 @@ class TranslatorResource extends Resource
                                 'lg' => 12,]),
 
                         BelongsToSelect::make('currency_id')
-                            ->rules(['required', 'exists:currencies,id'])
+                            ->rules(['required', 'exists:currencies,id'])->required()
                             ->relationship('currency', 'name')->preload()
                             ->searchable()
                             ->placeholder('Currency')
@@ -222,21 +222,21 @@ class TranslatorResource extends Resource
                                 'lg' => 12,]),
 
                         TextInput::make('payment_after')
-                            ->rules(['required', 'max:255', 'string'])
+                            ->rules(['required', 'max:255', 'string'])->required()
                             ->placeholder('Payment After')
                             ->columnSpan(['default' => 12,
                                 'md' => 12,
                                 'lg' => 12,]),
 
                         Toggle::make('nda')
-                            ->rules(['required', 'boolean'])
+                            ->rules(['required', 'boolean'])->required()
                             ->default('0')
                             ->columnSpan(['default' => 12,
                                 'md' => 12,
                                 'lg' => 12,]),
 
                         Toggle::make('cv')
-                            ->rules(['required', 'boolean'])
+                            ->rules(['required', 'boolean'])->required()
                             ->default('0')
                             ->columnSpan(['default' => 12,
                                 'md' => 12,

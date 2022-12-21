@@ -26,56 +26,56 @@ class TasksRelationManager extends HasManyRelationManager
         return $form->schema([
             Grid::make(['default' => 0])->schema([
                 TextInput::make('name')
-                    ->rules(['required', 'max:255', 'string'])
+                    ->rules(['required', 'max:255', 'string'])->required()
                     ->placeholder('Name')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                 BelongsToSelect::make('job_id')
-                    ->rules(['required', 'exists:jobs,id'])
+                    ->rules(['required', 'exists:jobs,id'])->required()
                     ->relationship('job', 'name')
                     ->searchable()
                     ->placeholder('Job')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                 DatePicker::make('start_date')
-                    ->rules(['required', 'date'])
+                    ->rules(['required', 'date'])->required()
                     ->placeholder('Start Date')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                 DatePicker::make('delivery_date')
-                    ->rules(['required', 'date'])
+                    ->rules(['required', 'date'])->required()
                     ->placeholder('Delivery Date')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                 BelongsToSelect::make('task_type_id')
-                    ->rules(['required', 'exists:task_types,id'])
+                    ->rules(['required', 'exists:task_types,id'])->required()
                     ->relationship('taskType', 'name')
                     ->searchable()
                     ->placeholder('Task Type')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                 BelongsToSelect::make('task_unit_id')
-                    ->rules(['required', 'exists:task_units,id'])
+                    ->rules(['required', 'exists:task_units,id'])->required()
                     ->relationship('taskUnit', 'name')
                     ->searchable()
                     ->placeholder('Task Unit')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                 BelongsToSelect::make('subject_matter_id')
-                    ->rules(['required', 'exists:subject_matters,id'])
+                    ->rules(['required', 'exists:subject_matters,id'])->required()
                     ->relationship('subjectMatter', 'name')
                     ->searchable()
                     ->placeholder('Subject Matter')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                 TextInput::make('amount')
-                    ->rules(['required', 'numeric'])
+                    ->rules(['required', 'numeric'])->required()
                     ->numeric()
                     ->placeholder('Amount')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                 Select::make('is_paid')
-                    ->rules(['required', 'in:paid,not paid,waived cost'])
+                    ->rules(['required', 'in:paid,not paid,waived cost'])->required()
                     ->searchable()
                     ->options([
                         'Paid' => 'Paid',

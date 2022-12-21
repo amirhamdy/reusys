@@ -39,12 +39,12 @@ class JobResource extends Resource
             Card::make()->schema([
                 Grid::make(['default' => 0])->schema([
                     TextInput::make('name')
-                        ->rules(['required', 'max:255', 'string'])
+                        ->rules(['required', 'max:255', 'string'])->required()
                         ->placeholder('Name')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                     BelongsToSelect::make('customer_id')
-                        ->rules(['required', 'exists:customers,id'])
+                        ->rules(['required', 'exists:customers,id'])->required()
                         ->options(Customer::all()->where('customer_status_id', '3')->pluck('name', 'id'))->preload()
                         ->searchable()->disablePlaceholderSelection()
                         ->placeholder('Customer')->label('Customer')
@@ -53,7 +53,7 @@ class JobResource extends Resource
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     BelongsToSelect::make('productline_id')
-                        ->rules(['required', 'exists:productlines,id'])
+                        ->rules(['required', 'exists:productlines,id'])->required()
                         ->options(function (callable $get) {
                             $customer = Customer::find($get('customer_id'));
                             if ($customer) return $customer->productlines->pluck('name', 'id');
@@ -65,7 +65,7 @@ class JobResource extends Resource
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     BelongsToSelect::make('project_id')
-                        ->rules(['required', 'exists:projects,id'])
+                        ->rules(['required', 'exists:projects,id'])->required()
                         ->options(function (callable $get) {
                             $select = Productline::find($get('productline_id'));
                             if ($select) return $select->projects->pluck('name', 'id');
@@ -77,7 +77,7 @@ class JobResource extends Resource
                         ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
 
                     BelongsToSelect::make('source_language_id')
-                        ->rules(['required', 'exists:languages,id'])
+                        ->rules(['required', 'exists:languages,id'])->required()
                         ->relationship('sourceLanguage', 'name')->preload()
                         ->searchable()->reactive()
                         ->placeholder('Source Language')
@@ -85,7 +85,7 @@ class JobResource extends Resource
                         ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
 
                     BelongsToSelect::make('target_language_id')
-                        ->rules(['required', 'exists:languages,id'])
+                        ->rules(['required', 'exists:languages,id'])->required()
                         ->relationship('targetLanguage', 'name')->preload()
                         ->searchable()->reactive()
                         ->placeholder('Target Language')
@@ -93,7 +93,7 @@ class JobResource extends Resource
                         ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
 
                     BelongsToSelect::make('job_type_id')
-                        ->rules(['required', 'exists:job_types,id'])
+                        ->rules(['required', 'exists:job_types,id'])->required()
                         ->relationship('jobType', 'name')->preload()
                         ->searchable()->reactive()
                         ->placeholder('Job Type')
@@ -101,7 +101,7 @@ class JobResource extends Resource
                         ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
 
                     BelongsToSelect::make('job_unit_id')
-                        ->rules(['required', 'exists:job_units,id'])
+                        ->rules(['required', 'exists:job_units,id'])->required()
                         ->relationship('jobUnit', 'name')->preload()
                         ->searchable()->reactive()
                         ->placeholder('Job Unit')
@@ -109,7 +109,7 @@ class JobResource extends Resource
                         ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
 
                     TextInput::make('amount')
-                        ->rules(['required', 'numeric'])
+                        ->rules(['required', 'numeric'])->required()
                         ->numeric()
                         ->placeholder('Amount')
                         ->default(1)
@@ -119,7 +119,7 @@ class JobResource extends Resource
 
                     TextInput::make('cost')
                         ->hint('This is a calculated not editable cost depending on your selections.')
-                        ->rules(['required', 'numeric'])
+                        ->rules(['required', 'numeric'])->required()
                         ->numeric()->disabled()
                         ->placeholder('This is a calculated not editable cost depending on your selections')
                         ->default(null)
@@ -127,14 +127,14 @@ class JobResource extends Resource
 
                     Toggle::make('is_free_job')
                         ->label('Mark as a free job')
-                        ->rules(['required', 'boolean'])
+                        ->rules(['required', 'boolean'])->required()
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6])
                         ->reactive()
                         ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
 
                     Toggle::make('is_minimum_charge_used')
                         ->label('Apply minimum charge for this job')
-                        ->rules(['required', 'boolean'])
+                        ->rules(['required', 'boolean'])->required()
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6])
                         ->reactive()
                         ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),

@@ -26,17 +26,17 @@ class ContactsRelationManager extends HasManyRelationManager
         return $form->schema([
             Grid::make(['default' => 0])->schema([
                 TextInput::make('name')
-                    ->rules(['required', 'max:255', 'string'])
+                    ->rules(['required', 'max:255', 'string'])->required()
                     ->placeholder('Name')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                 TextInput::make('phone')
-                    ->rules(['required', 'max:255', 'string'])
+                    ->rules(['required', 'max:255', 'string'])->required()
                     ->placeholder('Phone')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                 TextInput::make('email')
-                    ->rules(['required', 'email'])
+                    ->rules(['required', 'email'])->required()
                     ->email()
                     ->placeholder('Email')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
