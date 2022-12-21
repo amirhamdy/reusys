@@ -134,7 +134,7 @@ class OpportunityResource extends Resource
                 Tables\Columns\TextColumn::make('opportunityUnit.name')->limit(
                     50
                 ),
-            ])
+            ])->defaultSort('id', 'desc')
             ->filters([
                 Tables\Filters\Filter::make('created_at')
                     ->form([

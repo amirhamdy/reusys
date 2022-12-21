@@ -63,7 +63,7 @@ class ProductlineResource extends Resource
                 Tables\Columns\TextColumn::make('name')->limit(50)->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('pricebook.name')->limit(50)->sortable()->searchable()->toggleable(),
                 Tables\Columns\TextColumn::make('customer.name')->limit(50)->sortable()->searchable()->toggleable(),
-            ])
+            ])->defaultSort('id', 'desc')
             ->filters([
                 Tables\Filters\Filter::make('created_at')
                     ->form([

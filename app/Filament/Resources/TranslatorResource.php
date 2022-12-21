@@ -272,7 +272,7 @@ class TranslatorResource extends Resource
                 Tables\Columns\TextColumn::make('second_language')->limit(50)->toggleable(),
                 Tables\Columns\TextColumn::make('translatorType.name')->limit(50)->sortable()->toggleable(),
                 Tables\Columns\TextColumn::make('country.name')->limit(50)->toggleable(),
-            ])
+            ])->defaultSort('id', 'desc')
             ->filters([
                 Tables\Filters\Filter::make('created_at')
                     ->form([

@@ -61,7 +61,7 @@ class PortalResource extends Resource
                 Tables\Columns\TextColumn::make('url')->limit(30)->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('username')->limit(30)->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('password')->limit(30),
-            ])
+            ])->defaultSort('id', 'desc')
             ->filters([
                 Tables\Filters\Filter::make('created_at')
                     ->form([

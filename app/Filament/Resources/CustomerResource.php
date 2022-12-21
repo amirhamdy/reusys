@@ -129,7 +129,7 @@ class CustomerResource extends Resource
                 Tables\Columns\TextColumn::make('region.name')->limit(20)->sortable()->searchable()->toggleable(),
                 Tables\Columns\TextColumn::make('customerRating.name')->limit(20)->sortable()->label('Rating')->toggleable(),
                 Tables\Columns\TextColumn::make('industry.name')->limit(20)->sortable()->searchable()->toggleable(),
-            ])
+            ])->defaultSort('id', 'desc')
             ->filters([
                 Tables\Filters\Filter::make('created_at')
                     ->form([

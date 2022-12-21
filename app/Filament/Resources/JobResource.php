@@ -223,7 +223,7 @@ class JobResource extends Resource
                 Tables\Columns\TextColumn::make('amount')->toggleable(),
                 Tables\Columns\BooleanColumn::make('is_free_job')->toggleable(),
                 Tables\Columns\BooleanColumn::make('is_minimum_charge_used')->toggleable(),
-            ])
+            ])->defaultSort('id', 'desc')
             ->filters([
                 Tables\Filters\Filter::make('created_at')
                     ->form([

@@ -278,7 +278,7 @@ class TaskResource extends Resource
                     'warning' => 'In Progress',
                     'success' => 'Completed',
                 ])->searchable()->sortable()->toggleable(),
-            ])
+            ])->defaultSort('id', 'desc')
             ->filters([
                 MultiSelectFilter::make('job_id')
                     ->relationship('job', 'name')

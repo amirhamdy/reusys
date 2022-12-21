@@ -88,7 +88,7 @@ class ProjectResource extends Resource
                 Tables\Columns\TextColumn::make('end_date')->date()->toggleable(),
                 Tables\Columns\TextColumn::make('productline.name')->limit(50)->sortable()->searchable()->toggleable(),
                 Tables\Columns\TextColumn::make('po_number')->limit(50)->toggleable(),
-            ])
+            ])->defaultSort('id', 'desc')
             ->filters([
                 Tables\Filters\Filter::make('created_at')
                     ->form([
