@@ -4,6 +4,7 @@ namespace App\Filament\Resources\InvoiceResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Tables;
+use Filament\Tables\Actions\CreateAction;
 use Filament\Resources\{Form, Table};
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
@@ -112,7 +113,7 @@ class JobsRelationManager extends HasManyRelationManager
                                 $data['created_from'],
                                 fn(
                                     Builder $query,
-                                    $date
+                                            $date
                                 ): Builder => $query->whereDate(
                                     'created_at',
                                     '>=',
@@ -123,7 +124,7 @@ class JobsRelationManager extends HasManyRelationManager
                                 $data['created_until'],
                                 fn(
                                     Builder $query,
-                                    $date
+                                            $date
                                 ): Builder => $query->whereDate(
                                     'created_at',
                                     '<=',
@@ -156,6 +157,13 @@ class JobsRelationManager extends HasManyRelationManager
                     'jobUnit',
                     'name'
                 ),
+            ])
+            ->appendActions([
+                CreateAction::make()
+                    ->mutateFormDataUsing(function (array $data): array {
+                        $data['cost_usd'] = $data['cost'] * 20;
+                        return $data;
+                    })
             ]);
     }
 }

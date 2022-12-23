@@ -52,13 +52,13 @@ class LatestJobs extends BaseWidget
             Tables\Columns\TextColumn::make('targetLanguage.name')
                 ->searchable()
                 ->sortable(),
-            Tables\Columns\TextColumn::make('jobType.name')
-                ->searchable()
-                ->sortable(),
             Tables\Columns\TextColumn::make('amount')
                 ->searchable()
                 ->sortable(),
             Tables\Columns\TextColumn::make('jobUnit.name')
+                ->searchable()
+                ->sortable(),
+            Tables\Columns\TextColumn::make('cost')
                 ->searchable()
                 ->sortable(),
             Tables\Columns\BadgeColumn::make('amount')

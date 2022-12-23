@@ -36,6 +36,7 @@ class TaskSeeder extends Seeder
                     'is_paid' => $t['task_paid'] == 'waive' ? 'Waived Cost' : $t['task_paid'],
                     'status' => $t['task_status'],
                     'cost' => $t['task_cost'],
+                    'cost_usd' => $t['task_cost'] * 20,
                     'payment_date' => $t['task_payment_date'] != 'NULL' ? $t['task_payment_date'] : null,
                     'notes' => $t['task_note'],
                     'job_id' => $t['job_ID'],

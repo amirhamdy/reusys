@@ -2,10 +2,13 @@
 
 namespace App\Filament\Resources\JobResource\RelationManagers;
 
+use App\Mail\TaskCreated;
 use App\Models\Job;
+use App\Models\Translator;
 use App\Models\TranslatorPriceList;
 use Closure;
 use Filament\Forms;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component as Livewire;
 use Filament\Forms\Components\Toggle;
 use Filament\Notifications\Actions\Action;
@@ -21,6 +24,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\BelongsToSelect;
 use Filament\Tables\Filters\MultiSelectFilter;
 use Filament\Resources\RelationManagers\HasManyRelationManager;
+use Filament\Tables\Actions\CreateAction;
 
 class TasksRelationManager extends HasManyRelationManager
 {
@@ -31,102 +35,107 @@ class TasksRelationManager extends HasManyRelationManager
     public static function form(Form $form): Form
     {
         return $form->schema([
-                Grid::make(['default' => 0])->schema([
-                    TextInput::make('name')
-                        ->rules(['required', 'max:255', 'string'])->required()
-                        ->placeholder('Name')
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
+            Grid::make(['default' => 0])->schema([
+                TextInput::make('name')
+                    ->rules(['required', 'max:255', 'string'])->required()
+                    ->placeholder('Name')
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
-                    DatePicker::make('start_date')
-                        ->rules(['required', 'date'])->required()
-                        ->placeholder('Start Date')
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
+                DatePicker::make('start_date')
+                    ->rules(['required', 'date'])->required()
+                    ->placeholder('Start Date')
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
-                    DatePicker::make('delivery_date')
-                        ->rules(['required', 'date'])->required()
-                        ->placeholder('Delivery Date')
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
+                DatePicker::make('delivery_date')
+                    ->rules(['required', 'date'])->required()
+                    ->placeholder('Delivery Date')
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
-                    BelongsToSelect::make('task_type_id')
-                        ->rules(['required', 'exists:task_types,id'])->required()
-                        ->relationship('taskType', 'name')->preload()
-                        ->searchable()->preload()
-                        ->placeholder('Task Type')
-                        ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire))->reactive()
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
+                BelongsToSelect::make('task_type_id')
+                    ->rules(['required', 'exists:task_types,id'])->required()
+                    ->relationship('taskType', 'name')->preload()
+                    ->searchable()->preload()
+                    ->placeholder('Task Type')
+                    ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire))->reactive()
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
-                    BelongsToSelect::make('task_unit_id')
-                        ->rules(['required', 'exists:task_units,id'])->required()
-                        ->relationship('taskUnit', 'name')->preload()
-                        ->searchable()->preload()
-                        ->placeholder('Task Unit')
-                        ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire))->reactive()
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
+                BelongsToSelect::make('task_unit_id')
+                    ->rules(['required', 'exists:task_units,id'])->required()
+                    ->relationship('taskUnit', 'name')->preload()
+                    ->searchable()->preload()
+                    ->placeholder('Task Unit')
+                    ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire))->reactive()
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
-                    BelongsToSelect::make('subject_matter_id')
-                        ->rules(['required', 'exists:subject_matters,id'])->required()
-                        ->relationship('subjectMatter', 'name')->preload()
-                        ->searchable()->preload()
-                        ->placeholder('Subject Matter')
-                        ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire))->reactive()
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
+                BelongsToSelect::make('subject_matter_id')
+                    ->rules(['required', 'exists:subject_matters,id'])->required()
+                    ->relationship('subjectMatter', 'name')->preload()
+                    ->searchable()->preload()
+                    ->placeholder('Subject Matter')
+                    ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire))->reactive()
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
-                    BelongsToSelect::make('translator_id')
-                        ->label('Resource')
-                        ->rules(['required', 'exists:translators,id'])->required()
-                        ->relationship('translator', 'name')->preload()
-                        ->searchable()->preload()
-                        ->placeholder('Resource')
-                        ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire))->reactive()
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
+                BelongsToSelect::make('translator_id')
+                    ->label('Resource')
+                    ->rules(['required', 'exists:translators,id'])->required()
+                    ->relationship('translator', 'name')->preload()
+                    ->searchable()->preload()
+                    ->placeholder('Resource')
+                    ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire))->reactive()
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
-                    TextInput::make('amount')
-                        ->rules(['required', 'numeric'])->required()
-                        ->numeric()
-                        ->placeholder('Amount')
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4])
-                        ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire))->reactive(),
+                TextInput::make('amount')
+                    ->rules(['required', 'numeric'])->required()
+                    ->numeric()
+                    ->placeholder('Amount')
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4])
+                    ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire))->reactive(),
 
-                    Select::make('is_paid')
-                        ->label('Payment Status')
-                        ->rules(['required', 'in:Paid,Not Paid,Waived Cost'])->required()
-                        ->searchable()
-                        ->options(['Paid' => 'Paid', 'Not Paid' => 'Not Paid', 'Waived Cost' => 'Waived Cost'])
-                        ->placeholder('Payment Status')
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
+                Select::make('is_paid')
+                    ->label('Payment Status')
+                    ->rules(['required', 'in:Paid,Not Paid,Waived Cost'])->required()
+                    ->searchable()
+                    ->options(['Paid' => 'Paid', 'Not Paid' => 'Not Paid', 'Waived Cost' => 'Waived Cost'])
+                    ->placeholder('Payment Status')
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
-                    Select::make('status')
-                        ->rules(['required', 'in:Not Started,In Progress,Completed',])->required()
-                        ->searchable()
-                        ->options(['Not Started' => 'Not Started', 'In Progress' => 'In Progress', 'Completed' => 'Completed'])
-                        ->placeholder('Status')
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
+                Select::make('status')
+                    ->rules(['required', 'in:Not Started,In Progress,Completed',])->required()
+                    ->searchable()
+                    ->options(['Not Started' => 'Not Started', 'In Progress' => 'In Progress', 'Completed' => 'Completed'])
+                    ->placeholder('Status')
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
-                    TextInput::make('cost')
-                        ->hint('This is a calculated not editable cost depending on your selections.')
-                        ->rules(['required', 'numeric'])->required()
-                        ->numeric()->disabled()
-                        ->placeholder('This is a calculated not editable cost depending on your selections')
-                        ->default(null)
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
+                TextInput::make('cost')
+                    ->hint('This is a calculated not editable cost depending on your selections.')->hintColor('success')
+                    ->rules(['required', 'numeric'])->required()
+                    ->numeric()->disabled()
+                    ->placeholder('This is a calculated not editable cost depending on your selections')
+                    ->default(null)
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
-                    Toggle::make('is_free_task')
-                        ->label('Mark as a free task')
-                        ->rules(['required', 'boolean'])->required()
-                        ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire))->reactive()
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
+                Toggle::make('is_free_task')
+                    ->label('Mark as a free task')
+                    ->rules(['required', 'boolean'])->required()
+                    ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire))->reactive()
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
-                    Toggle::make('is_minimum_charge_used')
-                        ->label('Apply minimum charge for this job')
-                        ->rules(['required', 'boolean'])->required()
-                        ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire))->reactive()
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
+                Toggle::make('is_minimum_charge_used')
+                    ->label('Apply minimum charge for this job')
+                    ->rules(['required', 'boolean'])->required()
+                    ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire))->reactive()
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
-                    RichEditor::make('notes')
-                        ->rules(['nullable', 'max:255', 'string'])
-                        ->placeholder('Notes')
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
-                ]),
+                Toggle::make('send_po')
+                    ->label('Send P.O copy to the Resource?')
+                    ->rules(['boolean'])
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
+
+                RichEditor::make('notes')
+                    ->rules(['nullable', 'max:255', 'string'])
+                    ->placeholder('Notes')
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
+            ]),
         ]);
     }
 
@@ -148,7 +157,7 @@ class TasksRelationManager extends HasManyRelationManager
             } else {
                 $job = Job::where('id', $job_id)->first();
                 $currency = $job->project->productline->pricebook->currency;
-//dd($job_id ,$task_type_id ,$task_unit_id , $subject_matter_id , $translator_id , $amount, $currency, $job);
+                //dd($job_id ,$task_type_id ,$task_unit_id , $subject_matter_id , $translator_id , $amount, $currency, $job);
                 if (!$job) {
                     Notification::make()->warning()->title('Invalid job selected!')->body('Please select a valid job to continue.')->send();
                 }
@@ -173,9 +182,9 @@ class TasksRelationManager extends HasManyRelationManager
                 } else {
                     $cost = null;
 
-                    Notification::make()->warning()
+                    Notification::make()->warning()->duration(45)
                         ->title('No price-list found!')
-                        ->body('Please check the selected resource and make sure he has a valid price-list to continue.')
+//                        ->body('Please check the selected resource and make sure he has a valid price-list to continue.')
                         ->actions([
                             Action::make('Open resource page')
                                 ->button()
@@ -228,7 +237,7 @@ class TasksRelationManager extends HasManyRelationManager
                                 $data['created_from'],
                                 fn(
                                     Builder $query,
-                                    $date
+                                            $date
                                 ): Builder => $query->whereDate(
                                     'created_at',
                                     '>=',
@@ -239,7 +248,7 @@ class TasksRelationManager extends HasManyRelationManager
                                 $data['created_until'],
                                 fn(
                                     Builder $query,
-                                    $date
+                                            $date
                                 ): Builder => $query->whereDate(
                                     'created_at',
                                     '<=',
@@ -269,6 +278,24 @@ class TasksRelationManager extends HasManyRelationManager
                     'translator',
                     'name'
                 ),
+            ])
+            ->appendActions([
+                CreateAction::make()
+                    ->mutateFormDataUsing(function (array $data): array {
+                        $data['cost_usd'] = $data['cost'] * 20;
+                        return $data;
+                    })
+                    ->after(function (array $data): array {
+                        if ($data['send_po']) {
+                            $translator = Translator::find($data['translator_id']);
+                            // dd($translator->email);
+                            if ($translator->email) {
+                                Mail::to($translator->email)->send(new TaskCreated($translator->name));
+                            }
+                        }
+
+                        return $data;
+                    })
             ]);
     }
 }

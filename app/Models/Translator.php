@@ -30,6 +30,7 @@ class Translator extends Model
         'city',
         'postal_code',
         'payment_after',
+        'email',
         'nda',
         'cv',
         'native_language',
@@ -75,5 +76,10 @@ class Translator extends Model
     public function contacts()
     {
         return $this->hasMany(Contact::class);
+    }
+
+    public function firstPriceList()
+    {
+        return $this->hasOne(TranslatorPriceList::class);
     }
 }

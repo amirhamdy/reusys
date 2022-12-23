@@ -30,6 +30,7 @@ return new class extends Migration {
             $table->string('city')->nullable();
             $table->string('postal_code')->nullable();
             $table->string('payment_after');
+            $table->string('email')->nullable();
             $table->boolean('nda')->default(0);
             $table->boolean('cv')->default(0);
             $table->string('native_language')->nullable();

@@ -19,6 +19,7 @@ class Job extends Model
         'is_free_job',
         'is_minimum_charge_used',
         'cost',
+        'cost_usd',
         'project_id',
         'source_language_id',
         'target_language_id',

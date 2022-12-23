@@ -158,7 +158,7 @@ class TaskResource extends Resource
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     TextInput::make('cost')
-                        ->hint('This is a calculated not editable cost depending on your selections.')
+                        ->hint('This is a calculated not editable cost depending on your selections.')->hintColor('success')
                         ->rules(['required', 'numeric'])->required()
                         ->numeric()->disabled()
                         ->placeholder('This is a calculated not editable cost depending on your selections')
@@ -169,13 +169,18 @@ class TaskResource extends Resource
                         ->label('Mark as a free task')
                         ->rules(['required', 'boolean'])->required()
                         ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get))->reactive()
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     Toggle::make('is_minimum_charge_used')
                         ->label('Apply minimum charge for this job')
                         ->rules(['required', 'boolean'])->required()
                         ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get))->reactive()
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
+
+                    Toggle::make('send_po')
+                        ->label('Send P.O copy to the Resource?')
+                        ->rules(['boolean'])
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     RichEditor::make('notes')
                         ->rules(['nullable', 'max:255', 'string'])
@@ -231,7 +236,7 @@ class TaskResource extends Resource
 
                     Notification::make()->warning()
                         ->title('No price-list found!')
-                        ->body('Please check the selected resource and make sure he has a valid price-list to continue.')
+//                        ->body('Please check the selected resource and make sure he has a valid price-list to continue.')
                         ->actions([
                             Action::make('Open resource page')
                                 ->button()
@@ -357,7 +362,7 @@ class TaskResource extends Resource
         ];
     }
 
-//    public function openMarkPaidModal(): void
+    //    public function openMarkPaidModal(): void
 //    {
 //        $this->dispatchBrowserEvent('open-mark-paid-modal');
 //    }

@@ -21,8 +21,8 @@ return new class extends Migration {
             $table->unsignedBigInteger('currency_id');
             $table->unsignedBigInteger('task_unit_id');
             $table->unsignedBigInteger('translator_id');
-            $table->integer('unit_price');
-            $table->integer('minimum_charge')->default(0);
+            $table->decimal('unit_price', 10, 3);
+            $table->decimal('minimum_charge', 10, 3)->default(0);
 
             $table->timestamps();
             $table->softDeletes();

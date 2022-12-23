@@ -31,6 +31,7 @@ class JobSeeder extends Seeder
                 $j['name'] = trim($j['name']);
                 $j['updated_at'] = $j['created_at'];
                 $j['is_free_job'] = $j['cost'] == 0;
+                $j['cost_usd'] = $j['cost'] * 20;
 
                 $data[] = $j;
             }

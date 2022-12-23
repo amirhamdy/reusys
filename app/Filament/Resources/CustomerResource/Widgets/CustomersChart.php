@@ -13,12 +13,7 @@ class CustomersChart extends LineChartWidget
 
     public ?string $filter = 'today';
 
-    protected static ?string $heading = 'Chart';
-
-    protected function getHeading(): string
-    {
-        return 'Customers per month';
-    }
+    protected static ?string $heading = 'Customers per month';
 
     protected function getData(): array
     {

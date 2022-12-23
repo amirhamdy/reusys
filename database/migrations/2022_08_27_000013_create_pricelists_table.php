@@ -20,11 +20,8 @@ return new class extends Migration {
             $table->unsignedBigInteger('source_language_id');
             $table->unsignedBigInteger('target_language_id');
             $table->unsignedBigInteger('pricebook_id');
-            $table->integer('unit_price');
-            $table
-                ->integer('minimum_charge')
-                ->default(0)
-                ->nullable();
+            $table->decimal('unit_price', 10, 3);
+            $table->decimal('minimum_charge', 10, 3)->default(0)->nullable();
 
             $table->timestamps();
             $table->softDeletes();

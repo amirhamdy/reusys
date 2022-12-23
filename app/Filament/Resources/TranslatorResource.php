@@ -61,8 +61,9 @@ class TranslatorResource extends Resource
                             ->relationship('translatorType', 'name')->preload()
                             ->searchable()->disableLabel()->reactive()
                             ->placeholder('Resource Type')
-                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
-                    ]),
+                            ->columnSpan(['default' => 1, 'md' => 1, 'lg' => 1]),
+                    ])
+                    ->columns(2),
             ]);
     }
 
@@ -75,14 +76,12 @@ class TranslatorResource extends Resource
                         TextInput::make('name')
                             ->rules(['required', 'max:255', 'string'])->required()
                             ->placeholder('Name')
-                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
-
+                            ->columnSpan(['default' => 1, 'md' => 1, 'lg' => 6]),
                         TextInput::make('degree')
                             ->rules(['nullable', 'max:255', 'string'])
                             ->placeholder('Degree')
                             ->hidden(fn(Closure $get) => $get('translator_type_id') == 2)
-                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
-
+                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 6]),
                         Select::make('gender')
                             ->rules(['nullable', 'in:male,female,other'])
                             ->searchable()
@@ -93,67 +92,54 @@ class TranslatorResource extends Resource
                             ])
                             ->placeholder('Gender')
                             ->hidden(fn(Closure $get) => $get('translator_type_id') == 2)
-                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
-
+                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 6]),
                         DatePicker::make('date_of_birth')
                             ->rules(['nullable', 'date'])
                             ->placeholder('Date Of Birth')
                             ->hidden(fn(Closure $get) => $get('translator_type_id') == 2)
-                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
-
+                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 6]),
                         TextInput::make('nationality')
                             ->rules(['nullable', 'max:255', 'string'])
                             ->placeholder('Nationality')
                             ->hidden(fn(Closure $get) => $get('translator_type_id') == 2)
-                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
-
+                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 6]),
                         TextInput::make('experience')
                             ->rules(['nullable', 'max:255', 'string'])
                             ->label('Experience as Translator')
                             ->placeholder('Experience as Translator')
                             ->hidden(fn(Closure $get) => $get('translator_type_id') == 2)
-                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
-
+                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 6]),
                         TextInput::make('native_language')
                             ->rules(['nullable', 'max:255', 'string'])
                             ->placeholder('Native Language')
                             ->hidden(fn(Closure $get) => $get('translator_type_id') == 2)
-                            ->columnSpan(['default' => 12,
-                                'md' => 12,
-                                'lg' => 12,]),
-
+                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 6]),
                         TextInput::make('second_language')
                             ->rules(['nullable', 'max:255', 'string'])
                             ->placeholder('Second Language')
                             ->hidden(fn(Closure $get) => $get('translator_type_id') == 2)
-                            ->columnSpan(['default' => 12,
-                                'md' => 12,
-                                'lg' => 12,]),
-
+                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 6]),
                         TextInput::make('id_number')
                             ->rules(['nullable', 'max:255', 'string'])
                             ->placeholder('ID Number')->label('ID Number')
                             ->hidden(fn(Closure $get) => $get('translator_type_id') == 1)
-                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
-
+                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 6]),
                         TextInput::make('vat_number')
                             ->rules(['nullable', 'max:255', 'string'])
                             ->placeholder('Vat Number')->label('Vat Number')
                             ->hidden(fn(Closure $get) => $get('translator_type_id') == 1)
-                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
-
+                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 6]),
                         TextInput::make('id_other')
                             ->rules(['nullable', 'max:255', 'string'])
                             ->placeholder('ID Other')->label('ID Other')
                             ->hidden(fn(Closure $get) => $get('translator_type_id') == 1)
-                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
-
+                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 6]),
                         TextInput::make('timezone')
                             ->rules(['nullable', 'max:255', 'string'])
                             ->placeholder('Timezone')
                             ->hidden(fn(Closure $get) => $get('translator_type_id') == 1)
-                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
-                    ])
+                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 6]),
+                        ])->columns(12)
             ]);
     }
 
@@ -166,31 +152,23 @@ class TranslatorResource extends Resource
                         TextInput::make('website')
                             ->rules(['nullable', 'max:255', 'string'])
                             ->placeholder('Website')
-                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
-
+                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 6]),
                         TextInput::make('skype')
                             ->rules(['nullable', 'max:255', 'string'])
                             ->placeholder('Skype')
-                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
-
+                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 6]),
                         BelongsToSelect::make('country_id')
                             ->rules(['required', 'exists:countries,id'])->required()
                             ->relationship('country', 'name')->preload()
                             ->searchable()
                             ->placeholder('Country')
-                            ->columnSpan(['default' => 12,
-                                'md' => 12,
-                                'lg' => 12,]),
-
+                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 6]),
                         BelongsToSelect::make('currency_id')
                             ->rules(['required', 'exists:currencies,id'])->required()
                             ->relationship('currency', 'name')->preload()
                             ->searchable()
                             ->placeholder('Currency')
-                            ->columnSpan(['default' => 12,
-                                'md' => 12,
-                                'lg' => 12,]),
-                    ]),
+                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 6]),                    ])->columns(12),
             ]);
     }
 
@@ -203,44 +181,27 @@ class TranslatorResource extends Resource
                         TextInput::make('address')
                             ->rules(['nullable', 'max:255', 'string'])
                             ->placeholder('Address')
-                            ->columnSpan(['default' => 12,
-                                'md' => 12,
-                                'lg' => 12,]),
-
+                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 6]),
                         TextInput::make('city')
                             ->rules(['nullable', 'max:255', 'string'])
                             ->placeholder('City')
-                            ->columnSpan(['default' => 12,
-                                'md' => 12,
-                                'lg' => 12,]),
-
+                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 6]),
                         TextInput::make('postal_code')
                             ->rules(['nullable', 'max:255', 'string'])
                             ->placeholder('Postal Code')
-                            ->columnSpan(['default' => 12,
-                                'md' => 12,
-                                'lg' => 12,]),
-
+                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 6]),
                         TextInput::make('payment_after')
                             ->rules(['required', 'max:255', 'string'])->required()
                             ->placeholder('Payment After')
-                            ->columnSpan(['default' => 12,
-                                'md' => 12,
-                                'lg' => 12,]),
-
+                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 6]),
                         Toggle::make('nda')
                             ->rules(['required', 'boolean'])->required()
                             ->default('0')
-                            ->columnSpan(['default' => 12,
-                                'md' => 12,
-                                'lg' => 12,]),
-
+                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 6]),
                         Toggle::make('cv')
                             ->rules(['required', 'boolean'])->required()
                             ->default('0')
-                            ->columnSpan(['default' => 12,
-                                'md' => 12,
-                                'lg' => 12,]),])
+                            ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),])->columns(12),
             ]);
     }
 
@@ -268,8 +229,8 @@ class TranslatorResource extends Resource
                 Tables\Columns\TextColumn::make('name')->limit(50)->sortable()->searchable(),
                 Tables\Columns\BooleanColumn::make('nda')->toggleable(),
                 Tables\Columns\BooleanColumn::make('cv')->toggleable(),
-                Tables\Columns\TextColumn::make('native_language')->limit(50)->toggleable(),
-                Tables\Columns\TextColumn::make('second_language')->limit(50)->toggleable(),
+                Tables\Columns\TextColumn::make('firstPriceList.sourceLanguage.name')->limit(50)->toggleable(),
+                Tables\Columns\TextColumn::make('firstPriceList.targetLanguage.name')->limit(50)->toggleable(),
                 Tables\Columns\TextColumn::make('translatorType.name')->limit(50)->sortable()->toggleable(),
                 Tables\Columns\TextColumn::make('country.name')->limit(50)->toggleable(),
             ])->defaultSort('id', 'desc')
@@ -321,8 +282,8 @@ class TranslatorResource extends Resource
     {
         return [
             TranslatorResource\RelationManagers\TranslatorPriceListsRelationManager::class,
-            TranslatorResource\RelationManagers\TasksRelationManager::class,
             TranslatorResource\RelationManagers\ContactsRelationManager::class,
+            TranslatorResource\RelationManagers\TasksRelationManager::class,
         ];
     }
 

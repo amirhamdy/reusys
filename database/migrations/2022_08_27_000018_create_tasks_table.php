@@ -22,7 +22,8 @@ return new class extends Migration {
             $table
                 ->enum('is_paid', ['Paid', 'Not Paid', 'Waived Cost'])
                 ->default('Not Paid');
-            $table->float('cost');
+            $table->decimal('cost', 10, 3);
+            $table->decimal('cost_usd', 10, 3);
             $table->boolean('is_free_task');
             $table->boolean('is_minimum_charge_used');
             $table->date('payment_date')->nullable();

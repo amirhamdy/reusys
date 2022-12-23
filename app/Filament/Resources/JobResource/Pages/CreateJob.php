@@ -10,7 +10,7 @@ class CreateJob extends CreateRecord
 {
     protected static string $resource = JobResource::class;
 
-//    protected function mutateFormDataBeforeCreate(array $data): array
+    //    protected function mutateFormDataBeforeCreate(array $data): array
 //    {
 //        if ($data['is_free_job']) {
 //            $data['cost'] = 0;
@@ -53,13 +53,9 @@ class CreateJob extends CreateRecord
 //        }
 //    }
 
-    protected function getCreatedNotification(): ?Notification
+    protected function mutateFormDataBeforeCreate(array $data): array
     {
-        return Notification::make()
-            ->title('Saved successfully!')
-            ->body('The job has been created successfully.')
-            ->icon('heroicon-o-document-text')
-            ->iconColor('success')
-            ->send();
+        $data['cost_usd'] = $data['cost'] * 20;
+        return $data;
     }
 }

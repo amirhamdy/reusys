@@ -21,6 +21,7 @@ class Task extends Model
         'amount',
         'is_paid',
         'cost',
+        'cost_usd',
         'payment_date',
         'notes',
         'job_id',

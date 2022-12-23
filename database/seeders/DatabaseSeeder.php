@@ -37,13 +37,13 @@ class DatabaseSeeder extends Seeder
 //        $this->call(OpportunitySeeder::class);
 //        $this->call(OpportunityTypeSeeder::class);
 //        $this->call(OpportunityUnitSeeder::class);
+        $this->call(SubjectMatterSeeder::class);
         $this->call(PortalSeeder::class);
         $this->call(PricebookSeeder::class);
-//        $this->call(PricelistSeeder::class);
+        $this->call(PricelistSeeder::class);
         $this->call(ProductlineSeeder::class);
         $this->call(ProjectSeeder::class);
         $this->call(JobSeeder::class);
-        $this->call(SubjectMatterSeeder::class);
         $this->call(TranslatorTypeSeeder::class);
         $this->call(TranslatorSeeder::class);
         $this->call(TaskUnitSeeder::class);
