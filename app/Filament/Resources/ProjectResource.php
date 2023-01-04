@@ -92,17 +92,17 @@ class ProjectResource extends Resource
                             ])
                             ->hiddenOn(['edit']),
 
-                        Forms\Components\Card::make()
-                            ->schema([
-                                Forms\Components\Placeholder::make('created_at')
-                                    ->label('Created at')
-                                    ->content(fn(Project $record): ?string => $record->created_at?->diffForHumans()),
-
-                                Forms\Components\Placeholder::make('updated_at')
-                                    ->label('Last modified at')
-                                    ->content(fn(Project $record): ?string => $record->updated_at?->diffForHumans()),
-                            ])
-                            ->hiddenOn(['edit']),
+//                        Forms\Components\Card::make()
+//                            ->schema([
+//                                Forms\Components\Placeholder::make('created_at')
+//                                    ->label('Created at')
+//                                    ->content(fn(Project $record): ?string => $record->created_at?->diffForHumans()),
+//
+//                                Forms\Components\Placeholder::make('updated_at')
+//                                    ->label('Last modified at')
+//                                    ->content(fn(Project $record): ?string => $record->updated_at?->diffForHumans()),
+//                            ])
+//                            ->hiddenOn(['edit']),
                     ])
                     ->hidden(fn(?Project $record) => $record === null)
                     ->columnSpan(1),
