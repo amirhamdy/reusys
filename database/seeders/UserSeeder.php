@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->delete();
 
-        $password = Hash::make('password');
+        $password = Hash::make('Password');
 
         DB::table('users')->insert([
             ['id' => 999998, 'name' => 'System Admin', 'email' => 'portal@reutrans.com', 'password' => $password, 'address' => 'Cairo, Egypt', 'hiring_date' => '2016-11-24', 'created_at' => '2022-09-19 22:47:09', 'updated_at' => '2022-09-19 22:47:09'],
@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             ['id' => 1000001, 'name' => 'Martin Davis', 'email' => 'm.davis@reutrans.com', 'password' => $password, 'address' => 'Cairo, Misr', 'hiring_date' => '2016-11-29', 'created_at' => '2022-09-19 22:47:09', 'updated_at' => '2022-09-19 22:47:09'],
             ['id' => 1000002, 'name' => 'Rachel Stevenson', 'email' => 'r.stevenson@reutrans.com', 'password' => $password, 'address' => 'Cairo, Egypt', 'hiring_date' => '2016-11-17', 'created_at' => '2022-09-19 22:47:09', 'updated_at' => '2022-09-19 22:47:09'],
             ['id' => 1000003, 'name' => 'Riccardo Pozzoli', 'email' => 'recruitment@reutrans.com', 'password' => $password, 'address' => 'Cairo, Egypt', 'hiring_date' => '2016-11-01', 'created_at' => '2022-09-19 22:47:09', 'updated_at' => '2022-09-19 22:47:09'],
-            ['id' => 1000004, 'name' => 'Ibrahem Robil', 'email' => 'ibrahem.robil1994@gmail.com', 'password' => $password, 'address' => 'Cairo, Egypt', 'hiring_date' => '2017-07-19', 'created_at' => '2022-09-19 22:47:09', 'updated_at' => '2022-09-19 22:47:09'],
+            ['id' => 1000004, 'name' => 'Ibrahem Robil', 'email' => 'ibrahem.robil1994@reutrans.com', 'password' => $password, 'address' => 'Cairo, Egypt', 'hiring_date' => '2017-07-19', 'created_at' => '2022-09-19 22:47:09', 'updated_at' => '2022-09-19 22:47:09'],
             ['id' => 1000007, 'name' => 'Hannah Pearson', 'email' => 'projects@reutrans.com', 'password' => $password, 'address' => 'Cairo, Egypt', 'hiring_date' => '2016-11-01', 'created_at' => '2022-09-19 22:47:09', 'updated_at' => '2022-09-19 22:47:09'],
             ['id' => 1000008, 'name' => 'Matt Brooks', 'email' => 'accounting@reutrans.com', 'password' => $password, 'address' => 'Cairo, Egypt', 'hiring_date' => '2016-11-09', 'created_at' => '2022-09-19 22:47:09', 'updated_at' => '2022-09-19 22:47:09'],
             ['id' => 1000009, 'name' => 'Mae Adel', 'email' => 'm.hemida@reutrans.com', 'password' => $password, 'address' => 'Cairo, Egypt', 'hiring_date' => '2016-11-09', 'created_at' => '2022-09-19 22:47:09', 'updated_at' => '2022-09-19 22:47:09'],
