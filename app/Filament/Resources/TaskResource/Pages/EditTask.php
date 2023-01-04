@@ -3,31 +3,29 @@
 namespace App\Filament\Resources\TaskResource\Pages;
 
 use App\Filament\Resources\TaskResource;
-use Filament\Notifications\Notification;
+use App\Mail\TaskCreated;
+use App\Models\Translator;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Support\Facades\Mail;
 
 class EditTask extends EditRecord
 {
     protected static string $resource = TaskResource::class;
 
-    protected function mutateFormDataBeforeFill(array $data): array
+    protected function mutateFormDataBeforeSave(array $data): array
     {
-//        $job = Job::find($data['job_id']);
-//        $data['project_id'] = $job->project->name;
-//        $data['productline_id'] = $job->project->productline->name;
-//        $data['customer_id'] = $job->project->productline->customer->name;
-
+        $data['cost_usd'] = $data['cost'] * 20;
         return $data;
     }
 
-    protected function getSavedNotification(): ?Notification
+    protected function afterSave(): void
     {
-        return Notification::make()
-            ->title('Saved successfully!')
-            ->body('The task has been updated successfully.')
-            ->icon('heroicon-o-document-text')
-            ->iconColor('success')
-            ->send();
+        if ($this->data['send_po']) {
+            $translator = Translator::find($this->data['translator_id']);
+            if ($translator->email) {
+                Mail::to($translator->email)->send(new TaskCreated($translator->name));
+            }
+        }
     }
 
 }

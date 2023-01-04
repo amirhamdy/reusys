@@ -3,14 +3,20 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TaskResource\Pages;
+use App\Mail\TaskCreated;
 use App\Models\Customer;
 use App\Models\Job;
 use App\Models\Productline;
 use App\Models\Project;
 use App\Models\Task;
+use App\Models\Translator;
 use App\Models\TranslatorPriceList;
 use Closure;
-use Filament\{Forms\Components\Toggle, Notifications\Actions\Action, Notifications\Notification, Tables};
+use Filament\{Forms\Components\Toggle,
+    Notifications\Actions\Action,
+    Notifications\Notification,
+    Pages\Actions\CreateAction,
+    Tables};
 use Filament\Forms\Components\BelongsToSelect;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\DatePicker;
@@ -21,6 +27,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Resources\{Form, Resource, Table};
 use Filament\Tables\Filters\MultiSelectFilter;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Date;
 
 class TaskResource extends Resource
 {
@@ -94,11 +101,13 @@ class TaskResource extends Resource
 
                     DatePicker::make('start_date')
                         ->rules(['required', 'date'])->required()
+                        ->default(Date::now())
                         ->placeholder('Start Date')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     DatePicker::make('delivery_date')
                         ->rules(['required', 'date'])->required()
+                        ->default(Date::now())
                         ->placeholder('Delivery Date')
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
@@ -139,6 +148,7 @@ class TaskResource extends Resource
                         ->rules(['required', 'numeric'])->required()
                         ->numeric()
                         ->placeholder('Amount')
+                        ->default(1)
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4])
                         ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get))->reactive(),
 
@@ -158,7 +168,7 @@ class TaskResource extends Resource
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                     TextInput::make('cost')
-                        ->hint('This is a calculated not editable cost depending on your selections.')->hintColor('success')
+                        ->hint('This is a calculated, not editable cost depending on your selections.')->hintColor('success')
                         ->rules(['required', 'numeric'])->required()
                         ->numeric()->disabled()
                         ->placeholder('This is a calculated not editable cost depending on your selections')
@@ -361,14 +371,4 @@ class TaskResource extends Resource
             'edit' => Pages\EditTask::route('/{record}/edit'),
         ];
     }
-
-    //    public function openMarkPaidModal(): void
-//    {
-//        $this->dispatchBrowserEvent('open-mark-paid-modal');
-//    }
-
-    //    protected static function getNavigationBadge(): ?string
-//    {
-//        return static::getModel()::count();
-//    }
 }

@@ -44,15 +44,17 @@ class JobResource extends Resource
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
                     BelongsToSelect::make('customer_id')
+                        ->hiddenOn(['view', 'edit'])
                         ->rules(['required', 'exists:customers,id'])->required()
                         ->options(Customer::all()->where('customer_status_id', '3')->pluck('name', 'id'))->preload()
                         ->searchable()->disablePlaceholderSelection()
                         ->placeholder('Customer')->label('Customer')
                         ->reactive()
                         ->afterStateUpdated(fn(callable $set) => $set('productline_id', null))
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     BelongsToSelect::make('productline_id')
+                        ->hiddenOn(['view', 'edit'])
                         ->rules(['required', 'exists:productlines,id'])->required()
                         ->options(function (callable $get) {
                             $customer = Customer::find($get('customer_id'));
@@ -62,7 +64,7 @@ class JobResource extends Resource
                         ->searchable()->reactive()
                         ->placeholder('Productline')->label('Productline')
                         ->afterStateUpdated(fn(callable $set) => $set('project_id', null))
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                     BelongsToSelect::make('project_id')
                         ->rules(['required', 'exists:projects,id'])->required()
@@ -73,7 +75,7 @@ class JobResource extends Resource
                         })->preload()
                         ->searchable()->reactive()
                         ->placeholder('Project')->label('Project')
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4])
+                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12])
                         ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
 
                     BelongsToSelect::make('source_language_id')
@@ -118,12 +120,14 @@ class JobResource extends Resource
                         ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
 
                     TextInput::make('cost')
-                        ->hint('This is a calculated not editable cost depending on your selections.')
+                        ->hint('This is a calculated, not editable cost depending on your selections.')->hintColor('success')
                         ->rules(['required', 'numeric'])->required()
                         ->numeric()->disabled()
                         ->placeholder('This is a calculated not editable cost depending on your selections')
                         ->default(null)
                         ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
+
+                    TextInput::make('cost_usd')->numeric()->disabled()->hidden(),
 
                     Toggle::make('is_free_job')
                         ->label('Mark as a free job')
@@ -207,6 +211,7 @@ class JobResource extends Resource
         }
 
         $set('cost', $cost ?? null);
+        $set('cost_usd', isset($cost) ? $cost * 20 : null);
     }
 
     public static function table(Table $table): Table
@@ -306,7 +311,7 @@ class JobResource extends Resource
     public static function getWidgets(): array
     {
         return [
-            JobStats::class,
+//            JobStats::class,
         ];
     }
 }

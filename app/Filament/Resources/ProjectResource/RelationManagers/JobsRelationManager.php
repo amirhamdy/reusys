@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\ProjectResource\RelationManagers;
 
+use App\Filament\Resources\JobResource;
+use App\Models\Job;
 use App\Models\Pricelist;
 use App\Models\Productline;
 use App\Models\Project;
@@ -10,9 +12,9 @@ use Filament\Forms;
 use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification;
 use Filament\Tables;
+use Filament\Tables\Actions\EditAction;
 use Filament\Resources\{Form, Table};
 use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
@@ -31,75 +33,78 @@ class JobsRelationManager extends HasManyRelationManager
     public static function form(Form $form): Form
     {
         return $form->schema([
-                Grid::make(['default' => 0])->schema([
-                    TextInput::make('name')
-                        ->rules(['required', 'max:255', 'string'])->required()
-                        ->placeholder('Name')
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
+            Grid::make(['default' => 0])->schema([
+                TextInput::make('name')
+                    ->rules(['required', 'max:255', 'string'])->required()
+                    ->placeholder('Name')
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
-                    BelongsToSelect::make('source_language_id')
-                        ->rules(['required', 'exists:languages,id'])->required()
-                        ->relationship('sourceLanguage', 'name')->preload()
-                        ->searchable()->reactive()
-                        ->placeholder('Source Language')
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6])
-                        ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire)),
+                BelongsToSelect::make('source_language_id')
+                    ->rules(['required', 'exists:languages,id'])->required()
+                    ->relationship('sourceLanguage', 'name')->preload()
+                    ->searchable()->reactive()
+                    ->placeholder('Source Language')
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6])
+                    ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire)),
 
-                    BelongsToSelect::make('target_language_id')
-                        ->rules(['required', 'exists:languages,id'])->required()
-                        ->relationship('targetLanguage', 'name')->preload()
-                        ->searchable()->reactive()
-                        ->placeholder('Target Language')
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6])
-                        ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire)),
+                BelongsToSelect::make('target_language_id')
+                    ->rules(['required', 'exists:languages,id'])->required()
+                    ->relationship('targetLanguage', 'name')->preload()
+                    ->searchable()->reactive()
+                    ->placeholder('Target Language')
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6])
+                    ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire)),
 
-                    BelongsToSelect::make('job_type_id')
-                        ->rules(['required', 'exists:job_types,id'])->required()
-                        ->relationship('jobType', 'name')->preload()
-                        ->searchable()->reactive()
-                        ->placeholder('Job Type')
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4])
-                        ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire)),
+                BelongsToSelect::make('job_type_id')
+                    ->rules(['required', 'exists:job_types,id'])->required()
+                    ->relationship('jobType', 'name')->preload()
+                    ->searchable()->reactive()
+                    ->placeholder('Job Type')
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4])
+                    ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire)),
 
-                    BelongsToSelect::make('job_unit_id')
-                        ->rules(['required', 'exists:job_units,id'])->required()
-                        ->relationship('jobUnit', 'name')->preload()
-                        ->searchable()->reactive()
-                        ->placeholder('Job Unit')
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4])
-                        ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire)),
+                BelongsToSelect::make('job_unit_id')
+                    ->rules(['required', 'exists:job_units,id'])->required()
+                    ->relationship('jobUnit', 'name')->preload()
+                    ->searchable()->reactive()
+                    ->placeholder('Job Unit')
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4])
+                    ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire)),
 
-                    TextInput::make('amount')
-                        ->rules(['required', 'numeric'])->required()
-                        ->numeric()
-                        ->placeholder('Amount')
-                        ->default(1)
-                        ->reactive()
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4])
-                        ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire)),
+                TextInput::make('amount')
+                    ->rules(['required', 'numeric'])->required()
+                    ->numeric()
+                    ->default(1)
+                    ->placeholder('Amount')
+                    ->default(1)
+                    ->reactive()
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4])
+                    ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire)),
 
-                    TextInput::make('cost')
-                        ->hint('This is a calculated not editable cost depending on your selections.')
-                        ->rules(['required', 'numeric'])->required()
-                        ->numeric()->disabled()
-                        ->placeholder('This is a calculated not editable cost depending on your selections')
-                        ->default(null)
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
+                TextInput::make('cost')
+                    ->hint('This is a calculated, not editable cost depending on your selections.')->hintColor('success')
+                    ->rules(['required', 'numeric'])->required()
+                    ->numeric()->disabled()
+                    ->placeholder('This is a calculated not editable cost depending on your selections')
+                    ->default(null)
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
-                    Toggle::make('is_free_job')
-                        ->label('Mark as a free job')
-                        ->rules(['required', 'boolean'])->required()
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6])
-                        ->reactive()
-                        ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire)),
+//                TextInput::make('cost_usd')->numeric()->disabled()->hidden(),
 
-                    Toggle::make('is_minimum_charge_used')
-                        ->label('Apply minimum charge for this job')
-                        ->rules(['required', 'boolean'])->required()
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6])
-                        ->reactive()
-                        ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire)),
-                ]),
+                Toggle::make('is_free_job')
+                    ->label('Mark as a free job')
+                    ->rules(['required', 'boolean'])->required()
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6])
+                    ->reactive()
+                    ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire)),
+
+                Toggle::make('is_minimum_charge_used')
+                    ->label('Apply minimum charge for this job')
+                    ->rules(['required', 'boolean'])->required()
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6])
+                    ->reactive()
+                    ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire)),
+            ]),
         ]);
     }
 
@@ -167,6 +172,7 @@ class JobsRelationManager extends HasManyRelationManager
         }
 
         $set('cost', $cost ?? null);
+//        $set('cost_usd', isset($cost) ? $cost * 20 : null);
     }
 
     public static function table(Table $table): Table
@@ -199,7 +205,7 @@ class JobsRelationManager extends HasManyRelationManager
                                 $data['created_from'],
                                 fn(
                                     Builder $query,
-                                    $date
+                                            $date
                                 ): Builder => $query->whereDate(
                                     'created_at',
                                     '>=',
@@ -210,7 +216,7 @@ class JobsRelationManager extends HasManyRelationManager
                                 $data['created_until'],
                                 fn(
                                     Builder $query,
-                                    $date
+                                            $date
                                 ): Builder => $query->whereDate(
                                     'created_at',
                                     '<=',
@@ -243,14 +249,31 @@ class JobsRelationManager extends HasManyRelationManager
                     'jobUnit',
                     'name'
                 ),
+            ])
+            ->appendActions([
+                CreateAction::make()
+                    ->mutateFormDataUsing(function (array $data): array {
+                        $data['cost_usd'] = $data['cost'] * 20;
+                        return $data;
+                    })
+                    ->after(function (array $data): array {
+                        $job = Job::where('name', $data['name'])
+                            ->where('source_language_id', $data['source_language_id'])
+                            ->where('target_language_id', $data['target_language_id'])
+                            ->where('job_type_id', $data['job_type_id'])
+                            ->where('job_unit_id', $data['job_unit_id'])
+                            ->where('amount', $data['amount'])
+                            ->where('cost', $data['cost'])
+                            ->first();
+
+                        redirect(url(JobResource::getUrl('view', ['record' => $job->id])));
+                        return $data;
+                    }),
+                EditAction::make()
+                    ->mutateFormDataUsing(function (array $data): array {
+                        $data['cost_usd'] = $data['cost'] * 20;
+                        return $data;
+                    })
             ]);
-//            ->appendActions([
-//                CreateAction::make()
-//                    ->after(function (array $data): array {
-//                        dd($data);
-//                        redirect(url('jobs'));
-//                        return $data;
-//                    })
-//            ]);
     }
 }

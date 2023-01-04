@@ -8,6 +8,10 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+    protected array $pages = [
+//        FindTranslators::class,
+    ];
+
     /**
      * Register any application services.
      *
@@ -63,6 +67,8 @@ class AppServiceProvider extends ServiceProvider
                     ->icon('heroicon-o-collection')
                     ->collapsed(),
             ]);
+
+//            Filament::registerPages($this->pages);
         });
     }
 }

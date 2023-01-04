@@ -18,15 +18,13 @@ class CreateTask extends CreateRecord
         return $data;
     }
 
-    protected function afterCreate(array $data): void
+    protected function afterCreate(): void
     {
-        if ($data['send_po']) {
-            $translator = Translator::find($data['translator_id']);
-            // dd($translator->email);
+        if ($this->data['send_po']) {
+            $translator = Translator::find($this->data['translator_id']);
             if ($translator->email) {
                 Mail::to($translator->email)->send(new TaskCreated($translator->name));
             }
         }
-//        Mail::to('amirhamdy4@gmail.com’')->send(new TaskCreated('Amir'));
     }
 }

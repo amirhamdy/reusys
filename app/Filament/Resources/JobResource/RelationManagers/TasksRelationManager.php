@@ -2,10 +2,12 @@
 
 namespace App\Filament\Resources\JobResource\RelationManagers;
 
+use App\Filament\Resources\TranslatorResource;
 use App\Mail\TaskCreated;
 use App\Models\Job;
 use App\Models\Translator;
 use App\Models\TranslatorPriceList;
+use Illuminate\Support\Facades\Date;
 use Closure;
 use Filament\Forms;
 use Illuminate\Support\Facades\Mail;
@@ -43,11 +45,13 @@ class TasksRelationManager extends HasManyRelationManager
 
                 DatePicker::make('start_date')
                     ->rules(['required', 'date'])->required()
+                    ->default(Date::now())
                     ->placeholder('Start Date')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
                 DatePicker::make('delivery_date')
                     ->rules(['required', 'date'])->required()
+                    ->default(Date::now())
                     ->placeholder('Delivery Date')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
@@ -87,6 +91,7 @@ class TasksRelationManager extends HasManyRelationManager
                 TextInput::make('amount')
                     ->rules(['required', 'numeric'])->required()
                     ->numeric()
+                    ->default(1)
                     ->placeholder('Amount')
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4])
                     ->afterStateUpdated(fn(Closure $set, Closure $get, Livewire $livewire) => self::calc_cost($set, $get, $livewire))->reactive(),
@@ -107,7 +112,7 @@ class TasksRelationManager extends HasManyRelationManager
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                 TextInput::make('cost')
-                    ->hint('This is a calculated not editable cost depending on your selections.')->hintColor('success')
+                    ->hint('This is a calculated, not editable cost depending on your selections.')->hintColor('success')
                     ->rules(['required', 'numeric'])->required()
                     ->numeric()->disabled()
                     ->placeholder('This is a calculated not editable cost depending on your selections')
@@ -157,7 +162,7 @@ class TasksRelationManager extends HasManyRelationManager
             } else {
                 $job = Job::where('id', $job_id)->first();
                 $currency = $job->project->productline->pricebook->currency;
-                //dd($job_id ,$task_type_id ,$task_unit_id , $subject_matter_id , $translator_id , $amount, $currency, $job);
+//                dd($job_id ,$task_type_id ,$task_unit_id , $subject_matter_id , $translator_id , $amount, $currency, $job);
                 if (!$job) {
                     Notification::make()->warning()->title('Invalid job selected!')->body('Please select a valid job to continue.')->send();
                 }
@@ -182,13 +187,12 @@ class TasksRelationManager extends HasManyRelationManager
                 } else {
                     $cost = null;
 
-                    Notification::make()->warning()->duration(45)
+                    Notification::make()->warning()->duration(30000)
                         ->title('No price-list found!')
-//                        ->body('Please check the selected resource and make sure he has a valid price-list to continue.')
                         ->actions([
                             Action::make('Open resource page')
                                 ->button()
-                                ->url("/dashboard/resources/$translator_id", shouldOpenInNewTab: true)
+                                ->url(TranslatorResource::getUrl('view', ['record' => $translator_id]), shouldOpenInNewTab: true)
                         ])
                         ->send();
                 }

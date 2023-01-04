@@ -139,7 +139,7 @@ class TranslatorResource extends Resource
                             ->placeholder('Timezone')
                             ->hidden(fn(Closure $get) => $get('translator_type_id') == 1)
                             ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 6]),
-                        ])->columns(12)
+                    ])->columns(12)
             ]);
     }
 
@@ -168,7 +168,7 @@ class TranslatorResource extends Resource
                             ->relationship('currency', 'name')->preload()
                             ->searchable()
                             ->placeholder('Currency')
-                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 6]),                    ])->columns(12),
+                            ->columnSpan(['default' => 6, 'md' => 6, 'lg' => 6]),])->columns(12),
             ]);
     }
 
@@ -294,6 +294,7 @@ class TranslatorResource extends Resource
             'create' => Pages\CreateTranslator::route('/create'),
             'view' => Pages\ViewTranslator::route('/{record}'),
             'edit' => Pages\EditTranslator::route('/{record}/edit'),
+//            'find' => \App\Filament\Components\FindTranslators::route('/find'),
         ];
     }
 

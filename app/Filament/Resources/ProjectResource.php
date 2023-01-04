@@ -29,53 +29,85 @@ class ProjectResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form->schema([
-            Card::make()->schema([
-                Grid::make(['default' => 0])->schema([
-                    TextInput::make('name')
-                        ->rules(['required', 'max:255', 'string'])
-                        ->placeholder('Name')->required()
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
+        return $form
+            ->schema([
+                Forms\Components\Group::make()
+                    ->schema([
+                        Forms\Components\Section::make('Project Details')
+                            ->schema([
+                                Grid::make()->schema([
+                                    TextInput::make('name')
+                                        ->rules(['required', 'max:255', 'string'])
+                                        ->placeholder('Name')->required()
+                                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
-                    BelongsToSelect::make('customer_id')
-                        ->rules(['required', 'exists:customers,id'])->required()
-                        ->options(Customer::all()->where('customer_status_id', '3')->pluck('name', 'id'))->preload()
-                        ->searchable()->disablePlaceholderSelection()
-                        ->placeholder('Customer')->label('Customer')
-                        ->reactive()
-                        ->afterStateUpdated(fn(callable $set) => $set('productline_id', null))
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
+                                    BelongsToSelect::make('customer_id')
+                                        ->rules(['required', 'exists:customers,id'])->required()
+                                        ->hiddenOn(['edit'])
+                                        ->options(Customer::all()->where('customer_status_id', '3')->pluck('name', 'id'))->preload()
+                                        ->searchable()->disablePlaceholderSelection()
+                                        ->placeholder('Customer')->label('Customer')
+                                        ->reactive()
+                                        ->afterStateUpdated(fn(callable $set) => $set('productline_id', null))
+                                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
-                    BelongsToSelect::make('productline_id')
-                        ->rules(['required', 'exists:productlines,id'])->required()
-                        ->options(function (callable $get) {
-                            $customer = Customer::find($get('customer_id'));
-                            if ($customer) return $customer->productlines->pluck('name', 'id');
-                            return [];
-                        })->preload()
-                        ->searchable()
-                        ->placeholder('Productline')->label('Productline')
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
+                                    BelongsToSelect::make('productline_id')
+                                        ->rules(['required', 'exists:productlines,id'])->required()
+                                        ->hiddenOn(['edit'])
+                                        ->options(function (callable $get) {
+                                            $customer = Customer::find($get('customer_id'));
+                                            if ($customer) return $customer->productlines->pluck('name', 'id');
+                                            return [];
+                                        })->preload()
+                                        ->searchable()
+                                        ->placeholder('Productline')->label('Productline')
+                                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
 
-                    DatePicker::make('start_date')
-                        ->rules(['required', 'date'])->required()
-                        ->beforeOrEqual('end_date')
-                        ->placeholder('Start Date')
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
+                                    DatePicker::make('start_date')
+                                        ->rules(['required', 'date'])->required()
+                                        ->beforeOrEqual('end_date')
+                                        ->placeholder('Start Date')
+                                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
-                    DatePicker::make('end_date')
-                        ->rules(['required', 'date'])->required()
-                        ->afterOrEqual('start_date')
-                        ->placeholder('End Date')
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
+                                    DatePicker::make('end_date')
+                                        ->rules(['required', 'date'])->required()
+                                        ->afterOrEqual('start_date')
+                                        ->placeholder('End Date')
+                                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
-                    TextInput::make('po_number')
-                        ->rules(['required', 'max:255', 'string'])->required()
-                        ->placeholder('Po Number')
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
-                ]),
-            ]),
-        ]);
+                                    TextInput::make('po_number')
+                                        ->rules(['required', 'max:255', 'string'])->required()
+                                        ->placeholder('Po Number')
+                                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
+                                ]),
+                            ]),
+                    ])
+                    ->columnSpan(2),
+
+                Forms\Components\Group::make()
+                    ->schema([
+                        Forms\Components\Section::make('Profit in USD')
+                            ->schema([
+                                Forms\Components\TextInput::make('profit')->label('')
+                            ])
+                            ->hiddenOn(['edit']),
+
+                        Forms\Components\Card::make()
+                            ->schema([
+                                Forms\Components\Placeholder::make('created_at')
+                                    ->label('Created at')
+                                    ->content(fn(Project $record): ?string => $record->created_at?->diffForHumans()),
+
+                                Forms\Components\Placeholder::make('updated_at')
+                                    ->label('Last modified at')
+                                    ->content(fn(Project $record): ?string => $record->updated_at?->diffForHumans()),
+                            ])
+                            ->hiddenOn(['edit']),
+                    ])
+                    ->hidden(fn(?Project $record) => $record === null)
+                    ->columnSpan(1),
+            ])
+            ->columns(3);
     }
 
     public static function table(Table $table): Table
