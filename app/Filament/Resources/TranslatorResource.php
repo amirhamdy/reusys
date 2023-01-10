@@ -229,8 +229,8 @@ class TranslatorResource extends Resource
                 Tables\Columns\TextColumn::make('name')->limit(50)->sortable()->searchable(),
                 Tables\Columns\BooleanColumn::make('nda')->toggleable(),
                 Tables\Columns\BooleanColumn::make('cv')->toggleable(),
-                Tables\Columns\TextColumn::make('firstPriceList.sourceLanguage.name')->limit(50)->toggleable(),
-                Tables\Columns\TextColumn::make('firstPriceList.targetLanguage.name')->limit(50)->toggleable(),
+                Tables\Columns\TextColumn::make('firstPriceList.sourceLanguage.name')->limit(50)->toggleable()->searchable(),
+                Tables\Columns\TextColumn::make('firstPriceList.targetLanguage.name')->limit(50)->toggleable()->searchable(),
                 Tables\Columns\TextColumn::make('translatorType.name')->limit(50)->sortable()->toggleable(),
                 Tables\Columns\TextColumn::make('country.name')->limit(50)->toggleable(),
             ])->defaultSort('id', 'desc')
