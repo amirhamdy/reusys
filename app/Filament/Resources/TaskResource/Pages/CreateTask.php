@@ -7,6 +7,7 @@ use App\Mail\TaskCreated;
 use App\Models\Translator;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class CreateTask extends CreateRecord
 {
@@ -23,7 +24,7 @@ class CreateTask extends CreateRecord
         if ($this->data['send_po']) {
             $translator = Translator::find($this->data['translator_id']);
             if ($translator->email) {
-                Mail::to($translator->email)->send(new TaskCreated($translator->name));
+                Mail::to($translator->email)->send(new TaskCreated($translator->name,  Str::random(15)));
             }
         }
     }

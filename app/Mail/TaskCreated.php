@@ -21,9 +21,10 @@ class TaskCreated extends Mailable
      * @param string $name
      * @return void
      */
-    public function __construct(string $name)
+    public function __construct(string $name, string $po_number)
     {
         $this->name = $name;
+        $this->po_number = $po_number;
     }
 
     /**
@@ -47,7 +48,7 @@ class TaskCreated extends Mailable
     {
         return new Content(
             view: 'mail.task-created-email',
-            with: ['name' => $this->name],
+            with: ['name' => $this->name, 'po_number' => $this->po_number],
         );
     }
 
