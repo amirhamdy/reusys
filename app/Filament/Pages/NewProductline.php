@@ -12,7 +12,7 @@ class NewProductline extends CreateRecord
 
     protected static ?int $navigationSort = 2;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-plus';
 
     protected static ?string $navigationGroup = 'Product Lines';
 

@@ -17,7 +17,7 @@ class PortalResource extends Resource
 
     protected static ?int $navigationSort = 8;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-key';
 
     protected static ?string $navigationGroup = 'Portals';
 

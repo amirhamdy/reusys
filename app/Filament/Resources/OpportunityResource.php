@@ -21,7 +21,7 @@ class OpportunityResource extends Resource
 
     protected static ?int $navigationSort = 9;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-mail-open';
 
     protected static ?string $navigationGroup = 'Opportunities';
 

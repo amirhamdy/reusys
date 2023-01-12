@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Filament\Pages\FindTranslators;
 use Filament\Facades\Filament;
 use Filament\Navigation\NavigationGroup;
 use Illuminate\Support\ServiceProvider;
@@ -29,6 +30,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Filament::serving(function () {
+//            Filament::registerViteTheme('resources/css/filament.css');
+
             Filament::registerNavigationGroups([
                 NavigationGroup::make()
                     ->label('Customers')
@@ -36,35 +39,35 @@ class AppServiceProvider extends ServiceProvider
                     ->collapsed(),
                 NavigationGroup::make()
                     ->label('Product Lines')
-                    ->icon('heroicon-o-collection')
+                    ->icon('heroicon-o-menu')
                     ->collapsed(),
                 NavigationGroup::make()
                     ->label('Projects')
-                    ->icon('heroicon-o-collection')
+                    ->icon('heroicon-o-presentation-chart-bar')
                     ->collapsed(),
                 NavigationGroup::make()
                     ->label('Jobs')
-                    ->icon('heroicon-o-collection')
+                    ->icon('heroicon-o-newspaper')
                     ->collapsed(),
                 NavigationGroup::make()
                     ->label('Tasks')
-                    ->icon('heroicon-o-collection')
+                    ->icon('heroicon-o-calculator')
                     ->collapsed(),
                 NavigationGroup::make()
                     ->label('Resources')
-                    ->icon('heroicon-o-collection')
+                    ->icon('heroicon-o-database')
                     ->collapsed(),
                 NavigationGroup::make()
                     ->label('Price Books')
-                    ->icon('heroicon-o-collection')
+                    ->icon('heroicon-o-book-open')
                     ->collapsed(),
                 NavigationGroup::make()
                     ->label('Portals')
-                    ->icon('heroicon-o-collection')
+                    ->icon('heroicon-o-key')
                     ->collapsed(),
                 NavigationGroup::make()
                     ->label('Opportunities')
-                    ->icon('heroicon-o-collection')
+                    ->icon('heroicon-o-mail-open')
                     ->collapsed(),
             ]);
 

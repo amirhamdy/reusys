@@ -12,7 +12,7 @@ class NotPaidTasks extends ListRecords
 
     protected static ?int $navigationSort = 2;
 
-    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static ?string $navigationIcon = 'heroicon-o-receipt-tax';
 
     protected static ?string $navigationGroup = 'Tasks';
 

@@ -35,7 +35,7 @@ class TaskResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-s-calculator';
 
     protected static ?string $navigationGroup = 'Tasks';
 

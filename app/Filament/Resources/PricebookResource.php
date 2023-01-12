@@ -19,7 +19,7 @@ class PricebookResource extends Resource
 
     protected static ?int $navigationSort = 7;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-o-book-open';
 
     protected static ?string $navigationLabel = 'Price Books';
 

@@ -13,7 +13,7 @@ class OverdueTasks extends ListRecords
 
     protected static ?int $navigationSort = 3;
 
-    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static ?string $navigationIcon = 'heroicon-o-qrcode';
 
     protected static ?string $navigationGroup = 'Tasks';
 
