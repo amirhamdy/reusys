@@ -22,6 +22,39 @@ class TranslatorSeeder extends Seeder
         // "resource_ID","resource_rating","creator_ID","resource_country","resource_type","resource_skype","resource_website","resource_address","resource_city","resource_ZIP","status_type_ID","nda","cv","payment_after","approve","created_date"
         $resources = readCSVFile(public_path('../database/dump/resources.csv'));
 
+        // contact_ID,agency_ID,contact,phone,mail,position
+        $agency_contacts = array();
+        $agency_contacts_data = readCSVFile(public_path('../database/dump/agency_contacts.csv'));
+        foreach ($agency_contacts_data as $a_c) {
+            if (is_array($a_c)) {
+                $keys = array("contact_ID", "agency_ID", "contact", 'phone', 'mail', 'position');
+                $values = array_values($a_c);
+                $agency_contacts[] = array_combine($keys, $values);
+            }
+        }
+
+        // ID,freelancer_ID,phone
+        $vendor_phones = array();
+        $freelancer_phones = readCSVFile(public_path('../database/dump/freelancer_phone.csv'));
+        foreach ($freelancer_phones as $v_phone) {
+            if (is_array($v_phone)) {
+                $keys = array("ID", "freelancer_ID", "phone");
+                $values = array_values($v_phone);
+                $vendor_phones[] = array_combine($keys, $values);
+            }
+        }
+
+        // ID,freelancer_ID,mail
+        $vendor_emails = array();
+        $freelancer_emails = readCSVFile(public_path('../database/dump/freelancer_mail.csv'));
+        foreach ($freelancer_emails as $v_email) {
+            if (is_array($v_email)) {
+                $keys = array("ID", "freelancer_ID", "mail");
+                $values = array_values($v_email);
+                $vendor_emails[] = array_combine($keys, $values);
+            }
+        }
+
         // "freelancer_ID","resource_ID","freelancer_name","degree","sex","native_language","second_native_language","birth_date","nationality","experience"
         $vendors = array();
         $vendors_data = readCSVFile(public_path('../database/dump/vendors.csv'));
@@ -45,6 +78,10 @@ class TranslatorSeeder extends Seeder
                 $agencies[] = array_combine($keys, $values);
             }
         }
+
+        $phones = array();
+        $emails = array();
+        $contacts = array();
 
         foreach ($resources as $resource) {
             if (is_array($resource)) {
@@ -90,6 +127,36 @@ class TranslatorSeeder extends Seeder
                             'updated_at' => $r['created_date'],
                         );
                         $data[] = $input;
+
+                        // find the vendor phones
+                        $vendor_phones_arr = $this->find_phones($vendor_phones, $vendor['freelancer_ID']);
+                        if (count($vendor_phones_arr) > 0) {
+                            foreach ($vendor_phones_arr as $phone) {
+                                $phone_input = array(
+                                    'id' => $phone['ID'],
+                                    'number' => $phone['phone'],
+                                    'translator_id' => $r['resource_ID'],
+                                    'created_at' => $r['created_date'],
+                                    'updated_at' => $r['created_date'],
+                                );
+                                $phones[] = $phone_input;
+                            }
+                        }
+
+                        // find the vendor emails
+                        $vendor_emails_arr = $this->find_emails($vendor_emails, $vendor['freelancer_ID']);
+                        if (count($vendor_emails_arr) > 0) {
+                            foreach ($vendor_emails_arr as $email) {
+                                $email_input = array(
+                                    'id' => $email['ID'],
+                                    'address' => $email['mail'],
+                                    'translator_id' => $r['resource_ID'],
+                                    'created_at' => $r['created_date'],
+                                    'updated_at' => $r['created_date'],
+                                );
+                                $emails[] = $email_input;
+                            }
+                        }
                     } else {
                         echo "\n\n\n" . $r['resource_ID'] . "\n\n\n";
                     }
@@ -126,10 +193,28 @@ class TranslatorSeeder extends Seeder
                             'updated_at' => $r['created_date'],
                         );
                         $data[] = $input;
+
+                        // find the agency contacts
+                        $agency_contacts_arr = $this->find_contacts($agency_contacts, $agency['agency_ID']);
+                        if (count($agency_contacts_arr) > 0) {
+                            foreach ($agency_contacts_arr as $contact) {
+                                $contact_input = array(
+                                    //contact_ID,agency_ID,contact,phone,mail,position
+                                    'id' => $contact['contact_ID'],
+                                    'name' => $contact['contact'],
+                                    'phone' => $contact['phone'],
+                                    'email' => $contact['mail'],
+                                    'position' => $contact['position'],
+                                    'translator_id' => $r['resource_ID'],
+                                    'created_at' => $r['created_date'],
+                                    'updated_at' => $r['created_date'],
+                                );
+                                $contacts[] = $contact_input;
+                            }
+                        }
                     } else {
                         echo "\n\n\n" . $r['resource_ID'] . "\n\n\n";
                     }
-
                 }
 
 //                DB::table('translators')->insert($r);
@@ -137,6 +222,9 @@ class TranslatorSeeder extends Seeder
         }
 
         DB::table('translators')->insert($data);
+        DB::table('phones')->insert($phones);
+        DB::table('emails')->insert($emails);
+        DB::table('contacts')->insert($contacts);
     }
 
     public function find_resource($resources, $id)
@@ -146,6 +234,45 @@ class TranslatorSeeder extends Seeder
         foreach ($resources as $resource) {
             if ($resource['resource_ID'] == $id) {
                 $found = $resource;
+            }
+        }
+
+        return $found;
+    }
+
+    public function find_phones($phones, $id)
+    {
+        $found = [];
+
+        foreach ($phones as $phone) {
+            if ($phone['freelancer_ID'] == $id) {
+                $found[] = $phone;
+            }
+        }
+
+        return $found;
+    }
+
+    public function find_emails($emails, $id)
+    {
+        $found = [];
+
+        foreach ($emails as $email) {
+            if ($email['freelancer_ID'] == $id) {
+                $found[] = $email;
+            }
+        }
+
+        return $found;
+    }
+
+    public function find_contacts($contacts, $id)
+    {
+        $found = [];
+
+        foreach ($contacts as $contact) {
+            if ($contact['agency_ID'] == $id) {
+                $found[] = $contact;
             }
         }
 

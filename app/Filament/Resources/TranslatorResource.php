@@ -283,8 +283,10 @@ class TranslatorResource extends Resource
     {
         return [
             TranslatorResource\RelationManagers\TranslatorPriceListsRelationManager::class,
-            TranslatorResource\RelationManagers\ContactsRelationManager::class,
             TranslatorResource\RelationManagers\TasksRelationManager::class,
+            TranslatorResource\RelationManagers\PhonesRelationManager::class,
+            TranslatorResource\RelationManagers\EmailsRelationManager::class,
+            TranslatorResource\RelationManagers\ContactsRelationManager::class,
         ];
     }
 
