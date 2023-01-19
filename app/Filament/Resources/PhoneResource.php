@@ -21,6 +21,8 @@ class PhoneResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'id';
 
+    protected static bool $shouldRegisterNavigation = false;
+
     public static function form(Form $form): Form
     {
         return $form->schema([

@@ -21,6 +21,8 @@ class EmailResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'address';
 
+    protected static bool $shouldRegisterNavigation = false;
+
     public static function form(Form $form): Form
     {
         return $form->schema([
