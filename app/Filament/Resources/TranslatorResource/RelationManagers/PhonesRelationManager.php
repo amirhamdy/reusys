@@ -40,7 +40,7 @@ class PhonesRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('number'),
+                Tables\Columns\TextColumn::make('number')->copyable(),
 //                Tables\Columns\TextColumn::make('translator.name')->limit(50),
             ])
 //            ->filters([

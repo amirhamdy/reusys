@@ -54,8 +54,8 @@ class ContactsRelationManager extends HasManyRelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')->limit(50),
-                Tables\Columns\TextColumn::make('phone')->limit(50),
-                Tables\Columns\TextColumn::make('email')->limit(50),
+                Tables\Columns\TextColumn::make('phone')->limit(50)->copyable(),
+                Tables\Columns\TextColumn::make('email')->limit(50)->copyable(),
                 Tables\Columns\TextColumn::make('position')->limit(50),
                 Tables\Columns\TextColumn::make('translator.name')->limit(50),
             ])

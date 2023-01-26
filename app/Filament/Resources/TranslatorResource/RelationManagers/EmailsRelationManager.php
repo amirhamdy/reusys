@@ -40,7 +40,7 @@ class EmailsRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('address')->limit(50),
+                Tables\Columns\TextColumn::make('address')->limit(50)->copyable(),
 //                Tables\Columns\TextColumn::make('translator.id')->limit(50),
             ])
 //            ->filters([
