@@ -2,10 +2,12 @@
 
 namespace App\Filament\Resources\ProjectResource\Pages;
 
+use App\Mail\SendNotificationEmail;
 use App\Models\Customer;
 use App\Models\Productline;
 use Filament\Resources\Pages\EditRecord;
 use App\Filament\Resources\ProjectResource;
+use Illuminate\Support\Facades\Mail;
 
 class EditProject extends EditRecord
 {
@@ -19,5 +21,10 @@ class EditProject extends EditRecord
         $data['customer_id'] = Customer::find($productline['customer_id'])->name;
 
         return $data;
+    }
+
+    function afterSave()
+    {
+        Mail::send(new SendNotificationEmail($this->record, 'updated', 'project'));
     }
 }

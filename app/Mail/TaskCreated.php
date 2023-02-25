@@ -14,6 +14,7 @@ class TaskCreated extends Mailable
     use Queueable, SerializesModels;
 
     public string $name;
+    public string $po_number;
 
     /**
      * Create a new message instance.

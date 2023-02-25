@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\TaskResource\Pages;
 
 use App\Filament\Resources\TaskResource;
+use App\Mail\SendNotificationEmail;
 use App\Mail\TaskCreated;
 use App\Models\Translator;
 use Filament\Resources\Pages\CreateRecord;
@@ -24,8 +25,10 @@ class CreateTask extends CreateRecord
         if ($this->data['send_po']) {
             $translator = Translator::find($this->data['translator_id']);
             if ($translator->email) {
-                Mail::to($translator->email)->send(new TaskCreated($translator->name,  Str::random(15)));
+                Mail::to($translator->email)->send(new TaskCreated($translator->name, Str::random(15)));
             }
         }
+
+        Mail::send(new SendNotificationEmail($this->record, 'created', 'task'));
     }
 }

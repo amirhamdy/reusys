@@ -62,6 +62,10 @@ class AppServiceProvider extends ServiceProvider
                     ->icon('heroicon-o-book-open')
                     ->collapsed(),
                 NavigationGroup::make()
+                    ->label('Invoices')
+                    ->icon('heroicon-o-cash')
+                    ->collapsed(),
+                NavigationGroup::make()
                     ->label('Portals')
                     ->icon('heroicon-o-key')
                     ->collapsed(),

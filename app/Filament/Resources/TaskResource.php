@@ -338,7 +338,7 @@ class TaskResource extends Resource
                     ->color('danger')
                     ->icon('heroicon-o-trash')
                     ->modalHeading('Delete Tasks')
-                    ->modalSubheading('Are you sure you\'d like to delete these tasks? This can\'t be undone.')
+                    ->modalSubheading('Are you sure you\'d like to delete these task? This can\'t be undone.')
                     ->modalButton('Yes, Delete'),
                 Tables\Actions\BulkAction::make('markAsPaid')
                     ->label('Mark as Paid')->color('success')

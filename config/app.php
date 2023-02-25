@@ -41,7 +41,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -50,7 +50,7 @@ return [
     |
     | This URL is used by the console to properly generate URLs when using
     | the Artisan command line tool. You should set this to the root of
-    | your application so that it is used when running Artisan tasks.
+    | your application so that it is used when running Artisan task.
     |
     */
 
@@ -195,6 +195,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 //        Spatie\Backup\BackupServiceProvider::class,
+//        'Barryvdh\DomPDF\ServiceProvider',
+//        Barryvdh\Snappy\ServiceProvider::class,
 
     ],
 
@@ -211,6 +213,9 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+//        'PDF' => 'Barryvdh\DomPDF\Facade'
+//        'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+//        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
     ])->toArray(),
 
 ];

@@ -3,7 +3,9 @@
 namespace App\Filament\Resources\JobResource\Pages;
 
 use App\Filament\Resources\JobResource;
+use App\Mail\SendNotificationEmail;
 use Filament\Resources\Pages\CreateRecord;
+use Illuminate\Support\Facades\Mail;
 
 class CreateJob extends CreateRecord
 {
@@ -13,5 +15,10 @@ class CreateJob extends CreateRecord
     {
         $data['cost_usd'] = $data['cost'] * 20;
         return $data;
+    }
+
+    function afterCreate($record)
+    {
+        Mail::send(new SendNotificationEmail($record, 'created', 'job'));
     }
 }

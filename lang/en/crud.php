@@ -110,7 +110,7 @@ return [
         ],
     ],
 
-    'tasks' => [
+    'task' => [
         'name' => 'Tasks',
         'index_title' => 'Tasks List',
         'new_title' => 'New Task',

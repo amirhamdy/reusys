@@ -12,7 +12,7 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::table('tasks', function (Blueprint $table) {
+        Schema::table('task', function (Blueprint $table) {
             $table
                 ->foreign('job_id')
                 ->references('id')
@@ -50,7 +50,7 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::table('tasks', function (Blueprint $table) {
+        Schema::table('task', function (Blueprint $table) {
             $table->dropForeign(['job_id']);
             $table->dropForeign(['task_unit_id']);
             $table->dropForeign(['subject_matter_id']);

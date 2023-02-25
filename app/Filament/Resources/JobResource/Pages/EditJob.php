@@ -3,8 +3,10 @@
 namespace App\Filament\Resources\JobResource\Pages;
 
 use App\Filament\Resources\JobResource;
+use App\Mail\SendNotificationEmail;
 use App\Models\Project;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Support\Facades\Mail;
 
 class EditJob extends EditRecord
 {
@@ -24,5 +26,10 @@ class EditJob extends EditRecord
     {
         $data['cost_usd'] = $data['cost'] * 20;
         return $data;
+    }
+
+    function afterSave()
+    {
+        Mail::send(new SendNotificationEmail($this->record, 'updated', 'job'));
     }
 }

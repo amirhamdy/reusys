@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\TaskResource\Pages;
 
 use App\Filament\Resources\TaskResource;
+use App\Mail\SendNotificationEmail;
 use App\Mail\TaskCreated;
 use App\Models\Translator;
 use Filament\Resources\Pages\EditRecord;
@@ -25,9 +26,11 @@ class EditTask extends EditRecord
             $translator = Translator::find($this->data['translator_id']);
 //            $res = Mail::to('amirhamdy4@gmail.com')->send(new TaskCreated($translator->name, Str::random(10) /*$this->data['po_number'*/));
             if ($translator->email) {
-                Mail::to($translator->email)->send(new TaskCreated($translator->name,  Str::random(15)));
+                Mail::to($translator->email)->send(new TaskCreated($translator->name, Str::random(15)));
             }
         }
+
+        Mail::send(new SendNotificationEmail($this->record, 'updated', 'task'));
     }
 
 }
