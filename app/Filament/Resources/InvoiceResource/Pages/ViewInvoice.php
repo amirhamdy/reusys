@@ -57,7 +57,7 @@ class ViewInvoice extends ViewRecord
             $browsershot = (new Browsershot)
                 ->setNodeBinary('/usr/bin/node')
                 ->setNpmBinary('/usr/bin/npm')
-                ->setChromePath('/root/.cache/puppeteer/chrome/linux-1095492');
+                ->setNodeModulePath("/var/www/reusys/node_modules/");
 
             echo $browsershot->html($content)
                 ->initialPageNumber(1)
