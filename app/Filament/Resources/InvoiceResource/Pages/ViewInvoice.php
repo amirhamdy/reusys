@@ -23,11 +23,11 @@ class ViewInvoice extends ViewRecord
     {
         return [
             EditAction::make(),
-            Action::make('pdf')
-                ->label('Download PDF')
-                ->icon('heroicon-o-document-download')
-                ->color('success')
-                ->action('generateInvoicePDF'),
+//            Action::make('pdf')
+//                ->label('Download PDF')
+//                ->icon('heroicon-o-document-download')
+//                ->color('success')
+//                ->action('generateInvoicePDF'),
 //            ReplicateAction::make()->button()->color('warning')
 //                ->form([
 //                    DatePicker::make('invoice_date')->required()
