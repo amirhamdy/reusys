@@ -54,17 +54,7 @@ class ViewInvoice extends ViewRecord
         $content = $this->replace_bank_tags($content, $invoice);
 
         return response()->stream(function () use ($invoice, $content) {
-            $browsershot = (new Browsershot)
-                ->setNodeBinary('/usr/bin/node')
-                ->setNpmBinary('/usr/bin/npm');
-//                ->setChromePath('/usr/bin/chromium-browser');
-//            SitemapGenerator::create($site_url)
-//                ->configureCrawler(function (Crawler $crawler) use ($browsershot) {
-//                    $crawler->executeJavaScript()->setBrowsershot($browsershot);
-//                })
-//                ->getSitemap()
-//                ->writeToDisk('local', 'sitemap.xml');
-            echo $browsershot->html($content)
+            echo Browsershot::html($content)
                 ->initialPageNumber(1)
                 ->showBrowserHeaderAndFooter()
                 ->footerHtml('<p>Page <span class="pageNumber"></span> of <span class="totalPages"></span></p>')
