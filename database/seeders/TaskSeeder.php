@@ -14,10 +14,10 @@ class TaskSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('task')->delete();
+        DB::table('tasks')->delete();
 
         $data = array();
-        $path = public_path('../database/dump/task.csv');
+        $path = public_path('../database/dump/tasks.csv');
         $tasks = readCSVFile($path);
 
         foreach ($tasks as $task) {
@@ -54,6 +54,6 @@ class TaskSeeder extends Seeder
             }
         }
 
-        DB::table('task')->insert($data);
+        DB::table('tasks')->insert($data);
     }
 }
