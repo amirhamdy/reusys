@@ -146,11 +146,11 @@ class InvoiceResource extends Resource
         return $table
             ->poll('60s')
             ->columns([
-                Tables\Columns\TextColumn::make('id')
-                    ->sortable()
-                    ->toggleable()
-                    ->searchable()
-                    ->limit(50),
+//                Tables\Columns\TextColumn::make('id')
+//                    ->sortable()
+//                    ->toggleable()
+//                    ->searchable()
+//                    ->limit(50),
                 Tables\Columns\TextColumn::make('number')
                     ->toggleable()
                     ->searchable()

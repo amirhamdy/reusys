@@ -44,6 +44,10 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductlineSeeder::class);
         $this->call(ProjectSeeder::class);
         $this->call(JobSeeder::class);
+
+        $this->call(InvoiceSeeder::class);
+        $this->call(InvoiceJobSeeder::class);
+
         $this->call(TranslatorTypeSeeder::class);
         $this->call(TranslatorSeeder::class);
         $this->call(TaskUnitSeeder::class);
