@@ -56,14 +56,9 @@ class ViewInvoice extends ViewRecord
         return response()->stream(function () use ($invoice, $content) {
             $browsershot = (new Browsershot)
                 ->setNodeBinary('/usr/bin/node')
-                ->setNpmBinary('/usr/bin/npm');
-//                ->setChromePath('/usr/bin/chromium-browser');
-//            SitemapGenerator::create($site_url)
-//                ->configureCrawler(function (Crawler $crawler) use ($browsershot) {
-//                    $crawler->executeJavaScript()->setBrowsershot($browsershot);
-//                })
-//                ->getSitemap()
-//                ->writeToDisk('local', 'sitemap.xml');
+                ->setNpmBinary('/usr/bin/npm')
+                ->setChromePath('/root/.cache/puppeteer/chrome/linux-1095492');
+
             echo $browsershot->html($content)
                 ->initialPageNumber(1)
                 ->showBrowserHeaderAndFooter()
