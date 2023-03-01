@@ -46,7 +46,7 @@
                             </x-dropdown-link>
                             @endcan
                             @can('view-any', App\Models\Task::class)
-                            <x-dropdown-link href="{{ route('task.index') }}">
+                            <x-dropdown-link href="{{ route('tasks.index') }}">
                             Tasks
                             </x-dropdown-link>
                             @endcan
@@ -163,7 +163,7 @@
                 </x-responsive-nav-link>
                 @endcan
                 @can('view-any', App\Models\Task::class)
-                <x-responsive-nav-link href="{{ route('task.index') }}">
+                <x-responsive-nav-link href="{{ route('tasks.index') }}">
                 Tasks
                 </x-responsive-nav-link>
                 @endcan

@@ -46,7 +46,7 @@ Route::prefix('/')
         Route::resource('pricebooks', PricebookController::class);
         Route::resource('projects', ProjectController::class);
         Route::resource('jobs', JobController::class);
-        Route::resource('task', TaskController::class);
+        Route::resource('tasks', TaskController::class);
         Route::resource('portals', PortalController::class);
         Route::resource('opportunities', OpportunityController::class);
         Route::resource('resources', TranslatorController::class);

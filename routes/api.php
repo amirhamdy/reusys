@@ -124,16 +124,16 @@ Route::name('api.')
         Route::apiResource('jobs', JobController::class);
 
         // Job Tasks
-        Route::get('/jobs/{job}/task', [
+        Route::get('/jobs/{job}/tasks', [
             JobTasksController::class,
             'index',
-        ])->name('jobs.task.index');
-        Route::post('/jobs/{job}/task', [
+        ])->name('jobs.tasks.index');
+        Route::post('/jobs/{job}/tasks', [
             JobTasksController::class,
             'store',
-        ])->name('jobs.task.store');
+        ])->name('jobs.tasks.store');
 
-        Route::apiResource('task', TaskController::class);
+        Route::apiResource('tasks', TaskController::class);
 
         Route::apiResource('portals', PortalController::class);
 
@@ -142,14 +142,14 @@ Route::name('api.')
         Route::apiResource('resources', TranslatorController::class);
 
         // Translator Tasks
-        Route::get('/translators/{translator}/task', [
+        Route::get('/translators/{translator}/tasks', [
             TranslatorTasksController::class,
             'index',
-        ])->name('translators.task.index');
-        Route::post('/translators/{translator}/task', [
+        ])->name('translators.tasks.index');
+        Route::post('/translators/{translator}/tasks', [
             TranslatorTasksController::class,
             'store',
-        ])->name('translators.task.store');
+        ])->name('translators.tasks.store');
 
         // Translator Translator Price Lists
         Route::get('/translators/{translator}/translator-price-lists', [
