@@ -30,7 +30,7 @@ use Filament\Tables\Actions\CreateAction;
 
 class TasksRelationManager extends HasManyRelationManager
 {
-    protected static string $relationship = 'task';
+    protected static string $relationship = 'tasks';
 
     protected static ?string $recordTitleAttribute = 'name';
 
