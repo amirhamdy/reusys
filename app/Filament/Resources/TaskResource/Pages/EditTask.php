@@ -22,13 +22,18 @@ class EditTask extends EditRecord
 
     protected function afterSave(): void
     {
+        $po = $this->record->job->project->po_number;
+        $user = auth()->user();
+
         if ($this->data['send_po']) {
             $translator = Translator::find($this->data['translator_id']);
 //            $res = Mail::to('amirhamdy4@gmail.com')->send(new TaskCreated($translator->name, Str::random(10) /*$this->data['po_number'*/));
             if ($translator->email) {
-                Mail::to($translator->email)->send(new TaskCreated($translator->name, Str::random(15)));
+                Mail::to($translator->email)->send(new TaskCreated($translator->name, $po));
             }
         }
+
+        Mail::to($user->email)->send(new TaskCreated($user->name, $po));
 
         Mail::send(new SendNotificationEmail($this->record, 'updated', 'task'));
     }
