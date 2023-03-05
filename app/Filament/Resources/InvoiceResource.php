@@ -5,7 +5,15 @@ namespace App\Filament\Resources;
 use App\Models\Customer;
 use App\Models\Invoice;
 use App\Models\Job;
-use Filament\{Forms\Components\Repeater, Forms\Components\RichEditor, Forms\Components\Toggle, Tables, Forms};
+use App\Models\Productline;
+use App\Models\Project;
+use Filament\{Forms\Components\BelongsToSelect,
+    Forms\Components\Repeater,
+    Forms\Components\RichEditor,
+    Forms\Components\Toggle,
+    Tables,
+    Forms
+};
 use Filament\Resources\{Form, Table, Resource};
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
@@ -14,6 +22,8 @@ use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Filters\SelectFilter;
 use App\Filament\Filters\DateRangeFilter;
 use App\Filament\Resources\InvoiceResource\Pages;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
 class InvoiceResource extends Resource
 {
@@ -27,7 +37,7 @@ class InvoiceResource extends Resource
 
     protected static ?string $navigationLabel = 'All Invoices';
 
-    protected static ?string $recordTitleAttribute = 'date';
+    protected static ?string $recordTitleAttribute = 'number';
 
     public static function form(Form $form): Form
     {
@@ -90,12 +100,42 @@ class InvoiceResource extends Resource
                                 Repeater::make('invoiceJobs')
                                     ->schema([
                                         Grid::make()->schema([
+                                            BelongsToSelect::make('customer_id')
+                                                ->hiddenOn(['view', 'edit'])
+                                                ->rules(['required', 'exists:customers,id'])->required()
+                                                ->options(Customer::all()->where('customer_status_id', '3')->pluck('name', 'id'))
+                                                ->preload()
+                                                ->searchable()->disablePlaceholderSelection()
+                                                ->placeholder('Customer')->label('Customer')
+                                                ->reactive()
+                                                ->afterStateUpdated(fn(callable $set) => $set('productline_id', null))
+                                                ->columnSpan(['default' => 1]),
+
+                                            BelongsToSelect::make('project_id')
+                                                ->hiddenOn(['view', 'edit'])
+                                                ->rules(['required', 'exists:projects,id'])->required()
+                                                ->options(function (callable $get) {
+                                                    $customer = Customer::find($get('customer_id'));
+                                                    if ($customer) {
+                                                        $productlines = $customer->productlines->pluck('id');
+                                                        return Project::all()->whereIn('productline_id', $productlines)->pluck('name', 'id');
+                                                    }
+                                                    return [];
+                                                })
+//                                                ->getOptionLabelFromRecordUsing(fn (Model $record) => "{$record->name} {$record->name}")
+                                                ->preload()
+                                                ->searchable()->reactive()
+                                                ->placeholder('Project')->label('Project')
+//                                                ->afterStateUpdated(fn(callable $set) => $set('job_id', null))
+                                                ->columnSpan(['default' => 1]),
+
                                             Select::make('job_id')
                                                 ->rules(['exists:jobs,id'])
                                                 ->required()
-                                                ->disableLabel()
-                                                ->relationship('job', 'name')
-                                                ->searchable()->preload()
+//                                                ->disableLabel()
+                                                ->relationship('job', 'name', fn(Builder $query, callable $get) => $query->where('project_id', $get('project_id')))
+                                                ->searchable()
+                                                ->preload()
                                                 ->placeholder('Job')
                                                 ->reactive()
                                                 ->afterStateUpdated(function ($state, callable $set) {
@@ -110,20 +150,23 @@ class InvoiceResource extends Resource
 
                                             TextInput::make('amount')
 //                                                ->hiddenOn(['view', 'edit'])
-                                                ->disableLabel()->numeric()->required()->disabled()
+//                                                ->disableLabel()
+                                                ->numeric()->required()->disabled()
                                                 ->placeholder('Amount')
                                                 ->columnSpan(['default' => 1]),
                                         ]),
                                         Grid::make()->schema([
                                             TextInput::make('cost')
 //                                                ->hiddenOn(['view', 'edit'])
-                                                ->disableLabel()->numeric()->required()->disabled()
+//                                                ->disableLabel()
+                                                ->numeric()->required()->disabled()
                                                 ->placeholder('Cost')
                                                 ->columnSpan(['default' => 1]),
 
                                             TextInput::make('cost_usd')
 //                                                ->hiddenOn(['view', 'edit'])
-                                                ->disableLabel()->numeric()->required()->disabled()
+//                                                ->disableLabel()
+                                                ->numeric()->required()->disabled()
                                                 ->placeholder('Cost in USD')
                                                 ->columnSpan(['default' => 1]),
                                         ]),
