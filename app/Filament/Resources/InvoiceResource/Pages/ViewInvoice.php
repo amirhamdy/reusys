@@ -23,11 +23,11 @@ class ViewInvoice extends ViewRecord
     {
         return [
             EditAction::make(),
-//            Action::make('pdf')
-//                ->label('Download PDF')
-//                ->icon('heroicon-o-document-download')
-//                ->color('success')
-//                ->action('generateInvoicePDF'),
+            Action::make('pdf')
+                ->label('Download PDF')
+                ->icon('heroicon-o-document-download')
+                ->color('success')
+                ->action('generateInvoicePDF'),
 //            ReplicateAction::make()->button()->color('warning')
 //                ->form([
 //                    DatePicker::make('invoice_date')->required()
@@ -64,7 +64,7 @@ class ViewInvoice extends ViewRecord
                 ->showBrowserHeaderAndFooter()
                 ->footerHtml('<p>Page <span class="pageNumber"></span> of <span class="totalPages"></span></p>')
                 ->pdf();
-        }, 200, ['Content-Type' => 'application/pdf']);
+        }, 200, ['Content-Type' => 'application/pdf', 'Content-Disposition' => 'attachment; filename="invoice_' . $invoice->number . '.pdf"']);
     }
 
     private function replace_customer_tags($content, $invoice)
