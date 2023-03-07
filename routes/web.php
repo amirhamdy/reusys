@@ -58,6 +58,6 @@ Route::get('db_backup', function () {
 });
 
 Route::get('full_backup', function () {
-    Artisan::call('backup:run');
+    Artisan::call('backup:run --disable-notifications');
     dd("DB Backup done!");
 });

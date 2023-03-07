@@ -21,9 +21,13 @@
             {{ $this->form }}
 
             <br>
-            <button type="submit">
+{{--            <button type="submit" secondary>--}}
+{{--                Find Resources--}}
+{{--            </button>--}}
+            <x-filament-support::button type="submit" :dark-mode="config('forms.dark_mode')">
                 Find Resources
-            </button>
+            </x-filament-support::button>
+
         </form>
 
     {{ $this->table }}
