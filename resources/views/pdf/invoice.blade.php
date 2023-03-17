@@ -88,7 +88,6 @@
                                                 Reutrans Invoice
                                             </td>
                                         </tr>
-                                        <tr>
                                         <tr class="hiddenMobile">
                                             <td height="20"></td>
                                         </tr>
@@ -97,9 +96,9 @@
                                         </tr>
                                         <tr>
                                             <td style="font-size: 12px; color: #5b5b5b; font-family: 'Open Sans', sans-serif; line-height: 18px; vertical-align: top; text-align: right;">
-                                                #---i_number---
+                                                Invoice #---i_number---
                                                 <br/>
-                                                ---i_date---
+                                                Date ---i_date---
                                             </td>
                                         </tr>
                                         </tbody>
@@ -134,11 +133,10 @@
                             <tr>
                                 <td>
                                     <table width="220" border="0" cellpadding="0" cellspacing="0" align="left" class="col">
-
                                         <tbody>
                                         <tr>
                                             <td style="font-size: 11px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ">
-                                                <strong>REUTRANS</strong>
+                                                <strong>Reutrans LTD</strong>
                                             </td>
                                         </tr>
                                         <tr>
@@ -146,17 +144,17 @@
                                         </tr>
                                         <tr>
                                             <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ">
-                                                Public Wales, Somewhere<br> Germany<br> 4468, Berlin
+                                                20-22 Wenlock Road<br> N1 7GU London, UK
                                                 <br>
                                                 <a href="mailto:info@reutrans.com" style="color:#b0b0b0;">info@reutrans.com</a>
+                                                <br>
+                                                <a href="tel:+4402079932325" style="color:#b0b0b0;">+44 (0) 207 993 2325</a>
                                                 <br>
                                                 <a href="https://www.reutrans.com/" style="color:#b0b0b0;">www.reutrans.com</a>
                                             </td>
                                         </tr>
                                         </tbody>
                                     </table>
-
-
                                     <table width="220" border="0" cellpadding="0" cellspacing="0" align="right" class="col">
                                         <tbody>
                                         <tr class="visibleMobile">
@@ -427,18 +425,10 @@
                             </tr>
                             <tr>
                                 <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #ff0000;  line-height: 14px;  vertical-align: top; padding:5px 0;" class="article">
-                                    Bank Guidelines
+                                    Notes
                                 </td>
                                 <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #646a6e;  line-height: 18px;  vertical-align: top; padding:5px 0;">
-                                    Only ACH (US local bank) transfers in USD can be accepted
-                                    <br>
-                                    Transfers must be made from a company account
-                                    <br>
-                                    Transfers from individuals will be automatically rejected
-                                    <br>
-                                    Wire transfers are not supported
-                                    <br>
-                                    Transfers made from a company account owned by you cannot be accepted
+                                    ---b_notes---
                                 </td>
                             </tr>
                             <tr>
@@ -460,6 +450,7 @@
 <!-- /Bank Details -->
 
 <!-- Footer -->
+{{--
 <table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
 
     <tr>
@@ -491,6 +482,68 @@
     <tr>
         <td height="20"></td>
     </tr>
+</table>
+--}}
+<table width="100%" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#e1e1e1">
+    <tbody>
+    <tr>
+        <td>
+            <table width="800" border="0" cellpadding="0" cellspacing="0" align="center" class="fullTable" bgcolor="#ffffff">
+                <tbody>
+                <tr>
+                <tr class="hiddenMobile">
+                    <td height="30"></td>
+                </tr>
+                <tr class="visibleMobile">
+                    <td height="40"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <table width="580" border="0" cellpadding="0" cellspacing="0" align="center" class="fullPadding">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <table width="100%" border="0" cellpadding="0" cellspacing="0" align="left" class="col">
+                                        <tbody>
+                                        <tr>
+                                            <td style="font-size: 11px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 1; vertical-align: top; ">
+{{--                                                <strong>Reutrans LTD</strong>--}}
+                                                <hr>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="100%" height="10"></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-size: 12px; font-family: 'Open Sans', sans-serif; color: #5b5b5b; line-height: 20px; vertical-align: top; ">
+                                                20-22 Wenlock Road, N1 7GU London, UK
+                                                <br>
+                                                <a href="mailto:info@reutrans.com" style="color:#b0b0b0;">info@reutrans.com</a>
+                                                <br>
+                                                <a href="tel:+4402079932325" style="color:#b0b0b0;">+44 (0) 207 993 2325</a>
+                                                <br>
+                                                <a href="https://www.reutrans.com/" style="color:#b0b0b0;">www.reutrans.com</a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr class="hiddenMobile">
+                    <td height="30"></td>
+                </tr>
+                <tr class="visibleMobile">
+                    <td height="30"></td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    </tbody>
 </table>
 <!-- /Footer -->
 

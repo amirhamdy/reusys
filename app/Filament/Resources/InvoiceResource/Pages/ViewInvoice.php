@@ -143,6 +143,7 @@ class ViewInvoice extends ViewRecord
         $content = str_replace('---b_number---', $invoice->bank->account_number, $content);
         $content = str_replace('---b_swift---', $invoice->bank->routing_number, $content);
         $content = str_replace('---b_country---', $invoice->bank->country->name, $content);
+        $content = str_replace('---b_notes---', $invoice->notes, $content);
 
         return $content;
     }
