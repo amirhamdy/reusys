@@ -17,9 +17,9 @@ class ViewProject extends ViewRecord
     {
         return [
             EditAction::make(),
-            Action::make('createInvoice')
-                ->color('success')
-                ->url(fn() => url('dashboard/invoices/create?customer_id=' . $this->record->productline->customer->id . '&project_id=' . $this->record->id)),
+//            Action::make('createInvoice')
+//                ->color('success')
+//                ->url(fn() => url('dashboard/invoices/create?customer_id=' . $this->record->productline->customer->id . '&project_id=' . $this->record->id)),
         ];
     }
 
