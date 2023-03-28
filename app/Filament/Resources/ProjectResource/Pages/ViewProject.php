@@ -3,7 +3,8 @@
 namespace App\Filament\Resources\ProjectResource\Pages;
 
 use App\Filament\Resources\ProjectResource;
-use App\Models\Customer;
+use Filament\Pages\Actions\Action;
+use Filament\Pages\Actions\EditAction;
 use App\Models\Productline;
 use App\Models\Project;
 use Filament\Resources\Pages\ViewRecord;
@@ -11,6 +12,16 @@ use Filament\Resources\Pages\ViewRecord;
 class ViewProject extends ViewRecord
 {
     protected static string $resource = ProjectResource::class;
+
+    protected function getActions(): array
+    {
+        return [
+            EditAction::make(),
+            Action::make('createInvoice')
+                ->color('success')
+                ->url(fn() => url('dashboard/invoices/create?customer_id=' . $this->record->productline->customer->id . '&project_id=' . $this->record->id)),
+        ];
+    }
 
     protected function mutateFormDataBeforeFill(array $data): array
     {
@@ -27,8 +38,8 @@ class ViewProject extends ViewRecord
         foreach ($jobs as $job) {
             $jobs_cost += $job->cost_usd;
             $tasks = $job->tasks;
-            if (count($tasks))
-                $tasks_cost += array_sum(array_column($tasks, 'cost_usd'));
+            if (count($tasks->toArray()))
+                $tasks_cost += array_sum(array_column($tasks->toArray(), 'cost_usd'));
         }
 
         $data['profit'] = number_format((float)($jobs_cost - $tasks_cost), 2, '.', '');
