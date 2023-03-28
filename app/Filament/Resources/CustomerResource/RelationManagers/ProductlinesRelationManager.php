@@ -4,6 +4,7 @@ namespace App\Filament\Resources\CustomerResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Resources\{Form, Table};
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
@@ -58,7 +59,7 @@ class ProductlinesRelationManager extends HasManyRelationManager
                                 $data['created_from'],
                                 fn(
                                     Builder $query,
-                                    $date
+                                            $date
                                 ): Builder => $query->whereDate(
                                     'created_at',
                                     '>=',
@@ -69,7 +70,7 @@ class ProductlinesRelationManager extends HasManyRelationManager
                                 $data['created_until'],
                                 fn(
                                     Builder $query,
-                                    $date
+                                            $date
                                 ): Builder => $query->whereDate(
                                     'created_at',
                                     '<=',
@@ -87,6 +88,11 @@ class ProductlinesRelationManager extends HasManyRelationManager
                     'customer',
                     'name'
                 ),
+            ])
+            ->prependActions([
+                Action::make('viewdetails')
+                    ->icon('heroicon-o-external-link')->label('View')->color('blue')
+                    ->url(fn($record) => "/dashboard/productlines/{$record->id}", true),
             ]);
     }
 }

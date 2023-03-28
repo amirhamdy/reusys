@@ -300,6 +300,11 @@ class TasksRelationManager extends HasManyRelationManager
 
                         return $data;
                     })
+            ])
+            ->prependActions([
+                \Filament\Tables\Actions\Action::make('viewdetails')
+                    ->icon('heroicon-o-external-link')->label('View')->color('blue')
+                    ->url(fn($record) => "/dashboard/tasks/{$record->id}", true),
             ]);
     }
 }

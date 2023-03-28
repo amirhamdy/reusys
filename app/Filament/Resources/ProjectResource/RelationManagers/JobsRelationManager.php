@@ -273,7 +273,12 @@ class JobsRelationManager extends HasManyRelationManager
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['cost_usd'] = $data['cost'] * 20;
                         return $data;
-                    })
+                    }),
+            ])
+            ->prependActions([
+                \Filament\Tables\Actions\Action::make('viewdetails')
+                    ->icon('heroicon-o-external-link')->label('View')->color('blue')
+                    ->url(fn($record) => "/dashboard/jobs/{$record->id}", true),
             ]);
     }
 }

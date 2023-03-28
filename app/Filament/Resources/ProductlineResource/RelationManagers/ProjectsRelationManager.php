@@ -4,6 +4,7 @@ namespace App\Filament\Resources\ProductlineResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Resources\{Form, Table};
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
@@ -93,6 +94,11 @@ class ProjectsRelationManager extends HasManyRelationManager
                     'productline',
                     'name'
                 ),
+            ])
+            ->prependActions([
+                Action::make('viewdetails')
+                    ->icon('heroicon-o-external-link')->label('View')->color('blue')
+                    ->url(fn($record) => "/dashboard/projects/{$record->id}", true),
             ]);
     }
 }
