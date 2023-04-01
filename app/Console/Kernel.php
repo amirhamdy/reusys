@@ -18,7 +18,7 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         // Backups (to Google Drive)
 //        $schedule->command('backup:clean')->dailyAt('01:30');
-          $schedule->command('backup:run --disable-notifications')->everyMinute();
+          $schedule->command('backup:run --disable-notifications')->everySixHours();
 //        $schedule->command('backup:run --only-db --disable-notifications')->everySixHours();
 //        $schedule->command("backup:run --only-db --only-to-disk=s3")->weeklyOn(6, '7:00');
     }

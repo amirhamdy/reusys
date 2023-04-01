@@ -122,13 +122,13 @@ class CustomerResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')->sortable()->searchable()->label('ID')->toggleable(),
-                Tables\Columns\TextColumn::make('name')->limit(30)->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('email')->limit(50)->sortable()->searchable()->toggleable(),
-                Tables\Columns\TextColumn::make('customerStatus.name')->limit(20)->label('Status')->toggleable(),
-                Tables\Columns\TextColumn::make('country.name')->limit(20)->sortable()->searchable()->toggleable(),
-                Tables\Columns\TextColumn::make('region.name')->limit(20)->sortable()->searchable()->toggleable(),
-                Tables\Columns\TextColumn::make('customerRating.name')->limit(20)->sortable()->label('Rating')->toggleable(),
-                Tables\Columns\TextColumn::make('industry.name')->limit(20)->sortable()->searchable()->toggleable(),
+                Tables\Columns\TextColumn::make('name')->limit(30)->sortable()->searchable()->copyable(),
+                Tables\Columns\TextColumn::make('email')->limit(50)->sortable()->searchable()->toggleable()->copyable(),
+                Tables\Columns\TextColumn::make('customerStatus.name')->limit(20)->label('Status')->toggleable()->copyable(),
+                Tables\Columns\TextColumn::make('country.name')->limit(20)->sortable()->searchable()->toggleable()->copyable(),
+                Tables\Columns\TextColumn::make('region.name')->limit(20)->sortable()->searchable()->toggleable()->copyable(),
+                Tables\Columns\TextColumn::make('customerRating.name')->limit(20)->sortable()->label('Rating')->toggleable()->copyable(),
+                Tables\Columns\TextColumn::make('industry.name')->limit(20)->sortable()->searchable()->toggleable()->copyable(),
             ])->defaultSort('id', 'desc')
             ->filters([
                 Tables\Filters\Filter::make('created_at')
