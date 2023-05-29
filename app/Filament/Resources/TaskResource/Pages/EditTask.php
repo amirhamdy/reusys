@@ -27,9 +27,11 @@ class EditTask extends EditRecord
 
         if ($this->data['send_po']) {
             $translator = Translator::find($this->data['translator_id']);
-//            $res = Mail::to('amirhamdy4@gmail.com')->send(new TaskCreated($translator->name, Str::random(10) /*$this->data['po_number'*/));
-            if ($translator->email) {
-                Mail::to($translator->email)->send(new TaskCreated($translator->name, $po));
+            if ($translator->emails) {
+                $emails = explode(',', $translator->emails);
+                foreach ($emails as $email) {
+                    Mail::to($email)->send(new TaskCreated($translator->name, $po));
+                }
             }
         }
 

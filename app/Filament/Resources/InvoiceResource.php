@@ -7,6 +7,7 @@ use App\Models\Invoice;
 use App\Models\Job;
 use App\Models\Productline;
 use App\Models\Project;
+use Closure;
 use Filament\{Forms\Components\BelongsToSelect,
     Forms\Components\Repeater,
     Forms\Components\RichEditor,
@@ -24,6 +25,7 @@ use App\Filament\Filters\DateRangeFilter;
 use App\Filament\Resources\InvoiceResource\Pages;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rule;
 
 class InvoiceResource extends Resource
 {
@@ -72,7 +74,7 @@ class InvoiceResource extends Resource
                                 Toggle::make('paid')
                                     ->label('Invoice has been paid?')
                                     ->rules(['boolean'])
-                                    ->required()
+//                                    ->required()
                                     ->default('0')
                                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
 
@@ -108,7 +110,7 @@ class InvoiceResource extends Resource
                                                 ->searchable()->disablePlaceholderSelection()
                                                 ->placeholder('Customer')->label('Customer')
                                                 ->reactive()
-                                                ->afterStateUpdated(fn(callable $set) => $set('productline_id', null))
+                                                ->afterStateUpdated(fn(callable $set) => $set('project_id', null))
                                                 ->columnSpan(['default' => 1]),
 
                                             BelongsToSelect::make('project_id')
@@ -170,11 +172,10 @@ class InvoiceResource extends Resource
                                                 ->placeholder('Cost in USD')
                                                 ->columnSpan(['default' => 1]),
                                         ]),
-
                                     ])
                                     ->relationship()
                                     ->label('')
-                                    ->createItemButtonLabel('Attach another job')
+                                    ->createItemButtonLabel('Attach job')
                                     ->defaultItems(1)
                                     ->columnSpan('full'),
                             ])
@@ -189,27 +190,15 @@ class InvoiceResource extends Resource
         return $table
             ->poll('60s')
             ->columns([
-//                Tables\Columns\TextColumn::make('id')
-//                    ->sortable()
-//                    ->toggleable()
-//                    ->searchable()
-//                    ->limit(50),
-                Tables\Columns\TextColumn::make('number')
-                    ->toggleable()
-                    ->searchable()
-                    ->limit(50),
-                Tables\Columns\TextColumn::make('date')
-                    ->toggleable()
-                    ->date(),
-                Tables\Columns\TextColumn::make('bank.label')
-                    ->toggleable()
-                    ->limit(50),
-                Tables\Columns\IconColumn::make('paid')
-                    ->toggleable()
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('paid_date')
-                    ->toggleable()
-                    ->date(),
+                Tables\Columns\TextColumn::make('number')->toggleable()->searchable()->sortable()->limit(50),
+                Tables\Columns\TextColumn::make('job.project.productline.customer.name')->toggleable()->searchable()->limit(50),
+                Tables\Columns\TextColumn::make('job.project.productline.name')->toggleable()->searchable()->limit(50),
+                Tables\Columns\TextColumn::make('job.project.name')->toggleable()->searchable()->limit(50),
+                Tables\Columns\TextColumn::make('job.name')->toggleable()->searchable()->limit(50),
+                Tables\Columns\TextColumn::make('date')->toggleable()->searchable()->sortable()->date(),
+                Tables\Columns\TextColumn::make('bank.label')->toggleable()->searchable()->sortable()->limit(50),
+                Tables\Columns\IconColumn::make('paid')->toggleable()->searchable()->sortable()->boolean(),
+                Tables\Columns\TextColumn::make('paid_date')->toggleable()->searchable()->sortable()->date(),
             ])
             ->defaultSort('id', 'desc')
             ->filters([

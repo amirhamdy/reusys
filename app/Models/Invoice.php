@@ -37,4 +37,9 @@ class Invoice extends Model
     {
         return $this->belongsTo(Bank::class);
     }
+
+    public function job()
+    {
+        return $this->hasOneThrough(Job::class, InvoiceJob::class, 'invoice_id', 'id', 'id', 'job_id');
+    }
 }

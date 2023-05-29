@@ -11,7 +11,7 @@ class CreateInvoice extends CreateRecord
 
     protected function afterFill(): void
     {
-        $this->data['invoiceJobs'][0]['customer_id'] = request()->query('customer_id');
-        $this->data['invoiceJobs'][0]['project_id'] = request()->query('project_id');
+//        $this->data['invoiceJobs'][0]['customer_id'] = request()->query('customer_id');
+//        $this->data['invoiceJobs'][0]['project_id'] = request()->query('project_id');
     }
 }

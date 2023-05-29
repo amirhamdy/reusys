@@ -181,12 +181,8 @@ class JobsRelationManager extends HasManyRelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('name')->limit(50),
                 Tables\Columns\TextColumn::make('project.name')->limit(50),
-                Tables\Columns\TextColumn::make('sourceLanguage.name')->limit(
-                    50
-                ),
-                Tables\Columns\TextColumn::make('targetLanguage.name')->limit(
-                    50
-                ),
+                Tables\Columns\TextColumn::make('sourceLanguage.name')->limit(50),
+                Tables\Columns\TextColumn::make('targetLanguage.name')->limit(50),
                 Tables\Columns\TextColumn::make('jobType.name')->limit(50),
                 Tables\Columns\TextColumn::make('jobUnit.name')->limit(50),
                 Tables\Columns\TextColumn::make('amount'),
@@ -266,9 +262,23 @@ class JobsRelationManager extends HasManyRelationManager
                             ->where('cost', $data['cost'])
                             ->first();
 
-                        redirect(url(JobResource::getUrl('view', ['record' => $job->id])));
+//                        $this->emit('notify', __('created successfully.'));
+
+                        // add notification
+                        Notification::make()
+                            ->success()
+                            ->title('Job created successfully!')
+                            ->actions([
+                                Action::make('View job')
+                                    ->button()
+                                    ->url("/dashboard/jobs/{$job->id}", shouldOpenInNewTab: true)
+                            ])
+                            ->send();
+
+//                        redirect(url(JobResource::getUrl('view', ['record' => $job->id])));
                         return $data;
                     }),
+
                 EditAction::make()
                     ->mutateFormDataUsing(function (array $data): array {
                         $data['cost_usd'] = $data['cost'] * 20;

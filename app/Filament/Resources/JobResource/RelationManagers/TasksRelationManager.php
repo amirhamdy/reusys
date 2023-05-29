@@ -105,6 +105,7 @@ class TasksRelationManager extends HasManyRelationManager
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                 Select::make('status')
+                    ->label('Task Status')
                     ->rules(['required', 'in:Not Started,In Progress,Completed',])->required()
                     ->searchable()
                     ->options(['Not Started' => 'Not Started', 'In Progress' => 'In Progress', 'Completed' => 'Completed'])
@@ -112,12 +113,25 @@ class TasksRelationManager extends HasManyRelationManager
                     ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                 TextInput::make('cost')
-                    ->hint('This is a calculated, not editable cost depending on your selections.')->hintColor('success')
                     ->rules(['required', 'numeric'])->required()
-                    ->numeric()->disabled()
-                    ->placeholder('This is a calculated not editable cost depending on your selections')
+                    ->numeric()
+                    ->placeholder('Calculated Cost')
                     ->default(null)
-                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
+
+                TextInput::make('job_currency')
+                    ->disabled()
+                    ->placeholder('This is currency of the job')
+                    ->hiddenOn(['view', 'edit'])
+                    ->default(null)
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
+
+                TextInput::make('resource_currency')
+                    ->disabled()
+                    ->placeholder('This is currency of the resource in the price list')
+                    ->hiddenOn(['view', 'edit'])
+                    ->default(null)
+                    ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4]),
 
                 Toggle::make('is_free_task')
                     ->label('Mark as a free task')
@@ -162,21 +176,26 @@ class TasksRelationManager extends HasManyRelationManager
             } else {
                 $job = Job::where('id', $job_id)->first();
                 $currency = $job->project->productline->pricebook->currency;
-//                dd($job_id ,$task_type_id ,$task_unit_id , $subject_matter_id , $translator_id , $amount, $currency, $job);
+
                 if (!$job) {
                     Notification::make()->warning()->title('Invalid job selected!')->body('Please select a valid job to continue.')->send();
                 }
+                // set job currency
+                $set('job_currency', $currency->name);
 
                 $pricelist = TranslatorPriceList::where('task_type_id', $task_type_id)
                     ->where('task_unit_id', $task_unit_id)
                     ->where('subject_matter_id', $subject_matter_id)
                     ->where('source_language_id', $job->source_language_id)
                     ->where('target_language_id', $job->target_language_id)
-                    ->where('currency_id', $currency->id)
+//                    ->where('currency_id', $currency->id)
                     ->where('translator_id', $translator_id)
                     ->first();
 
                 if ($pricelist && isset($pricelist['unit_price'])) {
+                    // set resource currency
+                    $set('resource_currency', $pricelist->currency->name);
+
                     if ($is_minimum_charge_used) {
                         $cost = $pricelist['minimum_charge'];
                         $set('is_free_task', false);
