@@ -302,17 +302,22 @@ class TaskResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id')->sortable()->searchable()->label('ID')->toggleable(),
-                TextColumn::make('name')->limit(30)->searchable()->sortable(),
-                TextColumn::make('job.name')->limit(20)->searchable()->sortable()->toggleable(),
-                TextColumn::make('start_date')->date()->sortable()->toggleable(),
-                TextColumn::make('delivery_date')->date()->sortable()->toggleable(),
-                TextColumn::make('taskType.name')->limit(30)->sortable()->toggleable(),
-                TextColumn::make('taskUnit.name')->limit(30)->sortable()->toggleable(),
-                TextColumn::make('subjectMatter.name')->limit(30)->sortable()->toggleable(),
-                TextColumn::make('translator.name')->limit(30)->label('Resource')->searchable()->sortable()->toggleable(),
-                TextColumn::make('amount')->toggleable(),
-                TextColumn::make('cost')->toggleable(),
+                TextColumn::make('id')->sortable()->searchable()->label('Task ID')->searchable(),
+                TextColumn::make('name')->limit(30)->searchable()->sortable()->disableClick(),
+                TextColumn::make('job.name')->limit(20)->searchable()->toggleable()->disableClick(),
+                TextColumn::make('job.project.name')->limit(20)->searchable()->toggleable()->disableClick(),
+                TextColumn::make('job.project.productline.name')->limit(20)->searchable()->toggleable()->disableClick(),
+                TextColumn::make('job.project.productline.customer.name')->limit(20)->searchable()->toggleable()->disableClick(),
+                TextColumn::make('job.project.productline.pricebook.name')->limit(20)->searchable()->toggleable()->disableClick(),
+                TextColumn::make('job.project.productline.pricebook.currency.name')->limit(20)->searchable()->toggleable()->disableClick(),
+                TextColumn::make('start_date')->date()->sortable()->toggleable()->disableClick(),
+                TextColumn::make('delivery_date')->date()->sortable()->toggleable()->disableClick(),
+                TextColumn::make('taskType.name')->limit(30)->sortable()->toggleable()->disableClick(),
+                TextColumn::make('taskUnit.name')->limit(30)->sortable()->toggleable()->disableClick(),
+                TextColumn::make('subjectMatter.name')->limit(30)->sortable()->toggleable()->disableClick(),
+                TextColumn::make('translator.name')->limit(30)->label('Resource')->searchable()->sortable()->toggleable()->disableClick(),
+                TextColumn::make('amount')->toggleable()->disableClick(),
+                TextColumn::make('cost')->toggleable()->disableClick(),
                 BadgeColumn::make('is_paid')->enum([
                     'Paid' => 'Paid',
                     'Not Paid' => 'Not paid',
@@ -321,7 +326,7 @@ class TaskResource extends Resource
                     'success' => 'Paid',
                     'danger' => 'Not Paid',
                     'warning' => 'Waived Cost',
-                ])->label('Payment Status')->searchable()->sortable()->toggleable(),
+                ])->label('Payment Status')->searchable()->sortable()->toggleable()->disableClick(),
                 BadgeColumn::make('status')->enum([
                     'Not Started' => 'Not started',
                     'In Progress' => 'In progress',
@@ -330,7 +335,7 @@ class TaskResource extends Resource
                     'danger' => 'Not Started',
                     'warning' => 'In Progress',
                     'success' => 'Completed',
-                ])->searchable()->sortable()->toggleable(),
+                ])->searchable()->sortable()->toggleable()->disableClick(),
             ])->defaultSort('id', 'desc')
             ->filters([
                 MultiSelectFilter::make('job_id')

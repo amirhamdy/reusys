@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CustomerResource\Pages;
 use App\Models\Customer;
-use Filament\{Forms, Tables};
+use Filament\{Forms, Tables, Tables\Columns\BadgeColumn};
 use Filament\Forms\Components\BelongsToSelect;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Grid;
@@ -121,14 +121,22 @@ class CustomerResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->sortable()->searchable()->label('ID')->toggleable(),
-                Tables\Columns\TextColumn::make('name')->limit(30)->sortable()->searchable()->copyable(),
-                Tables\Columns\TextColumn::make('email')->limit(50)->sortable()->searchable()->toggleable()->copyable(),
-                Tables\Columns\TextColumn::make('customerStatus.name')->limit(20)->label('Status')->toggleable()->copyable(),
-                Tables\Columns\TextColumn::make('country.name')->limit(20)->sortable()->searchable()->toggleable()->copyable(),
-                Tables\Columns\TextColumn::make('region.name')->limit(20)->sortable()->searchable()->toggleable()->copyable(),
-                Tables\Columns\TextColumn::make('customerRating.name')->limit(20)->sortable()->label('Rating')->toggleable()->copyable(),
-                Tables\Columns\TextColumn::make('industry.name')->limit(20)->sortable()->searchable()->toggleable()->copyable(),
+                Tables\Columns\TextColumn::make('id')->sortable()->searchable()->label('Customer ID')->toggleable(),
+                Tables\Columns\TextColumn::make('name')->limit(30)->sortable()->searchable()->disableClick(),
+                BadgeColumn::make('customerStatus.name')->enum([
+                    'Lead' => 'Lead',
+                    'Prospect' => 'Prospect',
+                    'Customer' => 'Customer',
+                ])->colors([
+                    'danger' => 'Lead',
+                    'warning' => 'Prospect',
+                    'success' => 'Customer',
+                ])->searchable()->sortable()->toggleable()->limit(20)->label('Status')->disableClick(),
+                Tables\Columns\TextColumn::make('email')->limit(50)->sortable()->searchable()->toggleable()->disableClick(),
+                Tables\Columns\TextColumn::make('country.name')->limit(20)->sortable()->searchable()->toggleable()->disableClick(),
+                Tables\Columns\TextColumn::make('region.name')->limit(20)->sortable()->searchable()->toggleable()->disableClick(),
+                Tables\Columns\TextColumn::make('customerRating.name')->limit(20)->sortable()->label('Rating')->toggleable()->disableClick(),
+                Tables\Columns\TextColumn::make('industry.name')->limit(20)->sortable()->searchable()->toggleable()->disableClick(),
             ])->defaultSort('id', 'desc')
             ->filters([
                 Tables\Filters\Filter::make('created_at')

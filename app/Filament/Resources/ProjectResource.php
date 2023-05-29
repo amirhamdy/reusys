@@ -114,12 +114,15 @@ class ProjectResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->sortable()->searchable()->label('ID')->toggleable(),
-                Tables\Columns\TextColumn::make('name')->limit(50)->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('start_date')->date()->toggleable(),
-                Tables\Columns\TextColumn::make('end_date')->date()->toggleable(),
-                Tables\Columns\TextColumn::make('productline.name')->limit(50)->sortable()->searchable()->toggleable(),
-                Tables\Columns\TextColumn::make('po_number')->limit(50)->toggleable(),
+                Tables\Columns\TextColumn::make('id')->sortable()->searchable()->label('Project ID'),
+                Tables\Columns\TextColumn::make('name')->limit(50)->sortable()->searchable()->disableClick(),
+                Tables\Columns\TextColumn::make('productline.name')->limit(50)->searchable()->toggleable()->disableClick(),
+                Tables\Columns\TextColumn::make('productline.customer.name')->limit(50)->searchable()->toggleable()->disableClick(),
+                Tables\Columns\TextColumn::make('productline.pricebook.name')->limit(50)->searchable()->toggleable()->disableClick(),
+                Tables\Columns\TextColumn::make('productline.pricebook.currency.name')->limit(50)->searchable()->toggleable()->disableClick(),
+                Tables\Columns\TextColumn::make('start_date')->date()->toggleable()->disableClick(),
+                Tables\Columns\TextColumn::make('end_date')->date()->toggleable()->disableClick(),
+                Tables\Columns\TextColumn::make('po_number')->limit(50)->toggleable()->disableClick(),
             ])->defaultSort('id', 'desc')
             ->filters([
                 Tables\Filters\Filter::make('created_at')

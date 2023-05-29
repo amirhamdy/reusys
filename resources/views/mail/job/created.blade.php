@@ -191,15 +191,15 @@
                                         </tr>
                                     </table>
                                 </td>
-                                <td class="column column-2" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="75%">
-                                    <table border="0" cellpadding="0" cellspacing="0" class="heading_block block-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
-                                        <tr>
-                                            <td class="pad" style="width:100%;text-align:center;padding-top:5px;padding-bottom:5px;">
-                                                <h1 style="margin: 0; color: #555555; font-size: 16px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; line-height: 120%; text-align: center; direction: ltr; font-weight: 400; letter-spacing: normal; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">{{ $project->name }}</span></h1>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
+{{--                                <td class="column column-2" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="75%">--}}
+{{--                                    <table border="0" cellpadding="0" cellspacing="0" class="heading_block block-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">--}}
+{{--                                        <tr>--}}
+{{--                                            <td class="pad" style="width:100%;text-align:center;padding-top:5px;padding-bottom:5px;">--}}
+{{--                                                <h1 style="margin: 0; color: #555555; font-size: 16px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; line-height: 120%; text-align: center; direction: ltr; font-weight: 400; letter-spacing: normal; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">{{ $project->name }}</span></h1>--}}
+{{--                                            </td>--}}
+{{--                                        </tr>--}}
+{{--                                    </table>--}}
+{{--                                </td>--}}
                             </tr>
                             </tbody>
                         </table>
@@ -223,15 +223,15 @@
                                         </tr>
                                     </table>
                                 </td>
-                                <td class="column column-2" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="75%">
-                                    <table border="0" cellpadding="0" cellspacing="0" class="heading_block block-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
-                                        <tr>
-                                            <td class="pad" style="width:100%;text-align:center;padding-top:5px;padding-bottom:5px;">
-                                                <h1 style="margin: 0; color: #555555; font-size: 16px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; line-height: 120%; text-align: center; direction: ltr; font-weight: 400; letter-spacing: normal; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">{{ $project->start_date }}</span></h1>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
+{{--                                <td class="column column-2" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="75%">--}}
+{{--                                    <table border="0" cellpadding="0" cellspacing="0" class="heading_block block-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">--}}
+{{--                                        <tr>--}}
+{{--                                            <td class="pad" style="width:100%;text-align:center;padding-top:5px;padding-bottom:5px;">--}}
+{{--                                                <h1 style="margin: 0; color: #555555; font-size: 16px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; line-height: 120%; text-align: center; direction: ltr; font-weight: 400; letter-spacing: normal; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">{{ $project->start_date }}</span></h1>--}}
+{{--                                            </td>--}}
+{{--                                        </tr>--}}
+{{--                                    </table>--}}
+{{--                                </td>--}}
                             </tr>
                             </tbody>
                         </table>
@@ -255,15 +255,15 @@
                                         </tr>
                                     </table>
                                 </td>
-                                <td class="column column-2" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="75%">
-                                    <table border="0" cellpadding="0" cellspacing="0" class="heading_block block-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
-                                        <tr>
-                                            <td class="pad" style="width:100%;text-align:center;padding-top:5px;padding-bottom:5px;">
-                                                <h1 style="margin: 0; color: #555555; font-size: 16px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; line-height: 120%; text-align: center; direction: ltr; font-weight: 400; letter-spacing: normal; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">{{ $project->end_date }}</span></h1>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
+{{--                                <td class="column column-2" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="75%">--}}
+{{--                                    <table border="0" cellpadding="0" cellspacing="0" class="heading_block block-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">--}}
+{{--                                        <tr>--}}
+{{--                                            <td class="pad" style="width:100%;text-align:center;padding-top:5px;padding-bottom:5px;">--}}
+{{--                                                <h1 style="margin: 0; color: #555555; font-size: 16px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; line-height: 120%; text-align: center; direction: ltr; font-weight: 400; letter-spacing: normal; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">{{ $project->end_date }}</span></h1>--}}
+{{--                                            </td>--}}
+{{--                                        </tr>--}}
+{{--                                    </table>--}}
+{{--                                </td>--}}
                             </tr>
                             </tbody>
                         </table>
@@ -287,15 +287,15 @@
                                         </tr>
                                     </table>
                                 </td>
-                                <td class="column column-2" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="75%">
-                                    <table border="0" cellpadding="0" cellspacing="0" class="heading_block block-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
-                                        <tr>
-                                            <td class="pad" style="width:100%;text-align:center;padding-top:5px;padding-bottom:5px;">
-                                                <h1 style="margin: 0; color: #555555; font-size: 16px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; line-height: 120%; text-align: center; direction: ltr; font-weight: 400; letter-spacing: normal; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">{{ $project->po_number }}</span></h1>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
+{{--                                <td class="column column-2" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; vertical-align: top; border-top: 0px; border-right: 0px; border-bottom: 0px; border-left: 0px;" width="75%">--}}
+{{--                                    <table border="0" cellpadding="0" cellspacing="0" class="heading_block block-2" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">--}}
+{{--                                        <tr>--}}
+{{--                                            <td class="pad" style="width:100%;text-align:center;padding-top:5px;padding-bottom:5px;">--}}
+{{--                                                <h1 style="margin: 0; color: #555555; font-size: 16px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; line-height: 120%; text-align: center; direction: ltr; font-weight: 400; letter-spacing: normal; margin-top: 0; margin-bottom: 0;"><span class="tinyMce-placeholder">{{ $project->po_number }}</span></h1>--}}
+{{--                                            </td>--}}
+{{--                                        </tr>--}}
+{{--                                    </table>--}}
+{{--                                </td>--}}
                             </tr>
                             </tbody>
                         </table>

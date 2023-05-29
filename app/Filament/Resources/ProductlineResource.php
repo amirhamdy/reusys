@@ -59,10 +59,11 @@ class ProductlineResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->sortable()->searchable()->label('ID')->toggleable(),
+                Tables\Columns\TextColumn::make('id')->sortable()->searchable()->label('Product Line ID'),
                 Tables\Columns\TextColumn::make('name')->limit(50)->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('pricebook.name')->limit(50)->sortable()->searchable()->toggleable(),
-                Tables\Columns\TextColumn::make('customer.name')->limit(50)->sortable()->searchable()->toggleable(),
+                Tables\Columns\TextColumn::make('customer.name')->limit(50)->sortable()->searchable()->toggleable()->disableClick(),
+                Tables\Columns\TextColumn::make('pricebook.name')->limit(50)->sortable()->searchable()->toggleable()->disableClick(),
+                Tables\Columns\TextColumn::make('pricebook.currency.name')->limit(50)->sortable()->searchable()->toggleable()->disableClick(),
             ])->defaultSort('id', 'desc')
             ->filters([
                 Tables\Filters\Filter::make('created_at')

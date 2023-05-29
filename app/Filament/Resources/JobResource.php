@@ -10,7 +10,7 @@ use App\Models\Pricelist;
 use App\Models\Productline;
 use App\Models\Project;
 use Closure;
-use Filament\{Forms, Notifications\Notification, Tables};
+use Filament\{Forms, Forms\Components\Group, Forms\Components\Section, Notifications\Notification, Tables};
 use Filament\Forms\Components\BelongsToSelect;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Grid;
@@ -35,116 +35,131 @@ class JobResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form->schema([
-            Card::make()->schema([
-                Grid::make(['default' => 0])->schema([
-                    TextInput::make('name')
-                        ->rules(['required', 'max:255', 'string'])->required()
-                        ->placeholder('Name')
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
+        return $form
+            ->schema([
+                Group::make()
+                    ->schema([
+                        Section::make('Project Selection')
+                            ->schema([
+                                BelongsToSelect::make('customer_id')
+                                    ->hiddenOn(['edit'])
+                                    ->rules(['required', 'exists:customers,id'])->required()
+                                    ->options(Customer::all()->where('customer_status_id', '3')->pluck('name', 'id'))->preload()
+                                    ->searchable()->disablePlaceholderSelection()
+                                    ->placeholder('Customer')->label('Customer')
+                                    ->reactive()
+                                    ->afterStateUpdated(fn(callable $set) => $set('productline_id', null)),
 
-                    BelongsToSelect::make('customer_id')
-                        ->hiddenOn(['view', 'edit'])
-                        ->rules(['required', 'exists:customers,id'])->required()
-                        ->options(Customer::all()->where('customer_status_id', '3')->pluck('name', 'id'))->preload()
-                        ->searchable()->disablePlaceholderSelection()
-                        ->placeholder('Customer')->label('Customer')
-                        ->reactive()
-                        ->afterStateUpdated(fn(callable $set) => $set('productline_id', null))
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
+                                BelongsToSelect::make('productline_id')
+                                    ->hiddenOn(['edit'])
+                                    ->rules(['required', 'exists:productlines,id'])->required()
+                                    ->options(function (callable $get) {
+                                        $customer = Customer::find($get('customer_id'));
+                                        if ($customer) return $customer->productlines->pluck('name', 'id');
+                                        return [];
+                                    })->preload()
+                                    ->searchable()->reactive()
+                                    ->placeholder('Productline')->label('Productline')
+                                    ->afterStateUpdated(fn(callable $set) => $set('project_id', null)),
 
-                    BelongsToSelect::make('productline_id')
-                        ->hiddenOn(['view', 'edit'])
-                        ->rules(['required', 'exists:productlines,id'])->required()
-                        ->options(function (callable $get) {
-                            $customer = Customer::find($get('customer_id'));
-                            if ($customer) return $customer->productlines->pluck('name', 'id');
-                            return [];
-                        })->preload()
-                        ->searchable()->reactive()
-                        ->placeholder('Productline')->label('Productline')
-                        ->afterStateUpdated(fn(callable $set) => $set('project_id', null))
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6]),
+                                BelongsToSelect::make('project_id')
+                                    ->hiddenOn(['edit'])
+                                    ->rules(['required', 'exists:projects,id'])->required()
+                                    ->options(function (callable $get) {
+                                        $select = Productline::find($get('productline_id'));
+                                        if ($select) return $select->projects->pluck('name', 'id');
+                                        return [];
+                                    })->preload()
+                                    ->searchable()->reactive()
+                                    ->placeholder('Project')->label('Project')
+                                    ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
 
-                    BelongsToSelect::make('project_id')
-                        ->rules(['required', 'exists:projects,id'])->required()
-                        ->options(function (callable $get) {
-                            $select = Productline::find($get('productline_id'));
-                            if ($select) return $select->projects->pluck('name', 'id');
-                            return [];
-                        })->preload()
-                        ->searchable()->reactive()
-                        ->placeholder('Project')->label('Project')
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12])
-                        ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
+                                TextInput::make('name')
+                                    ->rules(['required', 'max:255', 'string'])->required()
+                                    ->placeholder('Name'),
+                            ])
+                            ->columns(2),
 
-                    BelongsToSelect::make('source_language_id')
-                        ->rules(['required', 'exists:languages,id'])->required()
-                        ->relationship('sourceLanguage', 'name')->preload()
-                        ->searchable()->reactive()
-                        ->placeholder('Source Language')
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6])
-                        ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
+                        Section::make('Job Details')
+                            ->schema([
+                                BelongsToSelect::make('source_language_id')
+                                    ->rules(['required', 'exists:languages,id'])->required()
+                                    ->relationship('sourceLanguage', 'name')->preload()
+                                    ->searchable()->reactive()
+                                    ->placeholder('Source Language')
+                                    ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
 
-                    BelongsToSelect::make('target_language_id')
-                        ->rules(['required', 'exists:languages,id'])->required()
-                        ->relationship('targetLanguage', 'name')->preload()
-                        ->searchable()->reactive()
-                        ->placeholder('Target Language')
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6])
-                        ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
+                                BelongsToSelect::make('target_language_id')
+                                    ->rules(['required', 'exists:languages,id'])->required()
+                                    ->relationship('targetLanguage', 'name')->preload()
+                                    ->searchable()->reactive()
+                                    ->placeholder('Target Language')
+                                    ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
 
-                    BelongsToSelect::make('job_type_id')
-                        ->rules(['required', 'exists:job_types,id'])->required()
-                        ->relationship('jobType', 'name')->preload()
-                        ->searchable()->reactive()
-                        ->placeholder('Job Type')
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4])
-                        ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
+                                BelongsToSelect::make('job_type_id')
+                                    ->rules(['required', 'exists:job_types,id'])->required()
+                                    ->relationship('jobType', 'name')->preload()
+                                    ->searchable()->reactive()
+                                    ->placeholder('Job Type')
+                                    ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
 
-                    BelongsToSelect::make('job_unit_id')
-                        ->rules(['required', 'exists:job_units,id'])->required()
-                        ->relationship('jobUnit', 'name')->preload()
-                        ->searchable()->reactive()
-                        ->placeholder('Job Unit')
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4])
-                        ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
+                                BelongsToSelect::make('job_unit_id')
+                                    ->rules(['required', 'exists:job_units,id'])->required()
+                                    ->relationship('jobUnit', 'name')->preload()
+                                    ->searchable()->reactive()
+                                    ->placeholder('Job Unit')
+                                    ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
+                            ])
+                            ->columns(2),
+                    ])
+                    ->columnSpan(['lg' => 2]),
 
-                    TextInput::make('amount')
-                        ->rules(['required', 'numeric'])->required()
-                        ->numeric()
-                        ->placeholder('Amount')
-                        ->default(1)
-                        ->reactive()
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 4])
-                        ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
+                Group::make()
+                    ->schema([
+                        Section::make('Pricing')
+                            ->schema([
+                                TextInput::make('amount')
+                                    ->rules(['required', 'numeric'])->required()
+                                    ->numeric()
+                                    ->placeholder('Amount')
+                                    ->default(1)
+                                    ->reactive()
+                                    ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
 
-                    TextInput::make('cost')
-                        ->hint('This is a calculated, not editable cost depending on your selections.')->hintColor('success')
-                        ->rules(['required', 'numeric'])->required()
-                        ->numeric()->disabled()
-                        ->placeholder('This is a calculated not editable cost depending on your selections')
-                        ->default(null)
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 12]),
+                                TextInput::make('price_per_unit')
+                                    ->rules(['required', 'numeric'])->required()
+                                    ->numeric()->disabled()
+                                    ->placeholder('Price per unit from Price List')
+                                    ->default(null),
 
-                    TextInput::make('cost_usd')->numeric()->disabled()->hidden(),
+                                TextInput::make('cost')
+                                    ->hint('This is a calculated cost, could be edited.')->hintColor('danger')
+                                    ->rules(['required', 'numeric'])->required()
+                                    ->numeric()
+                                    ->placeholder('Final Cost')->label('Final Cost')
+                                    ->default(null),
 
-                    Toggle::make('is_free_job')
-                        ->label('Mark as a free job')
-                        ->rules(['required', 'boolean'])->required()
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6])
-                        ->reactive()
-                        ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
+                                TextInput::make('cost_usd')->numeric()->disabled()->hidden(),
+                            ]),
 
-                    Toggle::make('is_minimum_charge_used')
-                        ->label('Apply minimum charge for this job')
-                        ->rules(['required', 'boolean'])->required()
-                        ->columnSpan(['default' => 12, 'md' => 12, 'lg' => 6])
-                        ->reactive()
-                        ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
-                ]),
-            ]),
-        ])->columns(3);
+                        Section::make('Job Preferences')
+                            ->schema([
+                                Toggle::make('is_free_job')
+                                    ->label('Mark as a free job')
+                                    ->rules(['required', 'boolean'])->required()
+                                    ->reactive()
+                                    ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
+
+                                Toggle::make('is_minimum_charge_used')
+                                    ->label('Apply minimum charge for this job')
+                                    ->rules(['required', 'boolean'])->required()
+                                    ->reactive()
+                                    ->afterStateUpdated(fn(Closure $set, Closure $get) => self::calc_cost($set, $get)),
+                            ]),
+                    ])
+                    ->columnSpan(['lg' => 1]),
+            ])
+            ->columns(3);
     }
 
     public static function calc_cost(Closure $set, Closure $get)
@@ -212,6 +227,7 @@ class JobResource extends Resource
 
         $set('cost', $cost ?? null);
         $set('cost_usd', isset($cost) ? $cost * 20 : null);
+        $set('price_per_unit', $pricelist['unit_price'] ?? null);
     }
 
     public static function table(Table $table): Table
@@ -219,15 +235,20 @@ class JobResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('id')->sortable()->searchable()->label('ID')->toggleable(),
-                Tables\Columns\TextColumn::make('name')->limit(30)->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('project.name')->limit(30)->sortable()->searchable()->toggleable(),
-                Tables\Columns\TextColumn::make('sourceLanguage.name')->limit(20)->sortable()->searchable()->toggleable(),
-                Tables\Columns\TextColumn::make('targetLanguage.name')->limit(20)->sortable()->searchable()->toggleable(),
-                Tables\Columns\TextColumn::make('jobType.name')->limit(30)->sortable()->searchable()->toggleable(),
-                Tables\Columns\TextColumn::make('jobUnit.name')->limit(30)->sortable()->searchable()->toggleable(),
-                Tables\Columns\TextColumn::make('amount')->toggleable(),
-                Tables\Columns\BooleanColumn::make('is_free_job')->toggleable(),
-                Tables\Columns\BooleanColumn::make('is_minimum_charge_used')->toggleable(),
+                Tables\Columns\TextColumn::make('name')->limit(30)->sortable()->searchable()->toggleable()->disableClick(),
+                Tables\Columns\TextColumn::make('project.name')->limit(30)->searchable()->toggleable()->disableClick(),
+                Tables\Columns\TextColumn::make('project.productline.name')->limit(30)->searchable()->toggleable()->disableClick(),
+                Tables\Columns\TextColumn::make('project.productline.customer.name')->limit(30)->searchable()->toggleable()->disableClick(),
+                Tables\Columns\TextColumn::make('sourceLanguage.name')->limit(20)->sortable()->searchable()->toggleable()->disableClick(),
+                Tables\Columns\TextColumn::make('targetLanguage.name')->limit(20)->sortable()->searchable()->toggleable()->disableClick(),
+                Tables\Columns\TextColumn::make('jobType.name')->limit(30)->sortable()->searchable()->toggleable()->disableClick(),
+                Tables\Columns\TextColumn::make('jobUnit.name')->limit(30)->sortable()->searchable()->toggleable()->disableClick(),
+                Tables\Columns\TextColumn::make('amount')->toggleable()->disableClick(),
+                Tables\Columns\TextColumn::make('cost')->toggleable()->disableClick(),
+                Tables\Columns\TextColumn::make('project.productline.pricebook.currency.name')->limit(30)->searchable()->toggleable()->disableClick(),
+                Tables\Columns\TextColumn::make('cost_usd')->label('Cost in USD')->toggleable()->disableClick(),
+                Tables\Columns\BooleanColumn::make('is_free_job')->label('Free Job')->toggleable()->disableClick(),
+                Tables\Columns\BooleanColumn::make('is_minimum_charge_used')->label('Minimum Charged')->toggleable()->disableClick(),
             ])->defaultSort('id', 'desc')
             ->filters([
                 Tables\Filters\Filter::make('created_at')
