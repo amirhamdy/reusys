@@ -73,10 +73,10 @@ class AppServiceProvider extends ServiceProvider
                     ->label('Opportunities')
                     ->icon('heroicon-o-mail-open')
                     ->collapsed(),
-                NavigationGroup::make()
-                    ->label('System Settings')
-                    ->icon('heroicon-o-lock-closed')
-                    ->collapsed(),
+//                NavigationGroup::make()
+//                    ->label('System Settings')
+//                    ->icon('heroicon-o-lock-closed')
+//                    ->collapsed(),
             ]);
 
 //            Filament::registerPages($this->pages);
