@@ -179,7 +179,7 @@ class TaskResource extends Resource
                         Section::make('Delivery Details')
                             ->schema([
                                 TextInput::make('name')
-                                    ->rules(['required', 'max:255', 'string'])
+                                    ->rules(['required', 'max:255', 'string'])->required()
                                     ->placeholder('Name'),
 
                                 DatePicker::make('start_date')
